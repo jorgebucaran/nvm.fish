@@ -655,19 +655,19 @@ function __fin_log -a log message fd
 
     printf "%s\n" "$message" | command awk '
         function okay(name, s) {
-            printf("'$nc'%s '$green'%s'$nc' %s\n", name, "OKAY", s)
+            printf("%s '$green'%s'$nc' %s\n", name, "OKAY", s)
         }
 
         function says(name, s) {
-            printf("'$nc'%s '$green'%s'$nc' %s\n", name, "SAYS", s)
+            printf("%s '$green'%s'$nc' %s\n", name, "SAYS", s)
         }
 
         function warn(name, s) {
-            printf("'$nc'%s '$warn'%s'$nc' %s\n", name, "WARN", s)
+            printf("%s '$warn'%s'$nc' %s\n", name, "WARN", s)
         }
 
         function error(name, s) {
-            printf("'$nc'%s '$red'%s'$nc' %s\n", name, "ARGH", s)
+            printf("%s '$red'%s'$nc' %s\n", name, "ARGH", s)
         }
 
         {
