@@ -1,7 +1,7 @@
 [![Version][version-badge]][version-link]
 
 [version-badge]: https://img.shields.io/badge/latest-v1.0.0-44cc11.svg?style=flat-square
-[version-link]: https://github.com/fishery/fin/releases
+[version-link]: https://github.com/fisherman/fin/releases
 
 # fin
 
@@ -127,7 +127,7 @@ fin self-destroy
 
 ### 2. What fish version is required?
 
-fin was built for the latest fish, but at least 2.2.0 is required. If you can't upgrade your build, append the following code to your `~/.config/fish/config.fish` for [snippet](https://github.com/fishery/fin/blob/master/faq.md#12-what-is-a-plugin) support.
+fin was built for the latest fish, but at least 2.2.0 is required. If you can't upgrade your build, append the following code to your `~/.config/fish/config.fish` for [snippet](https://github.com/fisherman/fin/blob/master/faq.md#12-what-is-a-plugin) support.
 
 ```fish
 for file in ~/.config/fish/conf.d/*.fish
@@ -141,7 +141,7 @@ Yes.
 
 ### 4. Why fin? Why not ____?
 
-fin learns from my mistakes building oh my fish, wahoo and fisherman. It also takes some ideas from fundle.
+fin learns from my mistakes building oh my fish, wahoo and fisherman. It also uses some ideas from fundle.
 
 Other reasons:
 
@@ -170,19 +170,23 @@ The bundle file lists all the installed plugins.
 You can let fin take care of the bundle for you automatically, or write in the plugins you want and run `fin` to satisfy the changes.
 
 ```
-fishery/simple
+fisherman/simple
 omf/grc
 omf/thefuck
-fishery/z
+fisherman/z
 ```
 
 This mechanism only installs plugins and missing dependencies. To remove a plugin, use `fin rm` instead.
 
-The bundle file is inside your fish configuration directory `~/.config/fish` so you can commit the entire tree to your dotfiles or only the bundle.
+The bundle file is inside your fish configuration directory `~/.config/fish` by default, but you can customize this location.
+
+```
+set -g fin_bundle ~/.bundle
+```
 
 ### 7. Where can I find a list of fish plugins?
 
-Browse the [fishery], [oh-my-fish], [awesome-fish] or use the fisherman [online] search to discover content.
+Browse the [organization], [awesome-fish], [oh-my-fish] or use the [online] search to discover content.
 
 ### 8. How do I install, update, list or remove plugins?
 
@@ -190,7 +194,7 @@ See [Usage].
 
 ### 9. How do I upgrade from ____?
 
-You don't have to. fin is framework agnostic and does not interfere with other known systems. If you want to uninstall oh my fish or fisherman, refer to their documentation.
+You are not required to. fin does not interfere with other known frameworks. If you want to uninstall oh my fish or fisherman, refer to their documentation.
 
 ### 10. How do I update fin to the latest version?
 
@@ -224,7 +228,7 @@ https://gist.github.com/bucaran/c256586044fea832e62f02bc6f6daf32
 
 Create a new ticket on the issue tracker:
 
-* https://github.com/fishery/fin/issues
+* https://github.com/fisherman/fin/issues
 
 ### 15. Why did you create a new project instead of improving fisherman?
 
@@ -236,14 +240,10 @@ Create a new ticket on the issue tracker:
 
 fundle inspired me to use a bundle and one-file distribution, but it has limited capabilities and still requires you to edit your fish configuration.
 
-### 17. Does this mean you are done with fisherman?
-
-Nope.
-
-[fishery]: https://github.com/fishery
+[organization]: https://github.com/fisherman
 [oh-my-fish]: https://github.com/oh-my-fish
 [awesome-fish]: https://github.com/bucaran/awesome-fish
 [online]: http://fisherman.sh/#search
-[Usage]: https://github.com/fishery/fin#usage
+[Usage]: https://github.com/fisherman/fin#usage
 [configurability]: http://fishshell.com/docs/current/design.html#design-configurability
-[bundle]: https://github.com/fishery/fin#6-what-is-a-bundle-file-and-how-do-i-use-it
+[bundle]: https://github.com/fisherman/fin#6-what-is-a-bundle-file-and-how-do-i-use-it

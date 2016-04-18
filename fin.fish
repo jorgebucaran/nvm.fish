@@ -199,7 +199,7 @@ function __fin_plugin_url_clone_async -a url name
             set url "https://github.com/$url"
 
         case \*
-            set url "https://github.com/fishery/$url"
+            set url "https://github.com/fisherman/$url"
     end
 
     set -l nc (set_color normal)
@@ -277,7 +277,7 @@ end
 
 
 function __fin_self_update
-    set -l raw_url "https://raw.githubusercontent.com/fishery/fin/master/fin.fish"
+    set -l raw_url "https://raw.githubusercontent.com/fisherman/fin/master/fin.fish"
     set -l fake_qs (date "+%s")
     set -l file (status --current-filename)
 
@@ -303,7 +303,7 @@ function __fin_self_update
         __fin_log says "
 
             To see the change log, please visit:
-            __https://github.com/fishery/fin/releases
+            __https://github.com/fisherman/fin/releases
         " $__fin_stderr
     end
 end
@@ -710,7 +710,7 @@ end
 
 
 function __fin_log_error_footer -a fd
-    set -l url "https://github.com/fishery/fin/issues"
+    set -l url "https://github.com/fisherman/fin/issues"
     set -l debug_log "$fin_cache/fin-debug.log"
 
     __fin_log error "
@@ -1404,7 +1404,7 @@ function __fin_man_page_write
     # .IP "" 0
     # .
     # .SS "2\. What fish version is required?"
-    # fin was built for the latest fish, but at least 2\.2\.0 is required\. If you can\'t upgrade your build, append the following code to your \fB~/\.config/fish/config\.fish\fR for snippet \fIhttps://github\.com/fishery/fin/blob/master/faq\.md#12\-what\-is\-a\-plugin\fR support\.
+    # fin was built for the latest fish, but at least 2\.2\.0 is required\. If you can\'t upgrade your build, append the following code to your \fB~/\.config/fish/config\.fish\fR for snippet \fIhttps://github\.com/fisherman/fin/blob/master/faq\.md#12\-what\-is\-a\-plugin\fR support\.
     # .
     # .IP "" 4
     # .
@@ -1463,10 +1463,10 @@ function __fin_man_page_write
     # .
     # .nf
     #
-    # fishery/superman
+    # fisherman/superman
     # omf/grc
     # omf/thefuck
-    # fishery/z
+    # fisherman/z
     # .
     # .fi
     # .
@@ -1479,7 +1479,7 @@ function __fin_man_page_write
     # The bundle file is inside your fish configuration directory \fB~/\.config/fish\fR so you can commit the entire tree to your dotfiles or only the bundle and that\'s it\.
     # .
     # .SS "7\. Where can I find a list of fish plugins?"
-    # Browse github/fishery, github/oh\-my\-fish, github/awesome\-fish or use the http://fisherman.sh online search to discover content\.
+    # Browse github/fisherman, github/oh\-my\-fish, github/awesome\-fish or use the http://fisherman.sh online search to discover content\.
     # .
     # .SS "8\. How do I install, update, list or remove plugins?"
     # See \fIUsage\fR\.
@@ -1533,7 +1533,7 @@ function __fin_man_page_write
     # Create a new ticket on the issue tracker:
     # .
     # .IP "\(bu" 4
-    # https://github\.com/fishery/fin/issues
+    # https://github\.com/fisherman/fin/issues
     # .
     # .IP "" 0
     # .
@@ -1560,7 +1560,7 @@ function __fin_man_page_write
     # When you find issues, please report them:
     # .
     # .IP "\(bu" 4
-    # \fIhttp://github\.com/fishery/fin/issues\fR
+    # \fIhttp://github\.com/fisherman/fin/issues\fR
     # .
     # .IP "" 0
     # .
@@ -1574,7 +1574,7 @@ function __fin_man_page_write
     # See the contributor graph for a list of other people who have contributed to this project:
     # .
     # .IP "\(bu" 4
-    # \fIhttps://github\.com/fishery/fin/graphs/contributors\fR
+    # \fIhttps://github\.com/fisherman/fin/graphs/contributors\fR
     # .
     # .IP "" 0
 end
@@ -1670,7 +1670,7 @@ function __fin_self_destroy
         Thanks for trying out fin. If you have a moment,
         please share your feedback in our issue tracker.
 
-        @https://github.com/fishery/fin/issues@
+        @https://github.com/fisherman/fin/issues@
 
     " $__fin_stderr
 
