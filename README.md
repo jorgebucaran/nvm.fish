@@ -62,7 +62,7 @@ fin lts
 
 Select a version interactively.
 
-```toml
+```rb
 fin
   5.5.0
   5.10.0
@@ -71,7 +71,7 @@ fin
 
 List all versions available for download.
 
-```toml
+```rb
 fin ls
   ...
 - 5.5.0   # downloaded
