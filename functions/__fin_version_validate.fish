@@ -1,7 +1,7 @@
 function __fin_version_validate -a v
     printf "%s\n" "$v" | command awk '
 
-        {
+        !/^v$/ {
             sub(/^v/, "", $0)
         }
 
