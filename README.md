@@ -24,7 +24,7 @@ fin is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creati
 
 ## Install
 
-With [fisherman].
+With [fisherman]
 
 ```
 fisher fin
