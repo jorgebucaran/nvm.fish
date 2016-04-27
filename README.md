@@ -62,16 +62,16 @@ fin lts
 
 Select a version interactively.
 
-```rb
+```awk
 fin
   5.5.0
   5.10.0
-* 5.10.1
+• 5.10.1
 ```
 
 List all versions available for download.
 
-```rb
+```awk
 fin ls
   ...
 - 5.5.0   # downloaded
@@ -79,7 +79,7 @@ fin ls
   ...
   5.9.1
 - 5.10.0  # downloaded
-* 5.10.1  # active version
+• 5.10.1  # active version
 ```
 
 Remove a version.
