@@ -24,6 +24,8 @@ fin is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creati
 
 ## Install
 
+With [fisherman].
+
 ```
 fisher fin
 ```
@@ -32,7 +34,7 @@ fisher fin
 
 Use node 5.5.0.
 
-```
+```fish
 fin 5.5.0
 node -v
 v5.5.0
@@ -40,7 +42,7 @@ v5.5.0
 
 Use a *.finrc* file.
 
-```
+```fish
 echo 5.10.1 > .finrc
 node -v
 v5.10.1
@@ -60,7 +62,7 @@ fin lts
 
 Select a version interactively.
 
-```
+```toml
 fin
   5.5.0
   5.10.0
@@ -69,20 +71,16 @@ fin
 
 List all versions available for download.
 
-```
+```toml
 fin ls
   ...
-- 5.5.0
+- 5.5.0   # downloaded
   5.6.0
   ...
   5.9.1
-- 5.10.0
-* 5.10.1
+- 5.10.0  # downloaded
+* 5.10.1  # active version
 ```
-
-> Version is currently selected: `*`
-
-> Version is already downloaded: `-`
 
 Remove a version.
 
@@ -102,6 +100,7 @@ end
 
 [bass]: https://github.com/edc/bass
 [laborious]: https://github.com/edc/bass/issues/28
+[fisherman]: https://github.com/fisherman
 [tj/n]: https://github.com/tj/n
 [wbyoung/avn]: https://github.com/wbyoung/avn
 [creationix/nvm]: https://github.com/creationix/fin
