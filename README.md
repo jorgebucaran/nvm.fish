@@ -88,6 +88,16 @@ Remove a version.
 fin rm 5.5.0
 ```
 
+## Bugs
+
+fin was built for fish >= 2.3.0. If you are using fish 2.2.0, append the following code to your ~/.config/fish/config.fish for automatic version switching support.
+
+```
+for file in ~/.config/fish/conf.d/*.fish
+    source $file
+end
+```
+
 [bass]: https://github.com/edc/bass
 [laborious]: https://github.com/edc/bass/issues/28
 [tj/n]: https://github.com/tj/n
