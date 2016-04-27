@@ -92,7 +92,7 @@ fin rm 5.5.0
 
 fin was built for fish >= 2.3.0. If you are using fish 2.2.0, append the following code to your ~/.config/fish/config.fish for automatic version switching support.
 
-```
+```fish
 for file in ~/.config/fish/conf.d/*.fish
     source $file
 end
