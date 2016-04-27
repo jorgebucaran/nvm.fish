@@ -1,4 +1,18 @@
 function fin
+    set -l config_home "$XDG_CONFIG_HOME"
+
+    if test -z "$config_home"
+        set config_home ~/.config
+    end
+
+    if test -z "$fin_config"
+        if not source "$config_home/fish/conf.d/fin.fish" ^ /dev/null
+            echo "fin: Internal error: fin was not installed correctly." > /dev/stderr
+            echo "fin: I could not find '$config_home/fish/conf.d/fin.fish'." > /dev/stderr
+            return 1
+        end
+    end
+
     if not command mkdir -p "$fin_config"/{bin,versions} "$fin_cache"/versions
         echo "fin: I couldn't create the fin configuration: $fin_config" > /dev/stderr
         return 1
@@ -72,12 +86,6 @@ function fin
 
         case remove
             __fin_rm $argv
-    end
-
-    set -l config_home "$XDG_CONFIG_HOME"
-
-    if test -z "$config_home"
-        set config_home ~/.config
     end
 
     complete -c fin --erase
