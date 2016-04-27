@@ -36,7 +36,7 @@ function __fin_use -a v
         end
     end
 
-    if test ! -s "$fin_config/versions/$v/node"
+    if test ! -e "$fin_config/versions/$v"
         if test ! -s "$fin_cache/versions/$v/bin/node"
             if not __fin_version_download "$v" "$fin_cache/versions/$v"
                 switch "$status"
@@ -57,14 +57,18 @@ function __fin_use -a v
             end
         end
 
-        command mkdir -p "$fin_config/versions/$v"
-        command cp -f "$fin_cache/versions/$v/bin/node" "$fin_config/versions/$v/node"
-        command cp -rf "$fin_cache/versions/$v/lib" "$fin_config/versions/$v/lib"
+        command touch "$fin_config/versions/$v"
     end
 
-    if test -s "$fin_config/versions/$v/node"
-        command ln -sf "$fin_config/versions/$v/node" "$fin_config/bin/node"
-        command ln -sf "$fin_config/versions/$v/lib/node_modules/npm/bin/npm-cli.js" "$fin_config/bin/npm"
-        echo "$v" > "$fin_config/version"
+    command cp -fR "$fin_cache/versions/$v/bin/." "$fin_config/bin"
+    command cp -fR "$fin_cache/versions/$v/lib/." "$fin_config/lib"
+    echo "$v" > "$fin_config/version"
+
+    set -l config_home "$XDG_CONFIG_HOME"
+
+    if test -z "$config_home"
+        set config_home ~/.config
     end
+
+    source "$config_home/fish/completions/fin.fish" ^ /dev/null
 end

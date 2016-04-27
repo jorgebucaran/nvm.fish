@@ -16,3 +16,9 @@ end
 if test -z "$fin_cache"
     set -g fin_cache "$cache_home/fin"
 end
+
+if test -d "$fin_config/bin"
+    if not contains -- "$fin_config/bin" $PATH
+        set PATH "$fin_config/bin" $PATH
+    end    
+end

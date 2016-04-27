@@ -21,7 +21,7 @@ function __fin_rm -a v
         return 1
     end
 
-    if test ! -d "$fin_config/versions/$v"
+    if test ! -e "$fin_config/versions/$v"
         echo "fin: It seems '$v' is not installed." > /dev/stderr
 
         if test -s .finrc
@@ -35,15 +35,20 @@ function __fin_rm -a v
         return 1
     end
 
-    command rm -rf "$fin_config/versions/$v"
+    command rm -f "$fin_config/versions/$v"
 
     if test -s "$fin_config/version"
         read -l current_version < "$fin_config/version"
 
         if test "$current_version" = "$v"
-            command rm -f "$fin_config/version"
-            command rm -f "$fin_config/bin/node"
-            command rm -f "$fin_config/bin/npm"
+            fish -c "
+                command rm -f '$fin_config/version'
+                command rm -f '$fin_config/bin/node'
+                command rm -f '$fin_config/bin/npm'
+                command rm -rf '$fin_config/lib'
+            " &
+
+            await (last_job_id -l)
         end
     end
 end

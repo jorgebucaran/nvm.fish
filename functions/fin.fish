@@ -18,7 +18,7 @@ function fin
         return 1
     end
 
-    set -g fin_version 1.1.0
+    set -g fin_version 1.2.0
 
     set -l cmd
 
@@ -85,7 +85,9 @@ function fin
             __fin_list $argv
 
         case remove
-            __fin_rm $argv
+            for v in $argv
+                __fin_rm $v
+            end
     end
 
     complete -c fin --erase

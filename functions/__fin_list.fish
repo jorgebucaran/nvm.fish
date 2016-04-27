@@ -5,7 +5,14 @@ function __fin_list
     end
 
     if test ! -z "$argv"
-        echo "$fin_config/versions/$argv"
+        for v in $argv
+            if test ! -d "$fin_cache/versions/$v"
+                continue
+            end
+
+            printf "%s\n" "$fin_cache/versions/$v"
+        end
+
         return
     end
 
