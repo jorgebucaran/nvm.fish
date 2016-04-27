@@ -81,6 +81,7 @@ fin ls
 ```
 
 > Version is currently selected: `*`
+
 > Version is already downloaded: `-`
 
 Remove a version.
