@@ -71,7 +71,7 @@ List all versions available for download.
 
 ```
 fin ls
-...
+  ...
 - 5.5.0
   5.6.0
   ...
@@ -80,7 +80,8 @@ fin ls
 * 5.10.1
 ```
 
-> `*` means active version and `-` available locally.
+> Version is currently selected: `*`
+> Version is already downloaded: `-`
 
 Remove a version.
 
