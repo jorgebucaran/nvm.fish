@@ -74,7 +74,18 @@ function fin
                 set -l menu_cursor_glyph (set_color -o white)"•"(set_color normal)
                 set -l menu_hover_item_style -o white
 
+                set -l current_version
+
+                if test -s "$fin_config/version"
+                    read current_version < "$fin_config/version"
+
+                    if set -l index (contains --index -- "$current_version" $local_versions)
+                        set menu_selected_index "$index"
+                    end
+                end
+
                 menu $local_versions
+
                 __fin_use "$local_versions[$menu_selected_index]"
             end
 
