@@ -59,10 +59,12 @@ function __fin_use -a v
 
         command mkdir -p "$fin_config/versions/$v"
         command cp -f "$fin_cache/versions/$v/bin/node" "$fin_config/versions/$v/node"
+        command cp -rf "$fin_cache/versions/$v/lib" "$fin_config/versions/$v/lib"
     end
 
     if test -s "$fin_config/versions/$v/node"
-        command ln -sfF "$fin_config/versions/$v/node" "$fin_config/bin/node"
+        command ln -sf "$fin_config/versions/$v/node" "$fin_config/bin/node"
+        command ln -sf "$fin_config/versions/$v/lib/node_modules/npm/bin/npm-cli.js" "$fin_config/bin/npm"
         echo "$v" > "$fin_config/version"
     end
 end

@@ -43,6 +43,7 @@ function __fin_rm -a v
         if test "$current_version" = "$v"
             command rm -f "$fin_config/version"
             command rm -f "$fin_config/bin/node"
+            command rm -f "$fin_config/bin/npm"
         end
     end
 end
