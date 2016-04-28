@@ -12,6 +12,8 @@ fin is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creati
 
 ## Features
 
+* No sudo
+
 * Autocomplete
 
 * No configuration
@@ -19,8 +21,6 @@ fin is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creati
 * Cached downloads
 
 * Automatic version switching
-
-* No sudo, version is selected by prepending to `$PATH`
 
 ## Install
 
