@@ -34,7 +34,7 @@ function __fin_version_download -a v target
     end
 
     fish -c "
-        command cd '$target'
+        builtin cd '$target'
         command tar -zx --strip-components=1 < '$file'
         command rm -f '$file'
     " &
