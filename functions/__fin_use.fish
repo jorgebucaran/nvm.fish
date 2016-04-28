@@ -16,7 +16,7 @@ function __fin_use -a v
             echo "fin: I could not fetch the remote index." > /dev/stderr
             echo > /dev/stderr
             echo "Hint: This is most likely a problem with http://nodejs.org" > /dev/stderr
-            echo "      or a connection timeout. If the the problem persists" > /dev/stderr
+            echo "      or a connection timeout. If the problem persists" > /dev/stderr
             echo "      open an issue in: <github.com/fisherman/fin/issues>" > /dev/stderr
 
             return 1
