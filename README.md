@@ -103,4 +103,4 @@ end
 [fisherman]: https://github.com/fisherman
 [tj/n]: https://github.com/tj/n
 [wbyoung/avn]: https://github.com/wbyoung/avn
-[creationix/nvm]: https://github.com/creationix/fin
+[creationix/nvm]: https://github.com/creationix/nvm
