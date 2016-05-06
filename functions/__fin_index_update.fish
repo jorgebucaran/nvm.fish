@@ -1,6 +1,7 @@
 function __fin_index_update
     set -l index "$fin_cache/index"
     set -l interval 4320
+    set -l mirror_url $FIN_MIRROR
 
     if test ! -z "$fin_index_update_interval"
         set interval "$fin_index_update_interval"
@@ -12,7 +13,11 @@ function __fin_index_update
         end
     end
 
-    fish -c "curl -sS http://nodejs.org/dist/index.tab > '$index'" &
+    if test -z "$mirror_url"
+        set mirror_url "http://nodejs.org/dist"
+    end
+
+    fish -c "curl -sS $mirror_url/index.tab > '$index'" &
 
     await (last_job_id -l)
 

@@ -20,5 +20,5 @@ end
 if test -d "$fin_config/bin"
     if not contains -- "$fin_config/bin" $PATH
         set PATH "$fin_config/bin" $PATH
-    end    
+    end
 end
