@@ -24,11 +24,9 @@ function __fin_rm -a v
     if test ! -e "$fin_config/versions/$v"
         echo "fin: It seems '$v' is not installed." > /dev/stderr
 
-        if test -s .finrc
-            read -l finrc_ver < .finrc
-
+        if set -l finrc_ver (__fin_read_finrc)
             if test "$finrc_ver" = "$v"
-                echo "Hint: If you want to disable your .finrc file, just delete it." > /dev/stderr
+                echo "Hint: Delete any existing .finrc file to disable it." > /dev/stderr
             end
         end
 
