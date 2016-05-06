@@ -86,6 +86,14 @@ Remove a version.
 fin rm 5.5.0
 ```
 
+## Options
+
+Customize the download mirror.
+
+```fish
+set -u fin_mirror http://npm.taobao.org/mirrors/node
+```
+
 ## Bugs
 
 If you are using fish 2.2.0, append the following code to your *~/.config/fish/config.fish* for automatic version switching support.
