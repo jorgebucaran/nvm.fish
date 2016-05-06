@@ -10,7 +10,7 @@ function __fin_rm -a v
             echo > /dev/stderr
             echo "Hint: This is most likely a problem with http://nodejs.org" > /dev/stderr
             echo "      or a connection timeout. If the the problem persists" > /dev/stderr
-            echo "      go to: <github.com/fisherman/fin/issues>" > /dev/stderr
+            echo "      visit: <github.com/fisherman/fin/issues>" > /dev/stderr
 
             return 1
         end

@@ -30,8 +30,17 @@ function __fin_version_download -a v target
 
     pushd "$target"
 
-    if not curl --progress-bar -LO "$url"
+    if not curl --fail --progress-bar -SLO "$url"
         command rm -rf "$target"
+
+        echo "fin: I could not fetch $file from:" > /dev/stderr
+        echo "     <$url>" > /dev/stderr
+        echo > /dev/stderr
+        echo "Hint: This is most likely a problem with http://nodejs.org" > /dev/stderr
+        echo "      or a connection timeout. If the the problem persists" > /dev/stderr
+        echo "      visit: <github.com/fisherman/fin/issues>" > /dev/stderr
+
+        return 1
     end
 
     fish -c "
