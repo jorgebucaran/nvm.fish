@@ -34,7 +34,7 @@ function __fin_version_download -a v target
 
     pushd "$target"
 
-    if not curl --progress-bar -O "$url"
+    if not curl --progress-bar -LO "$url"
         command rm -rf "$target"
     end
 
