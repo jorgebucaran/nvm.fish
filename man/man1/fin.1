@@ -1,0 +1,124 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "FIN" "1" "May 2016" "" "fin"
+.
+.SH "NAME"
+\fBfin\fR \- node\.js version manager
+.
+.SH "SYNOPSIS"
+\fBfin\fR [\fIcommand\fR] [\fIversion\fR] [\-\-help] [\-\-version]
+.
+.br
+.
+.P
+where command can be one of: \fBu\fRse (optional), \fBl\fRs and \fBr\fRm\.
+.
+.SH "DESCRIPTION"
+\fBfin\fR is a node version manager using ideas from tj/n, wbyoung/avn and creationix/nvm for fish\-shell\.
+.
+.SH "USAGE"
+Use node 5\.5\.0\.
+.
+.IP "" 4
+.
+.nf
+
+fin 5\.5\.0
+node \-v
+v5\.5\.0
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Use a \fI\.finrc\fR file\.
+.
+.IP "" 4
+.
+.nf
+
+echo 5\.10\.1 > \.finrc
+node \-v
+v5\.10\.1
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Use the latest stable node release\.
+.
+.IP "" 4
+.
+.nf
+
+fin latest
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Use the latest LTS (long\-term support) node release\.
+.
+.IP "" 4
+.
+.nf
+
+fin lts
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Select a version interactively\.
+.
+.IP "" 4
+.
+.nf
+
+fin
+  5\.5\.0
+  5\.10\.0
+* 5\.10\.1
+.
+.fi
+.
+.IP "" 0
+.
+.P
+List all versions available for download\.
+.
+.IP "" 4
+.
+.nf
+
+fin ls
+  \.\.\.
+\- 5\.5\.0   # downloaded
+  5\.6\.0
+  \.\.\.
+  5\.9\.1
+\- 5\.10\.0  # downloaded
+* 5\.10\.1  # active version
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Remove a version\.
+.
+.IP "" 4
+.
+.nf
+
+fin rm 5\.5\.0
+.
+.fi
+.
+.IP "" 0
+
