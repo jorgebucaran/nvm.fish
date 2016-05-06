@@ -1,11 +1,7 @@
 function __fin_version_download -a v target
     set -l os (uname -s)
+    set -l mirror (__fin_mirror)
     set -l file
-    set -l mirror_url "$FIN_MIRROR"
-
-    if test -z "$mirror_url"
-        set mirror_url "http://nodejs.org/dist"
-    end
 
     switch "$os"
         case Linux
@@ -26,7 +22,7 @@ function __fin_version_download -a v target
             return 2
     end
 
-    set -l url "$mirror_url/v$v/$file"
+    set -l url "$mirror/v$v/$file"
 
     echo "Downloading <$url>"
 
