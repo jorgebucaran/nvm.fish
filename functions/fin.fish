@@ -59,9 +59,8 @@ function fin
 
     switch "$cmd"
         case default
-            if test -s ".finrc"
-                read -l v < .finrc
-                __fin_use "$v"
+            if set -l finrc_ver (__fin_read_finrc)
+                __fin_use "$finrc_ver"
             else
                 set -l local_versions (__fin_version_local)
 

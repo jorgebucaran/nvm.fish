@@ -2,16 +2,13 @@ function __fin_run_bin_as -a name
     set -e argv[1]
 
     set -l local_versions (__fin_version_local)
-
-    set -l current_version
     set -l finrc_version
+    set -l current_version
 
-    if test -s .finrc
+    if set finrc_version (__fin_read_finrc)
         if test -s "$fin_config/version"
             read current_version < "$fin_config/version"
         end
-
-        read finrc_version < .finrc
 
         if not fin "$finrc_version"
             return 1
