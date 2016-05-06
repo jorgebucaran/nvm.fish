@@ -68,3 +68,11 @@ Remove a version.
 ```
 fin rm 5.5.0
 ```
+
+## OPTIONS
+
+Customize the download mirror.
+
+```
+set -u fin_mirror http://npm.taobao.org/mirrors/node
+```
