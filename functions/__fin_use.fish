@@ -43,14 +43,14 @@ function __fin_use -a v
                     case 2
                         set -l os (uname -s)
                         echo "fin: '$os' is currently not supported. " > /dev/stderr
-                        echo "Hint: To help us support your OS, please go to:" > /dev/stderr
+                        echo "Hint: To help us support your OS, please visit:" > /dev/stderr
                         echo "              <github.com/fisherman/fin/issues>" > /dev/stderr
 
                     case 1
                         echo "fin: I could not download '$v'" > /dev/stderr
                         echo "Hint: This could be a fetch error due to a bad connection" > /dev/stderr
                         echo "      or a bug in the extracting function. If the problem" > /dev/stderr
-                        echo "      persists, go to: <github.com/fisherman/fin/issues>" > /dev/stderr
+                        echo "      persists, visit: <github.com/fisherman/fin/issues>" > /dev/stderr
                 end
 
                 return 1
