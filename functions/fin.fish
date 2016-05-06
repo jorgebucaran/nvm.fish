@@ -18,7 +18,7 @@ function fin
         return 1
     end
 
-    set -g fin_version 1.3.1
+    set -g fin_version 1.4.0
 
     set -l cmd
 
