@@ -8,15 +8,13 @@
 
 # fin
 
-fin is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creationix/nvm] for the fish shell.
+fin is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creationix/nvm] for fish-shell.
 
 ## Features
 
 * No sudo
 
-* Autocomplete
-
-* No configuration
+* Zero configuration
 
 * Cached downloads
 
@@ -62,7 +60,7 @@ fin lts
 
 Select a version interactively.
 
-```ApacheConf
+```
 fin
   5.5.0
   5.10.0
@@ -90,7 +88,7 @@ fin rm 5.5.0
 
 ## Bugs
 
-fin was built for fish >= 2.3.0. If you are using fish 2.2.0, append the following code to your ~/.config/fish/config.fish for automatic version switching support.
+If you are using fish 2.2.0, append the following code to your ~/.config/fish/config.fish for automatic version switching support.
 
 ```fish
 for file in ~/.config/fish/conf.d/*.fish
