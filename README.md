@@ -88,7 +88,7 @@ fin rm 5.5.0
 
 ## Bugs
 
-If you are using fish 2.2.0, append the following code to your ~/.config/fish/config.fish for automatic version switching support.
+If you are using fish 2.2.0, append the following code to your *~/.config/fish/config.fish* for automatic version switching support.
 
 ```fish
 for file in ~/.config/fish/conf.d/*.fish
