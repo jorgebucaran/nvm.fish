@@ -48,6 +48,11 @@ function fin
             set -e argv[1]
             set cmd "remove"
 
+        case latest
+            set -e argv[1]
+            set cmd "use"
+            set argv[1] "latest-$argv[1]"
+
         case -\*\*
             echo "fin: '$argv[1]' is not a valid option." > /dev/stderr
             __fin_usage > /dev/stderr
