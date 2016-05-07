@@ -8,7 +8,7 @@
 
 # fin
 
-fin is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creationix/nvm] for fish-shell.
+fin is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creationix/nvm] for [fish].
 
 ## Features
 
@@ -92,9 +92,8 @@ Customize the download mirror.
 set -u fin_mirror http://npm.taobao.org/mirrors/node
 ```
 
-[bass]: https://github.com/edc/bass
-[laborious]: https://github.com/edc/bass/issues/28
 [fisherman]: https://github.com/fisherman
 [tj/n]: https://github.com/tj/n
 [wbyoung/avn]: https://github.com/wbyoung/avn
 [creationix/nvm]: https://github.com/creationix/nvm
+[fish]: https://fishshell.com
