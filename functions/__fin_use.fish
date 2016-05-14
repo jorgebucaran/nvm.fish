@@ -32,6 +32,7 @@ function __fin_use -a v
         read -l version_current < "$fin_config/version"
 
         if test "$v" = "$version_current"
+            echo "Version $v already the current Node version."
             return
         end
     end
@@ -63,6 +64,7 @@ function __fin_use -a v
     command cp -fR "$fin_cache/versions/$v/bin/." "$fin_config/bin"
     command cp -fR "$fin_cache/versions/$v/lib/." "$fin_config/lib"
     echo "$v" > "$fin_config/version"
+    echo "Activated Node version $v"
 
     set -l config_home "$XDG_CONFIG_HOME"
 
