@@ -24,9 +24,10 @@ function __fin_rm -a v
     if test ! -e "$fin_config/versions/$v"
         echo "fin: It seems '$v' is not installed." > /dev/stderr
 
-        if set -l finrc_ver (__fin_read_finrc)
-            if test "$finrc_ver" = "$v"
-                echo "Hint: Delete any existing .finrc file to disable it." > /dev/stderr
+        if set -l rc_ver (__fin_read_finrc)
+            if test "$rc_ver" = "$v"
+                echo "Hint: Delete any existing .finrc to disable automatic" > /dev/stderr
+                echo "      version switching in the current directory." > /dev/stderr
             end
         end
 
@@ -36,9 +37,9 @@ function __fin_rm -a v
     command rm -f "$fin_config/versions/$v"
 
     if test -s "$fin_config/version"
-        read -l current_version < "$fin_config/version"
+        read -l sel_ver < "$fin_config/version"
 
-        if test "$current_version" = "$v"
+        if test "$sel_ver" = "$v"
             fish -c "
                 command rm -f '$fin_config/version'
                 command rm -f '$fin_config/bin/node'
@@ -49,4 +50,6 @@ function __fin_rm -a v
             await (last_job_id -l)
         end
     end
+
+    return 0
 end
