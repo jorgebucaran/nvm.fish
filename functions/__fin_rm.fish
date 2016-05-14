@@ -1,13 +1,21 @@
 function __fin_rm -a v
-    if not set v (__fin_version_validate "$v")
-        echo "fin: It seems '$v' is not a valid version number." > /dev/stderr
-        return 1
+    set v (__fin_version_validate "$v")
+
+    switch $status
+        case 2
+            echo "fin: Versions under 0.10.0 are not supported at the moment." > /dev/stderr
+            echo "Hint: If you'd like to support this feature visit: " > /dev/stderr
+            echo "          <github.com/fisherman/fin/issues>" > /dev/stderr
+            return 1
+
+        case 1
+            echo "fin: '$v' is not a valid version number." > /dev/stderr
+            return 1
     end
 
     if test ! -e "$fin_cache/index"
         if not __fin_index_update
             echo "fin: I could not fetch the remote index." > /dev/stderr
-            echo > /dev/stderr
             echo "Hint: This is most likely a problem with http://nodejs.org" > /dev/stderr
             echo "      or a connection timeout. If the the problem persists" > /dev/stderr
             echo "      visit: <github.com/fisherman/fin/issues>" > /dev/stderr
