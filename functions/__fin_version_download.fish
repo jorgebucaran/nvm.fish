@@ -22,12 +22,15 @@ function __fin_version_download -a v target
             return 2
     end
 
+    set -l c (set_color -o $fish_color_param)
+    set -l nc (set_color normal)
+    set -l hm_url "$mirror/$c"v"$v$nc/$file"
+
+    echo "Downloading <$hm_url>"
+
     set -l url "$mirror/v$v/$file"
 
-    echo "Downloading <$url>"
-
     command mkdir -p "$target"
-
     pushd "$target"
 
     if not curl --fail --progress-bar -SLO "$url"
