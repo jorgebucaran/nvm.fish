@@ -1,20 +1,27 @@
 function __fin_use -a v
-    if not set v (__fin_version_validate "$v")
-        echo "fin: It seems '$v' is not a valid version number." > /dev/stderr
-        echo > /dev/stderr
-        echo "Hint: Examples of valid node versions:" > /dev/stderr
-        echo "       v5.10.1" > /dev/stderr
-        echo "        latest" > /dev/stderr
-        echo "          0.12" > /dev/stderr
-        echo "           lts" > /dev/stderr
+    set v (__fin_version_validate "$v")
 
-        return 1
+    switch $status
+        case 2
+            echo "fin: Versions under 0.10.0 are not supported at the moment." > /dev/stderr
+            echo "Hint: If you'd like to support this feature visit: " > /dev/stderr
+            echo "          <github.com/fisherman/fin/issues>" > /dev/stderr
+            return 1
+
+        case 1
+            echo "fin: It seems '$v' is not a valid version number." > /dev/stderr
+            echo "Hint: Examples of valid node versions:" > /dev/stderr
+            echo "       v5.10.1" > /dev/stderr
+            echo "        latest" > /dev/stderr
+            echo "          0.12" > /dev/stderr
+            echo "           lts" > /dev/stderr
+
+            return 1
     end
 
     if test ! -e "$fin_cache/index"
         if not __fin_index_update
             echo "fin: I could not fetch the remote index." > /dev/stderr
-            echo > /dev/stderr
             echo "Hint: This is most likely a problem with http://nodejs.org" > /dev/stderr
             echo "      or a connection timeout. If the problem persists" > /dev/stderr
             echo "      open an issue in: <github.com/fisherman/fin/issues>" > /dev/stderr
