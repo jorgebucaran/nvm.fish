@@ -29,9 +29,9 @@ function __fin_use -a v
     end
 
     if test -s "$fin_config/version"
-        read -l version_current < "$fin_config/version"
+        read -l sel_ver < "$fin_config/version"
 
-        if test "$v" = "$version_current"
+        if test "$v" = "$sel_ver"
             return
         end
     end
@@ -60,8 +60,12 @@ function __fin_use -a v
         command touch "$fin_config/versions/$v"
     end
 
-    command cp -fR "$fin_cache/versions/$v/bin/." "$fin_config/bin"
+    if not command cp -fR "$fin_cache/versions/$v/bin/." "$fin_config/bin" ^ /dev/null
+        return 1
+    end
+
     command cp -fR "$fin_cache/versions/$v/lib/." "$fin_config/lib"
+
     echo "$v" > "$fin_config/version"
 
     set -l config_home "$XDG_CONFIG_HOME"
