@@ -47,6 +47,10 @@ function fin
         case r rm remove
             set -e argv[1]
             set cmd "remove"
+            if not set -q argv[1] and test -s "$fin_config/version"
+                read -l version_current < "$fin_config/version"
+                set argv[1] $version_current
+            end
 
         case latest
             set cmd "use"
