@@ -2,7 +2,7 @@ function __fin_usage
     set -l uline (set_color -u)
     set -l nc (set_color normal)
 
-    echo "Usage: fin [<command>] [<version>] [--help]"
+    echo "Usage: fin [<command>] [<version>] [(-h | --help)]"
     echo
     echo "where <command> can be one of:"
     echo "       "$uline"u"$nc"se  Use the given node version (default)"
