@@ -2,19 +2,19 @@ function __fin_run_bin_as -a name
     set -e argv[1]
 
     set -l local_versions (__fin_version_local)
-    set -l finrc_version
-    set -l current_version
+    set -l rc_ver
+    set -l sel_ver
 
-    if set finrc_version (__fin_read_finrc)
+    if set rc_ver (__fin_read_finrc)
         if test -s "$fin_config/version"
-            read current_version < "$fin_config/version"
+            read sel_ver < "$fin_config/version"
         end
 
-        if not fin "$finrc_version"
+        if not fin "$rc_ver"
             return 1
         end
 
-        read finrc_version < "$fin_config/version"
+        read rc_ver < "$fin_config/version"
     end
 
     set -lx PATH $PATH
@@ -34,13 +34,13 @@ function __fin_run_bin_as -a name
         echo "fin: Error: I don't know what is '$name'." > /dev/stderr
     end
 
-    if test ! -z "$finrc_version"
-        if not contains -- "$finrc_version" $local_versions
-            fin rm "$finrc_version"
+    if test ! -z "$rc_ver"
+        if not contains -- "$rc_ver" $local_versions
+            fin rm "$rc_ver"
         end
 
-        if test ! -z "$current_version"
-            fin "$current_version"
+        if test ! -z "$sel_ver"
+            fin "$sel_ver"
         end
     end
 end
