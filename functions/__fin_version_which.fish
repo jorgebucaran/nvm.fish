@@ -1,14 +1,14 @@
 function __fin_version_which
-    if set -l finrc_ver (__fin_read_finrc)
-        if not set finrc_ver (__fin_version_validate "$finrc_ver")
+    if set -l rc_ver (__fin_read_finrc)
+        if not set rc_ver (__fin_version_validate "$rc_ver")
             return 1
         end
 
-        if not set finrc_ver (__fin_version_query "$finrc_ver")
+        if not set rc_ver (__fin_version_query "$rc_ver")
             return 1
         end
 
-        printf "%s\n" "$finrc_ver"
+        printf "%s\n" "$rc_ver"
     else
         if test ! -e "$fin_config/version"
             return 1
