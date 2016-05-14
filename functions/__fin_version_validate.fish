@@ -5,6 +5,11 @@ function __fin_version_validate -a v
             sub(/^v/, "", $0)
         }
 
+        /^0\.[1-9](\.[0-9]+)?$/ {
+            print($0)
+            exit 2
+        }
+
         /^lts$|^latest$|^[0-9]+(\.[0-9]+(\.[0-9]+)?)?$/ {
             ok = 1
         }
