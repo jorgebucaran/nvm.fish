@@ -23,7 +23,7 @@ function fin
     set -l cmd
 
     switch "$argv[1]"
-        case -h --help
+        case -h --help help
             __fin_usage > /dev/stderr
             return
 
@@ -47,10 +47,6 @@ function fin
         case r rm remove
             set -e argv[1]
             set cmd "remove"
-            if not set -q argv[1] and test -s "$fin_config/version"
-                read -l version_current < "$fin_config/version"
-                set argv[1] $version_current
-            end
 
         case latest
             set cmd "use"
@@ -70,13 +66,13 @@ function fin
 
     switch "$cmd"
         case default
-            if set -l finrc_ver (__fin_read_finrc)
-                __fin_use "$finrc_ver"
+            if set -l rc_ver (__fin_read_finrc)
+                __fin_use "$rc_ver"
             else
                 set -l local_versions (__fin_version_local)
 
                 if test -z "$local_versions"
-                    echo "fin: It seems no versions are installed yet." > /dev/stderr
+                    __fin_usage > /dev/stderr
                     return 1
                 end
 
@@ -84,12 +80,12 @@ function fin
                 set -l menu_cursor_glyph (set_color -o white)"•"(set_color normal)
                 set -l menu_hover_item_style -o white
 
-                set -l current_version
+                set -l sel_ver
 
                 if test -s "$fin_config/version"
-                    read current_version < "$fin_config/version"
+                    read sel_ver < "$fin_config/version"
 
-                    if set -l index (contains --index -- "$current_version" $local_versions)
+                    if set -l index (contains --index -- "$sel_ver" $local_versions)
                         set menu_selected_index "$index"
                     end
                 end
@@ -106,6 +102,23 @@ function fin
             __fin_list $argv
 
         case remove
+            if not set -q argv[1]
+                if test -s "$fin_config/version"
+                    if __fin_read_finrc > /dev/null
+                        echo "fin: You tried to run 'fin rm' without arguments, but " > /dev/stderr
+                        echo "     there is a .finrc file in the current directory." > /dev/stderr
+                        echo > /dev/stderr
+                        echo "Hint: Delete this file to disable automatic version" > /dev/stderr
+                        echo "      switching in this directory." > /dev/stderr
+
+                        return 1
+                    else
+                        read -l v < "$fin_config/version"
+                        set argv[1] "$v"
+                    end
+                end
+            end
+
             for v in $argv
                 __fin_rm $v
             end
