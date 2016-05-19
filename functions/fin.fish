@@ -18,7 +18,7 @@ function fin -d "node.js version manager"
         return 1
     end
 
-    set -g fin_version 1.7.0
+    set -g fin_version 1.7.1
 
     set -l cmd
 
