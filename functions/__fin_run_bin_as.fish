@@ -1,4 +1,29 @@
 function __fin_run_bin_as -a name
+    #
+    # Remove after fish 2.3 is available
+    #
+    switch "$FISH_VERSION"
+        case 2.2.0
+            if test -z "$fin_cache"
+                set -l config "$XDG_CONFIG_HOME"
+
+                if test -z "$config"
+                    set config ~/.config/fish/
+                end
+
+                set config "$config/conf.d/fin.fish"
+
+                if test ! -s "$config"
+                    exit
+                end
+
+                source "$config" ^ /dev/null
+            end
+    end
+    #
+    # Remove after fish 2.3 is available
+    #
+
     set -e argv[1]
 
     set -l local_versions (__fin_version_local)
