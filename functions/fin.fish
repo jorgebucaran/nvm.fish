@@ -1,4 +1,4 @@
-function fin
+function fin -d "node.js version manager"
     set -l config_home "$XDG_CONFIG_HOME"
 
     if test -z "$config_home"
