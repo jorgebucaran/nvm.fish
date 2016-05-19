@@ -1,3 +1,30 @@
+#
+# Remove after fish 2.3 is available
+#
+switch "$FISH_VERSION"
+    case 2.2.0
+        if test -z "$fin_cache"
+            set -l config "$XDG_CONFIG_HOME"
+
+            if test -z "$config"
+                set config ~/.config/fish/
+            end
+
+            set config "$config/conf.d/fin.fish"
+
+            if test ! -s "$config"
+                exit
+            end
+
+            source "$config" ^ /dev/null
+        end
+end
+#
+# Remove after fish 2.3 is available
+#
+
+source ~/.config/fish/conf.d/fin.fish
+
 complete -xc fin -s h -l help -d "Show usage help"
 complete -xc fin -s v -l version -d "Show version information"
 complete -xc fin -n "__fish_use_subcommand" -a use -d "Select version"
