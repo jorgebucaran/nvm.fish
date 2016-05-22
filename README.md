@@ -6,15 +6,15 @@
 [![][travis-badge]][travis-link]
 [![][slack-badge]][slack-link]
 
-# fin
+# fnm
 
-fin is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creationix/nvm] for [fish].
+fnm is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creationix/nvm] for [fish].
 
 ## Features
 
 * No sudo
 
-* Zero configuration
+* No configuration
 
 * Cached downloads
 
@@ -25,7 +25,7 @@ fin is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creati
 With [fisherman]
 
 ```
-fisher fin
+fisher fnm
 ```
 
 ## Usage
@@ -33,15 +33,15 @@ fisher fin
 Use node 5.5.0.
 
 ```fish
-fin 5.5.0
+fnm 5.5.0
 node -v
 v5.5.0
 ```
 
-Use a *.finrc* file.
+Use a *.fnmrc* file.
 
 ```fish
-echo 5.10.1 > .finrc
+echo 5.10.1 > .fnmrc
 node -v
 v5.10.1
 ```
@@ -49,19 +49,19 @@ v5.10.1
 Use the latest stable node release.
 
 ```
-fin latest
+fnm latest
 ```
 
 Use the latest LTS (long-term support) node release.
 
 ```
-fin lts
+fnm lts
 ```
 
 Select a version interactively.
 
 ```
-fin
+fnm
   5.5.0
   5.10.0
 • 5.10.1
@@ -70,7 +70,7 @@ fin
 List all versions available for download.
 
 ```ApacheConf
-fin ls
+fnm ls
   ...
 - 5.5.0   # downloaded
   5.6.0
@@ -83,13 +83,13 @@ fin ls
 Remove a version.
 
 ```
-fin rm 5.5.0
+fnm rm 5.5.0
 ```
 
 Customize the download mirror.
 
 ```fish
-set -u fin_mirror http://npm.taobao.org/mirrors/node
+set -u fnm_mirror http://npm.taobao.org/mirrors/node
 ```
 
 [fisherman]: https://github.com/fisherman
