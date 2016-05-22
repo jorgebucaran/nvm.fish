@@ -18,7 +18,7 @@ function fnm -d "node.js version manager"
         return 1
     end
 
-    set -g fnm_version 1.7.2
+    set -g fnm_version 1.8.0
 
     set -l cmd
 
