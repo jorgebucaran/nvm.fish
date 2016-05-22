@@ -1,34 +1,34 @@
-function fin -d "node.js version manager"
+function fnm -d "node.js version manager"
     set -l config_home "$XDG_CONFIG_HOME"
 
     if test -z "$config_home"
         set config_home ~/.config
     end
 
-    if test -z "$fin_config"
-        if not source "$config_home/fish/conf.d/fin.fish" ^ /dev/null
-            echo "fin: Internal error: fin was not installed correctly." > /dev/stderr
-            echo "fin: I could not find '$config_home/fish/conf.d/fin.fish'." > /dev/stderr
+    if test -z "$fnm_config"
+        if not source "$config_home/fish/conf.d/fnm.fish" ^ /dev/null
+            echo "fnm: Internal error: fnm was not installed correctly." > /dev/stderr
+            echo "fnm: I could not fnmd '$config_home/fish/conf.d/fnm.fish'." > /dev/stderr
             return 1
         end
     end
 
-    if not command mkdir -p "$fin_config"/{bin,versions} "$fin_cache"/versions
-        echo "fin: I couldn't create the fin configuration: $fin_config" > /dev/stderr
+    if not command mkdir -p "$fnm_config"/{bin,versions} "$fnm_cache"/versions
+        echo "fnm: I couldn't create the fnm configuration: $fnm_config" > /dev/stderr
         return 1
     end
 
-    set -g fin_version 1.7.2
+    set -g fnm_version 1.7.2
 
     set -l cmd
 
     switch "$argv[1]"
         case -h --help help
-            __fin_usage > /dev/stderr
+            __fnm_usage > /dev/stderr
             return
 
         case -v --version
-            echo "fin v$fin_version"
+            echo "fnm v$fnm_version"
             return
 
         case u use -- ""
@@ -56,8 +56,8 @@ function fin -d "node.js version manager"
             end
 
         case -\*\*
-            echo "fin: '$argv[1]' is not a valid option." > /dev/stderr
-            __fin_usage > /dev/stderr
+            echo "fnm: '$argv[1]' is not a valid option." > /dev/stderr
+            __fnm_usage > /dev/stderr
             return 1
 
         case \*
@@ -66,13 +66,13 @@ function fin -d "node.js version manager"
 
     switch "$cmd"
         case default
-            if set -l rc_ver (__fin_read_finrc)
-                __fin_use "$rc_ver"
+            if set -l rc_ver (__fnm_read_fnmrc)
+                __fnm_use "$rc_ver"
             else
-                set -l local_versions (__fin_version_local)
+                set -l local_versions (__fnm_version_local)
 
                 if test -z "$local_versions"
-                    __fin_usage > /dev/stderr
+                    __fnm_usage > /dev/stderr
                     return 1
                 end
 
@@ -82,8 +82,8 @@ function fin -d "node.js version manager"
 
                 set -l sel_ver
 
-                if test -s "$fin_config/version"
-                    read sel_ver < "$fin_config/version"
+                if test -s "$fnm_config/version"
+                    read sel_ver < "$fnm_config/version"
 
                     if set -l index (contains --index -- "$sel_ver" $local_versions)
                         set menu_selected_index "$index"
@@ -92,39 +92,39 @@ function fin -d "node.js version manager"
 
                 menu $local_versions
 
-                __fin_use "$local_versions[$menu_selected_index]"
+                __fnm_use "$local_versions[$menu_selected_index]"
             end
 
         case use
-            __fin_use $argv
+            __fnm_use $argv
 
         case list
-            __fin_list $argv
+            __fnm_list $argv
 
         case remove
             if not set -q argv[1]
-                if test -s "$fin_config/version"
-                    if __fin_read_finrc > /dev/null
-                        echo "fin: You tried to run 'fin rm' without arguments, but " > /dev/stderr
-                        echo "     there is a .finrc file in the current directory." > /dev/stderr
+                if test -s "$fnm_config/version"
+                    if __fnm_read_fnmrc > /dev/null
+                        echo "fnm: You tried to run 'fnm rm' without arguments, but " > /dev/stderr
+                        echo "     there is a .fnmrc file in the current directory." > /dev/stderr
                         echo > /dev/stderr
                         echo "Hint: Delete this file to disable automatic version" > /dev/stderr
                         echo "      switching in this directory." > /dev/stderr
 
                         return 1
                     else
-                        read -l v < "$fin_config/version"
+                        read -l v < "$fnm_config/version"
                         set argv[1] "$v"
                     end
                 end
             end
 
             for v in $argv
-                __fin_rm $v
+                __fnm_rm $v
             end
     end
 
-    complete -c fin --erase
+    complete -c fnm --erase
 
-    source "$config_home/fish/completions/fin.fish" ^ /dev/null
+    source "$config_home/fish/completions/fnm.fish" ^ /dev/null
 end

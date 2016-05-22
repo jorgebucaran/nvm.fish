@@ -1,4 +1,4 @@
-function __fin_version_query -a v
+function __fnm_version_query -a v
     command awk -v v="$v" '
 
         (v == "latest" && NR == 2) || (v == "lts" && $10 != "-" && NR > 1) {
@@ -25,5 +25,5 @@ function __fin_version_query -a v
             print(result)
         }
 
-    ' < "$fin_cache/index"
+    ' < "$fnm_cache/index"
 end

@@ -1,5 +1,5 @@
-function __fin_version_local
-    set -l versions "$fin_config/versions"/*
+function __fnm_version_local
+    set -l versions "$fnm_config/versions"/*
 
     if test -z "$versions"
         return 1
