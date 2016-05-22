@@ -1,6 +1,6 @@
-function __fin_version_download -a v target
+function __fnm_version_download -a v target
     set -l os (uname -s)
-    set -l mirror (__fin_mirror)
+    set -l mirror (__fnm_mirror)
     set -l file
 
     switch "$os"
@@ -36,12 +36,12 @@ function __fin_version_download -a v target
     if not curl --fail --progress-bar -SLO "$url"
         command rm -rf "$target"
 
-        echo "fin: I could not fetch $file from:" > /dev/stderr
+        echo "fnm: I could not fetch $file from:" > /dev/stderr
         echo "     <$url>" > /dev/stderr
         echo > /dev/stderr
         echo "Hint: This is most likely a problem with http://nodejs.org" > /dev/stderr
         echo "      or a connection timeout. If the the problem persists" > /dev/stderr
-        echo "      visit: <github.com/fisherman/fin/issues>" > /dev/stderr
+        echo "      visit: <github.com/fisherman/fnm/issues>" > /dev/stderr
 
         return 1
     end

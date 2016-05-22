@@ -1,10 +1,10 @@
-function __fin_index_update
-    set -l index "$fin_cache/index"
+function __fnm_index_update
+    set -l index "$fnm_cache/index"
     set -l interval 4320
-    set -l mirror (__fin_mirror)
+    set -l mirror (__fnm_mirror)
 
-    if test ! -z "$fin_index_update_interval"
-        set interval "$fin_index_update_interval"
+    if test ! -z "$fnm_index_update_interval"
+        set interval "$fnm_index_update_interval"
     end
 
     if test -s "$index"

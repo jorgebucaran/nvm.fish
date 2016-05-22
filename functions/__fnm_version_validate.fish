@@ -1,4 +1,4 @@
-function __fin_version_validate -a v
+function __fnm_version_validate -a v
     printf "%s\n" "$v" | command awk '
 
         !/^v$/ {

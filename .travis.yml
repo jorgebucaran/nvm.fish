@@ -6,4 +6,4 @@ before_install:
 script:
     - curl -Lo ~/.config/fish/functions/f.fish --create-dirs git.io/fisherman
     - curl -L git.io/snippet > ~/.config/fish/config.fish
-    - fish -c "f .; fin latest; node -v"
+    - fish -c "f .; fnm latest; node -v"

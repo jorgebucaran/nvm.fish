@@ -1,23 +1,23 @@
-function __fin_list
-    if not __fin_index_update
-        echo "fin: I could not fetch the remote index." > /dev/stderr
+function __fnm_list
+    if not __fnm_index_update
+        echo "fnm: I could not fetch the remote index." > /dev/stderr
         return 1
     end
 
     if test ! -z "$argv"
         for v in $argv
-            if test ! -d "$fin_cache/versions/$v"
+            if test ! -d "$fnm_cache/versions/$v"
                 continue
             end
 
-            printf "%s\n" "$fin_cache/versions/$v"
+            printf "%s\n" "$fnm_cache/versions/$v"
         end
 
         return
     end
 
-    set -l ver_which (__fin_version_which)
-    set -l ver_available (__fin_version_local)
+    set -l ver_which (__fnm_version_which)
+    set -l ver_available (__fnm_version_local)
 
     command awk -v ver_which="$ver_which" -v ver_available_str="$ver_available" '
 
@@ -58,5 +58,5 @@ function __fin_list
             }
         }
 
-    ' < "$fin_cache/index"
+    ' < "$fnm_cache/index"
 end
