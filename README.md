@@ -89,7 +89,7 @@ fnm rm 5.5.0
 Customize the download mirror.
 
 ```fish
-set -u fnm_mirror http://npm.taobao.org/mirrors/node
+set -U fnm_mirror http://npm.taobao.org/mirrors/node
 ```
 
 [fisherman]: https://github.com/fisherman
