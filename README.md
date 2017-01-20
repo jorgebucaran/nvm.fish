@@ -1,12 +1,7 @@
-[slack-link]: https://fisherman-wharf.herokuapp.com
-[slack-badge]: https://fisherman-wharf.herokuapp.com/badge.svg
-[travis-link]: https://travis-ci.org/fisherman/fisherman
-[travis-badge]: https://img.shields.io/travis/fisherman/fisherman.svg
+# fnm
 
 [![][travis-badge]][travis-link]
 [![][slack-badge]][slack-link]
-
-# fnm
 
 fnm is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creationix/nvm] for [fish].
 
@@ -97,3 +92,8 @@ set -U fnm_mirror http://npm.taobao.org/mirrors/node
 [wbyoung/avn]: https://github.com/wbyoung/avn
 [creationix/nvm]: https://github.com/creationix/nvm
 [fish]: https://fishshell.com
+
+[slack-link]: https://fisherman-wharf.herokuapp.com
+[slack-badge]: https://fisherman-wharf.herokuapp.com/badge.svg
+[travis-link]: https://travis-ci.org/fisherman/fisherman
+[travis-badge]: https://img.shields.io/travis/fisherman/fisherman.svg
