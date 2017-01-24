@@ -41,7 +41,7 @@ end
 
 if set -l versions (__fnm_version_local)
     for ver in $versions
-        set -l info
+        set -l info "$ver"
 
         if test "$latest" = "$ver"
             set info "latest"
