@@ -39,7 +39,9 @@ function __fnm_run_bin_as -a name
             return 1
         end
 
-        read rc_ver < "$fnm_config/version"
+        if test -s "$fnm_config/version"
+            read rc_ver < "$fnm_config/version"
+        end
     end
 
     set -lx PATH $PATH
