@@ -30,18 +30,11 @@ function __fnm_run_bin_as -a name
     set -l rc_ver
     set -l sel_ver
 
-    if set rc_ver (__fnm_read_fnmrc)
-        if test -s "$fnm_config/version"
-            read sel_ver < "$fnm_config/version"
-        end
-
-        if not fnm "$rc_ver"
-            return 1
-        end
-
-        if test -s "$fnm_config/version"
-            read rc_ver < "$fnm_config/version"
-        end
+    if set rc_ver (__fnm_read_fnmrc) and not fnm "$rc_ver"
+        return 1
+    else if test -s "$fnm_config/version" 
+        read sel_ver < "$fnm_config/version"
+        read rc_ver < "$fnm_config/version"
     end
 
     set -lx PATH $PATH
