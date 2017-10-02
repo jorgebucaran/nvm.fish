@@ -25,7 +25,7 @@ function __fnm_rm -a v
     end
 
     if not set v (__fnm_version_query "$v")
-        echo "fnm: I couldn't fnmd '$v' in the version index." > /dev/stderr
+        echo "fnm: I couldn't find '$v' in the version index." > /dev/stderr
         return 1
     end
 
