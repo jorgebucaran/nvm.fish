@@ -8,7 +8,7 @@ function fnm -d "node.js version manager"
     if test -z "$fnm_config"
         if not source "$config_home/fish/conf.d/fnm.fish" ^ /dev/null
             echo "fnm: Internal error: fnm was not installed correctly." > /dev/stderr
-            echo "fnm: I could not fnmd '$config_home/fish/conf.d/fnm.fish'." > /dev/stderr
+            echo "fnm: I could not find '$config_home/fish/conf.d/fnm.fish'." > /dev/stderr
             return 1
         end
     end
