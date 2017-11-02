@@ -48,12 +48,15 @@ function __fnm_run_bin_as -a name
 
     if test "$name" = "node"
         command node $argv
+        set command_status $status
 
     else if test "$name" = "npm"
         command npm $argv
+        set command_status $status
 
     else
         echo "fnm: Error: I don't know what is '$name'." > /dev/stderr
+        set command_status 1
     end
 
     if test ! -z "$rc_ver"
@@ -65,4 +68,6 @@ function __fnm_run_bin_as -a name
             fnm "$sel_ver"
         end
     end
+
+    return $command_status
 end
