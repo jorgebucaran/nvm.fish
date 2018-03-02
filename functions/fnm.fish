@@ -127,4 +127,7 @@ function fnm -d "node.js version manager"
     complete -c fnm --erase
 
     source "$config_home/fish/completions/fnm.fish" ^ /dev/null
+
+    tput cvvis
 end
+
