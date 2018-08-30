@@ -14,5 +14,9 @@ function __fnm_read_fnmrc
 
     read -l v < "$fnmrc"
 
+    if test "$v" = "lts/*"
+        set v "lts"
+    end
+
     printf "%s\n" $v
 end
