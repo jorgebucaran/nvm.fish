@@ -20,7 +20,7 @@ fnm is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creati
 With [fisherman]
 
 ```
-fisher fnm
+fisher add fisherman/fnm
 ```
 
 ## Usage
