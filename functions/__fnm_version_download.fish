@@ -8,12 +8,18 @@ function __fnm_version_download -a v target
             set -l arch (uname -m)
 
             if test "$arch" = "x86_64"
-                set arch 64
+                set arch x64
+            else if contains $arch armv6 armv6l
+                set arch armv6l
+            else if contains $arch armv7 armv7l
+                set arch armv7l
+            else if contains $arch armv8 armv8l
+                set arch arm64
             else
-                set arch 86
+                set arch x86
             end
 
-            set file "node-v$v-linux-x$arch.tar.gz"
+            set file "node-v$v-linux-$arch.tar.gz"
 
         case Darwin
             set file "node-v$v-darwin-x64.tar.gz"
