@@ -1,26 +1,27 @@
 # fnm
 
-[![][travis-badge]][travis-link]
-[![][slack-badge]][slack-link]
+[![Build Status](https://img.shields.io/travis/jorgebucaran/fnm.svg)](https://travis-ci.org/jorgebucaran/fnm)
 
-fnm is a node version manager using ideas from [tj/n], [wbyoung/avn] and [creationix/nvm] for [fish].
+> ✋ Psst! We're currently rewriting fnm—please subscribe to [issues/#75](https://github.com/jorgebucaran/fnm/issues/75) for and news & details.
+
+Fnm is a node version manager using ideas from [tj/n](https://github.com/tj/n), [wbyoung/avn](https://github.com/wbyoung/avn) and [creationix/nvm](https://github.com/creationix/nvm) for the [fish-shell](https://fishshell.com).
 
 ## Features
 
-* No sudo
+- No sudo
 
-* No configuration
+- No configuration
 
-* Cached downloads
+- Cached downloads
 
-* Automatic version switching
+- Automatic version switching
 
 ## Install
 
-With [fisherman]
+With [Fisher](https://github.com/jorgebucaran/fisher)
 
 ```
-fisher add fisherman/fnm
+fisher add jorgebucaran/fnm
 ```
 
 ## Usage
@@ -33,7 +34,7 @@ node -v
 v5.5.0
 ```
 
-Use a *.fnmrc* file.
+Use a _.fnmrc_ file.
 
 ```fish
 echo 5.10.1 > .fnmrc
@@ -87,13 +88,6 @@ Customize the download mirror.
 set -U fnm_mirror http://npm.taobao.org/mirrors/node
 ```
 
-[fisherman]: https://github.com/fisherman
-[tj/n]: https://github.com/tj/n
-[wbyoung/avn]: https://github.com/wbyoung/avn
-[creationix/nvm]: https://github.com/creationix/nvm
-[fish]: https://fishshell.com
+## License
 
-[slack-link]: https://fisherman-wharf.herokuapp.com
-[slack-badge]: https://fisherman-wharf.herokuapp.com/badge.svg
-[travis-link]: https://travis-ci.org/fisherman/fisherman
-[travis-badge]: https://img.shields.io/travis/fisherman/fisherman.svg
+Fnm is MIT licensed. See the [LICENSE](LICENSE) for details.
