@@ -71,6 +71,12 @@ function __fnm_use -a v
         return 1
     end
 
+    if test -d "$fnm_cache/versions/$v/lib/node_modules/npm"
+        if test -d "$fnm_config/lib/node_modules/npm"
+            command rm -rf "$fnm_config/lib/node_modules/npm"
+        end
+    end
+
     command cp -fR "$fnm_cache/versions/$v/lib/." "$fnm_config/lib"
 
     echo "$v" > "$fnm_config/version"
