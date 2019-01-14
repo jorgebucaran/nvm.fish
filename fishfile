@@ -1,4 +1,4 @@
-fisherman/menu
-fisherman/get_file_age
-fisherman/await
-fisherman/last_job_id
+fishpkg/fish-menu
+fishpkg/fish-get-file-age
+fishpkg/fish-await
+fishpkg/fish-last-job-id
