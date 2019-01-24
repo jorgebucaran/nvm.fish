@@ -15,6 +15,8 @@ fish-nvm is a Node.js version manager for the [fish shell](https://fishshell.com
 
 ## Installation
 
+With [Fisher](https://github.com/jorgebucaran/fisher)
+
 ```sh
 fisher add jorgebucaran/fish-nvm
 ```
@@ -46,7 +48,7 @@ Use the latest LTS (long-term support) node release.
 nvm use lts
 ```
 
-Create an `.nvmrc` file in the root of your project and run `nvm` to use the version in it. 
+Create an `.nvmrc` file in the root of your project and run `nvm` to use the version in it.
 
 ```fish
 echo latest > .nvmrc
