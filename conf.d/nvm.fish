@@ -1,6 +1,3 @@
-set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-set -g nvm_config $XDG_CONFIG_HOME/nvm
-
 function _nvm_uninstall -e nvm_uninstall
     if test -s "$nvm_config/version"
         read -l ver <$nvm_config/version
