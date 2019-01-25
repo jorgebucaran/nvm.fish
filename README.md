@@ -1,4 +1,4 @@
-# fish-nvm — Node.js Version Manager
+# fish-nvm (Node.js Version Manager)
 
 [![Build Status](https://img.shields.io/travis/jorgebucaran/fish-nvm.svg)](https://travis-ci.org/jorgebucaran/fish-nvm)
 [![Releases](https://img.shields.io/github/release/jorgebucaran/fish-nvm.svg?label=latest)](https://github.com/jorgebucaran/fish-nvm/releases)
@@ -9,49 +9,57 @@ fish-nvm is a Node.js version manager for the [fish shell](https://fishshell.com
 
 ## Features
 
-- Zero configuration, pure-fish binary management
+- Zero configuration, pure-fish, binary management
 - No subshells, no dependencies, no nonsense
-- <kbd>Tab</kbd> completions included out-of-the-box
+- <kbd>Tab</kbd> completions included out of the box
 
 ## Installation
 
-With [Fisher](https://github.com/jorgebucaran/fisher)
+<pre>
+<a href=https://github.com/jorgebucaran/fisher>fisher</a> add jorgebucaran/fish-nvm
+</pre>
 
-```sh
-fisher add jorgebucaran/fish-nvm
+### Manual Installation
+
+Download `nvm.fish` to your fish configuration directory to install (or upgrade) nvm manually. If `nvm` is not immediately available after the download, you can launch a new session, or [replace the current session](https://fishshell.com/docs/current/commands.html#exec) with a new one.
+
+```fish
+set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
+
+for i in {conf.d,functions,completions}
+  curl https://git.io/$i.nvm.fish --create-dirs -sLo $XDG_CONFIG_HOME/fish/$i/nvm.fish
+end
 ```
 
-## System Requirements
+To uninstall nvm from your system run this code.
+
+```
+rm -f $XDG_CONFIG_HOME/fish/{conf.d,functions,completions}/nvm.fish && emit nvm_uninstall
+```
+
+### System Requirements
 
 - [fish](https://github.com/fish-shell/fish-shell) 2.2+
 - [curl](https://github.com/curl/curl) 7.10.3+
 
 ## Usage
 
-Use a node version. This will download the node binary tarball from the [default mirror](https://nodejs.org/dist/) and modify your `$PATH` so you can start using it right away.
+This will download the latest Node.js release tarball from the [official mirror](https://nodejs.org/dist), extract it to <code>[\$XDG_CONFIG_HOME](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)/nvm</code> and modify your `$PATH` so it can be used right away. Learn more about the Node.js release schedule [here](https://github.com/nodejs/Release).
 
 ```fish
-nvm use 10
-node -v
-v10.15.0
-```
-
-Use the latest node release. Learn more about release schedules [here](https://github.com/nodejs/Release).
-
-```
 nvm use latest
 ```
 
-Use the latest LTS (long-term support) node release.
+This will download and use the latest LTS (long-term support) Node.js release.
 
 ```
 nvm use lts
 ```
 
-Create an `.nvmrc` file in the root of your project and run `nvm` to use the version in it.
+You can create a `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version contained in it. Running this in any subdirectory of a directory with an `.nvmrc` will result in that `.nvmrc` being used.
 
 ```fish
-echo latest > .nvmrc
+echo 10 > .nvmrc
 nvm
 ```
 
@@ -78,7 +86,10 @@ nvm ls
 Want to narrow that down a bit? You can use a regular expression to refine the output.
 
 ```
-$ nvm ls '^8.[4-6]'
+nvm ls '^8.[4-6]'
+```
+
+```console
 8.4.0    (lts/carbon)
 8.5.0    (lts/carbon)
 8.6.0    (lts/carbon)
@@ -92,10 +103,4 @@ set -g nvm_mirror http://npm.taobao.org/mirrors/node
 
 ## License
 
-Copyright © 2016-2019 Jorge Bucaran <<https://jorgebucaran.com>>
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+[MIT](LICENSE.md)
