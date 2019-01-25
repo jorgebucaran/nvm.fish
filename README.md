@@ -65,7 +65,7 @@ nvm
 
 Running `nvm` in any subdirectory of a directory with an `.nvmrc` file will read the Node.js version from that file. Similarly, running `nvm use <version>` will update that `.nvmrc` file with the specified version.
 
-```console
+```
 ├── README.md
 ├── dist
     └── foo.min.js
