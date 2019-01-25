@@ -56,11 +56,31 @@ This will download and use the latest LTS (long-term support) Node.js release.
 nvm use lts
 ```
 
-You can create a `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version contained in it. Running this in any subdirectory of a directory with an `.nvmrc` will result in that `.nvmrc` being used.
+You can create a `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version contained in it. We'll attempt to find the nearest `.nvmrc` file, traversing the directory tree from the current working directory upwards.
 
 ```fish
-echo 10 > .nvmrc
+echo 10 >.nvmrc
 nvm
+```
+
+Running `nvm` in any subdirectory of a directory with an `.nvmrc` file will read the Node.js version from that file. Similarly, running `nvm use <version>` will update that `.nvmrc` file with the specified version.
+
+```console
+├── README.md
+├── dist
+    └── foo.min.js
+├── node_modules
+├── package.json
+└── src
+    └── index.js
+```
+
+```fish
+echo 10 >.nvmrc
+cd src
+nvm
+node -v
+10.15.0
 ```
 
 List all supported Node.js versions.
