@@ -3,7 +3,7 @@ set -g nvm_version 1.0.0
 function nvm -a cmd -d "Node.js version manager"
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
     set -g nvm_config $XDG_CONFIG_HOME/nvm
-    set -g nvm_file .nvmrc 
+    set -g nvm_file .nvmrc
     set -q nvm_mirror; or set -g nvm_mirror "https://nodejs.org/dist"
 
     if test ! -d $nvm_config
@@ -19,8 +19,8 @@ function nvm -a cmd -d "Node.js version manager"
             _nvm_use $argv
         case ""
             if isatty
-                for file in $nvm_file
-                    test -e $file; and read cmd <$file; and break
+                if set -l root (_nvm_find_up (pwd) $nvm_file)
+                    read cmd <$root/$nvm_file
                 end
             else
                 read cmd
@@ -30,6 +30,7 @@ function nvm -a cmd -d "Node.js version manager"
                 _nvm_help >&2
                 return 1
             end
+
             _nvm_use $cmd
         case {,-}-v{ersion,}
             echo "nvm version $nvm_version"
@@ -195,13 +196,23 @@ function _nvm_use
         end
     end
 
-    if test -e "$nvm_file"
-        echo $argv[1] >$nvm_file
+    if set -l root (_nvm_find_up (pwd) $nvm_file)
+        echo $argv[1] >$root/$nvm_file
     end
 
     echo $ver >$nvm_config/version
 
     if not contains -- "$nvm_config/$ver/bin" $fish_user_paths
         set -U fish_user_paths "$nvm_config/$ver/bin" $fish_user_paths
+    end
+end
+
+function _nvm_find_up -a path file
+    if test -e "$path/$file"
+        echo $path
+    else if test "$path" != /
+        _nvm_find_up (command dirname $path) $file
+    else
+        return 1
     end
 end
