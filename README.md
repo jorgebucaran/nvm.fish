@@ -5,7 +5,7 @@
 
 Node.js version manager for the <a href=https://fishshell.com title="friendly interactive shell">fish shell</a>.
 
-![](https://gitcdn.link/repo/jorgebucaran/00f6d3f301483a01a00e836eb17a2b3e/raw/a0db2b492e1dab95ae80ddb005519a32b2bf43c8/fish-nvm.svg)
+![](https://gitcdn.link/repo/jorgebucaran/00f6d3f301483a01a00e836eb17a2b3e/raw/0084c9bacd4dcc8ddea0932d413efcab98f3b82f/fish-nvm.svg)
 
 ## Features
 
