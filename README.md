@@ -3,25 +3,31 @@
 [![Build Status](https://img.shields.io/travis/jorgebucaran/fish-nvm.svg)](https://travis-ci.org/jorgebucaran/fish-nvm)
 [![Releases](https://img.shields.io/github/release/jorgebucaran/fish-nvm.svg?label=latest)](https://github.com/jorgebucaran/fish-nvm/releases)
 
-fish-nvm is a Node.js version manager for the [fish shell](https://fishshell.com).
+Node.js version manager for the <a href=https://fishshell.com title="friendly interactive shell">fish shell</a>.
 
-![](https://gitcdn.link/repo/jorgebucaran/c796a54376c7571ad7d5bb1c85feabb8/raw/038b6654300e4575b47c0a61a749733ea9c0bb5d/nvm.svg)
+![](https://gitcdn.link/repo/jorgebucaran/00f6d3f301483a01a00e836eb17a2b3e/raw/cb8e0a4b5a46fe032f5c3a154ffdb0c141898dbb/fish-nvm.svg)
 
 ## Features
 
-- Zero configuration, pure-fish, binary management
-- No subshells, no dependencies, no nonsense
-- <kbd>Tab</kbd> completions included out of the box
+- `.nvmrc` support
+- Seamless shell integration
+  - <kbd>Tab</kbd>-completions? You got it
+- No dependencies, no subshells, no configuration setup—it just works
 
 ## Installation
 
-<pre>
-<a href=https://github.com/jorgebucaran/fisher>fisher</a> add jorgebucaran/fish-nvm
-</pre>
+Install with [Fisher](https://github.com/jorgebucaran/fisher) (recommended):
 
-### Manual Installation
+```
+fisher add jorgebucaran/fish-nvm
+```
 
-Download `nvm.fish` to your fish configuration directory to install (or upgrade) nvm manually. If `nvm` is not immediately available after the download, you can launch a new session, or [replace the current session](https://fishshell.com/docs/current/commands.html#exec) with a new one.
+<details>
+<summary>Not using a package manager?</summary>
+
+---
+
+Copy [`conf.d/nvm.fish`](conf.d/nvm.fish), [`functions/nvm.fish`](functions/nvm.fish), and [`completions/nvm.fish`](completions/nvm.fish) to your fish configuration directory preserving directory structure.
 
 ```fish
 set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
@@ -31,20 +37,22 @@ for i in {conf.d,functions,completions}
 end
 ```
 
-To uninstall nvm from your system run this code.
+To uninstall, run the following code:
 
 ```
 rm -f $XDG_CONFIG_HOME/fish/{conf.d,functions,completions}/nvm.fish && emit nvm_uninstall
 ```
 
+</details>
+
 ### System Requirements
 
 - [fish](https://github.com/fish-shell/fish-shell) 2.2+
-- [curl](https://github.com/curl/curl) 7.10.3+
+- [curl](https://github.com/curl/curl) [7.10.3](https://curl.haxx.se/changes.html#7_10_3)+
 
 ## Usage
 
-This will download the latest Node.js release tarball from the [official mirror](https://nodejs.org/dist), extract it to <code>[\$XDG_CONFIG_HOME](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)/nvm</code> and modify your `$PATH` so it can be used right away. Learn more about the Node.js release schedule [here](https://github.com/nodejs/Release).
+This will download the latest Node.js release tarball from the [official mirror](https://nodejs.org/dist), extract it to <code>[\$XDG_CONFIG_HOME](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)/nvm</code> and modify your `$PATH` so it can be used immediately. Learn more about the Node.js release schedule [here](https://github.com/nodejs/Release).
 
 ```fish
 nvm use latest
@@ -56,14 +64,14 @@ This will download and use the latest LTS (long-term support) Node.js release.
 nvm use lts
 ```
 
-You can create a `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version contained in it. We'll attempt to find the nearest `.nvmrc` file, traversing the directory tree from the current working directory upwards.
+You can create an `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version in it. We'll attempt to find the nearest `.nvmrc` file, traversing the directory tree from the current working directory upwards.
 
 ```fish
 echo 10 >.nvmrc
 nvm
 ```
 
-Running `nvm` in any subdirectory of a directory with an `.nvmrc` file will read the Node.js version from that file. Similarly, running `nvm use <version>` will update that `.nvmrc` file with the specified version.
+Running `nvm` in any subdirectory of a directory with an `.nvmrc` file will use the version from that file. Likewise, running `nvm use <version>` will update that `.nvmrc` file with the specified version.
 
 ```
 ├── README.md
@@ -83,7 +91,7 @@ node -v
 10.15.0
 ```
 
-List all supported Node.js versions.
+List all supported Node.js versions you can download and use.
 
 ```
 nvm ls
@@ -103,7 +111,7 @@ nvm ls
  11.7.0    (latest/current)
 ```
 
-Want to narrow that down a bit? You can use a regular expression to refine the output.
+You can use a regular expression to narrow down the output.
 
 ```
 nvm ls '^8.[4-6]'
