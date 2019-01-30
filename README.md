@@ -5,7 +5,7 @@
 
 Node.js version manager for the <a href=https://fishshell.com title="friendly interactive shell">fish shell</a>.
 
-![](https://gitcdn.link/repo/jorgebucaran/00f6d3f301483a01a00e836eb17a2b3e/raw/cb8e0a4b5a46fe032f5c3a154ffdb0c141898dbb/fish-nvm.svg)
+![](https://gitcdn.link/repo/jorgebucaran/00f6d3f301483a01a00e836eb17a2b3e/raw/a0db2b492e1dab95ae80ddb005519a32b2bf43c8/fish-nvm.svg)
 
 ## Features
 
@@ -27,7 +27,7 @@ fisher add jorgebucaran/fish-nvm
 
 ---
 
-Copy [`conf.d/nvm.fish`](conf.d/nvm.fish), [`functions/nvm.fish`](functions/nvm.fish), and [`completions/nvm.fish`](completions/nvm.fish) to your fish configuration directory preserving directory structure.
+Copy [`conf.d/nvm.fish`](conf.d/nvm.fish), [`functions/nvm.fish`](functions/nvm.fish), and [`completions/nvm.fish`](completions/nvm.fish) to your fish configuration directory preserving the directory structure.
 
 ```fish
 set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
@@ -71,12 +71,11 @@ echo 10 >.nvmrc
 nvm
 ```
 
-Running `nvm` in any subdirectory of a directory with an `.nvmrc` file will use the version from that file. Likewise, running `nvm use <version>` will update that `.nvmrc` file with the specified version.
+Running `nvm` in any subdirectory of a directory with an `.nvmrc` file will use the version from that file. Likewise, running `nvm use <version>` will update that `.nvmrc` file with the indicated version.
 
 ```
 ├── README.md
 ├── dist
-    └── foo.min.js
 ├── node_modules
 ├── package.json
 └── src
@@ -84,14 +83,16 @@ Running `nvm` in any subdirectory of a directory with an `.nvmrc` file will use 
 ```
 
 ```fish
-echo 10 >.nvmrc
+echo lts >.nvmrc
 cd src
 nvm
 node -v
-10.15.0
+v10.15.1
 ```
 
-List all supported Node.js versions you can download and use.
+### Listing versions
+
+This will list all the supported Node.js versions you can use.
 
 ```
 nvm ls
@@ -123,7 +124,7 @@ nvm ls '^8.[4-6]'
 8.6.0    (lts/carbon)
 ```
 
-Are you behind a firewall? Use the `$nvm_mirror` variable to customize the download mirror.
+To customize the download mirror, e.g. if you are behind a firewall, you can set `$nvm_mirror`:
 
 ```fish
 set -g nvm_mirror http://npm.taobao.org/mirrors/node
