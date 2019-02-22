@@ -64,14 +64,14 @@ This will download and use the latest LTS (long-term support) Node.js release.
 nvm use lts
 ```
 
-You can create an `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version in it. We'll attempt to find the nearest `.nvmrc` file, traversing the directory tree from the current working directory upwards.
+You can create a `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version in it. We'll attempt to find the nearest `.nvmrc` file, traversing the directory tree from the current working directory upwards.
 
 ```fish
 echo 10 >.nvmrc
 nvm
 ```
 
-Running `nvm` in any subdirectory of a directory with an `.nvmrc` file will use the version from that file. Likewise, running `nvm use <version>` will update that `.nvmrc` file with the indicated version.
+Running `nvm` in any subdirectory of a directory with a `.nvmrc` file uses the version from that file. Likewise, running `nvm use <version>` will update that `.nvmrc` file with the indicated version.
 
 ```
 ├── README.md
@@ -124,7 +124,7 @@ nvm ls '^8.[4-6]'
 8.6.0    (lts/carbon)
 ```
 
-To customize the download mirror, e.g. if you are behind a firewall, you can set `$nvm_mirror`:
+To customize the download mirror, e.g., if you are behind a firewall, you can set `$nvm_mirror`:
 
 ```fish
 set -g nvm_mirror http://npm.taobao.org/mirrors/node
