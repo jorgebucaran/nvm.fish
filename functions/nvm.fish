@@ -1,4 +1,4 @@
-set -g nvm_version 1.0.0
+set -g nvm_version 1.0.1
 
 function nvm -a cmd -d "Node.js version manager"
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
