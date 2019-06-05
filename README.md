@@ -67,7 +67,7 @@ nvm use lts
 You can create a `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version in it. We'll attempt to find the nearest `.nvmrc` file, traversing the directory tree from the current working directory upwards.
 
 ```fish
-echo 10 >.nvmrc
+node -v > .nvmrc
 nvm
 ```
 
