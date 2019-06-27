@@ -1,18 +1,14 @@
-# fish-nvm (Node.js Version Manager)
+# fish-nvm (Node Version Manager) [![Releases](https://img.shields.io/github/release/jorgebucaran/fish-nvm.svg?label=&color=0080FF)](https://github.com/jorgebucaran/fish-nvm/releases/latest) [![Travis CI](https://img.shields.io/travis/jorgebucaran/fish-nvm.svg?label=)](https://travis-ci.org/jorgebucaran/fish-nvm)
 
-[![Build Status](https://img.shields.io/travis/jorgebucaran/fish-nvm.svg)](https://travis-ci.org/jorgebucaran/fish-nvm)
-[![Releases](https://img.shields.io/github/release/jorgebucaran/fish-nvm.svg?label=latest)](https://github.com/jorgebucaran/fish-nvm/releases)
+> Node.js version manager for the <a href=https://fishshell.com title="friendly interactive shell">fish shell</a>.
 
-Node.js version manager for the <a href=https://fishshell.com title="friendly interactive shell">fish shell</a>.
+- `.nvmrc` support.
+- Seamless shell integration.
+  - <kbd>Tab</kbd>-completions? You got it.
+- No dependencies, no subshells, and no configuration setup—it just works.
+- Basically pretty easy to use, minimal & awesome ([see this comparison](https://github.com/jorgebucaran/fish-nvm/issues/82)).
 
 ![](https://gitcdn.link/repo/jorgebucaran/00f6d3f301483a01a00e836eb17a2b3e/raw/0084c9bacd4dcc8ddea0932d413efcab98f3b82f/fish-nvm.svg)
-
-## Features
-
-- `.nvmrc` support
-- Seamless shell integration
-  - <kbd>Tab</kbd>-completions? You got it
-- No dependencies, no subshells, no configuration setup—it just works
 
 ## Installation
 
@@ -52,26 +48,28 @@ rm -f $XDG_CONFIG_HOME/fish/{conf.d,functions,completions}/nvm.fish && emit nvm_
 
 ## Usage
 
-This will download the latest Node.js release tarball from the [official mirror](https://nodejs.org/dist), extract it to <code>[\$XDG_CONFIG_HOME](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)/nvm</code> and modify your `$PATH` so it can be used immediately. Learn more about the Node.js release schedule [here](https://github.com/nodejs/Release).
+Download and switch to the latest Node.js release.
 
 ```fish
 nvm use latest
 ```
 
-This will download and use the latest LTS (long-term support) Node.js release.
+> **Note:** This downloads the latest Node.js release tarball from the [official mirror](https://nodejs.org/dist), extracts it to <code>[\$XDG_CONFIG_HOME](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)/nvm</code> and modifies your `$PATH` so it can be used immediately. Learn more about the Node.js release schedule [here](https://github.com/nodejs/Release).
+
+Download and switch to the latest LTS (long-term support) Node.js release.
 
 ```
 nvm use lts
 ```
 
-You can create a `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version in it. We'll attempt to find the nearest `.nvmrc` file, traversing the directory tree from the current working directory upwards.
+You can create a `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version in it. `nvm` will try to find the nearest `.nvmrc` file, traversing the directory tree from the current working directory upwards.
 
 ```fish
 node -v > .nvmrc
 nvm
 ```
 
-Running `nvm` in any subdirectory of a directory with a `.nvmrc` file uses the version from that file. Likewise, running `nvm use <version>` will update that `.nvmrc` file with the indicated version.
+Run `nvm` in any subdirectory of a directory with an `.nvmrc` file to switch to the version from that file. Similarly, running `nvm use <version>` updates that `.nvmrc` file with the specified version.
 
 ```
 ├── README.md
@@ -92,7 +90,7 @@ v10.15.1
 
 ### Listing versions
 
-This will list all the supported Node.js versions you can use.
+List all the supported Node.js versions you can download and switch to.
 
 ```
 nvm ls
