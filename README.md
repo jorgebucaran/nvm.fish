@@ -1,6 +1,6 @@
 # fish-nvm (Node Version Manager) [![Releases](https://img.shields.io/github/release/jorgebucaran/fish-nvm.svg?label=&color=0080FF)](https://github.com/jorgebucaran/fish-nvm/releases/latest) [![Travis CI](https://img.shields.io/travis/jorgebucaran/fish-nvm.svg?label=)](https://travis-ci.org/jorgebucaran/fish-nvm)
 
-> Node.js version manager for the <a href=https://fishshell.com title="friendly interactive shell">fish shell</a>.
+> Pure-[fish](https://fishshell.com), Node.js version manager.
 
 - `.nvmrc` support.
 - Seamless shell integration.
