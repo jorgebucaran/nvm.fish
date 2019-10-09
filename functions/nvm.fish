@@ -84,8 +84,8 @@ function _nvm_get_index
             NR > 1 && !/^v0\.[1-9]\./ {
                 split($1 = substr($1, 2), v, ".")
                 is_latest = NR == 2
-                is_lts = !(v[1] % 2)
-                alias = /^0/ ? "" : "lts" ((($10 = tolower($10)) == "-" ? prev : prev = $10) ? "|" prev : "")
+                alias = ($10 = tolower($10)) == "-" ? "" : "lts|"$10
+                is_lts = alias != ""
                 print $1, (/^0/ ? "-" : v[1]), v[1]"."v[2],
                     is_latest ? is_lts ? alias"|latest" : "latest" : is_lts ? alias : ""
             }
