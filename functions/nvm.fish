@@ -195,7 +195,7 @@ function _nvm_use
 
     echo $ver >$nvm_config/version
 
-    ln -sfn "$nvm_config/current" "$nvm_config/$ver"
+    ln -sfn "$nvm_config/$ver" "$nvm_config/current"
 
     if not contains -- "$nvm_config/current/bin" $fish_user_paths
         set -U fish_user_paths "$nvm_config/current/bin" $fish_user_paths
