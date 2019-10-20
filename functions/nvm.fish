@@ -189,21 +189,16 @@ function _nvm_use
         command mv -f $nvm_config/$ver. $target
     end
 
-    if test -s "$nvm_config/version"
-        read -l last <"$nvm_config/version"
-        if set -l i (contains -i -- "$nvm_config/$last/bin" $fish_user_paths)
-            set -e fish_user_paths[$i]
-        end
-    end
-
     if set -l root (_nvm_find_up (pwd) $nvm_file)
         echo $argv[1] >$root/$nvm_file
     end
 
     echo $ver >$nvm_config/version
 
-    if not contains -- "$nvm_config/$ver/bin" $fish_user_paths
-        set -U fish_user_paths "$nvm_config/$ver/bin" $fish_user_paths
+    ln -sfn "$nvm_config/current" "$nvm_config/$ver"
+
+    if not contains -- "$nvm_config/current/bin" $fish_user_paths
+        set -U fish_user_paths "$nvm_config/current/bin" $fish_user_paths
     end
 end
 
