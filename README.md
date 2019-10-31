@@ -54,7 +54,7 @@ Download and switch to the latest Node.js release.
 nvm use latest
 ```
 
-> **Note:** This downloads the latest Node.js release tarball from the [official mirror](https://nodejs.org/dist), extracts it to <code>[\$XDG_CONFIG_HOME](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)/nvm</code> and modifies your `$PATH` so it can be used immediately. Learn more about the Node.js release schedule [here](https://github.com/nodejs/Release).
+> **Note:** This downloads the latest Node.js release tarball from the [official mirror](https://nodejs.org/dist), extracts it to <code>[\$XDG_CONFIG_HOME](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)/nvm</code> and let's you use it immediately in all your open shells. Learn more about the Node.js release schedule [here](https://github.com/nodejs/Release).
 
 Download and switch to the latest LTS (long-term support) Node.js release.
 

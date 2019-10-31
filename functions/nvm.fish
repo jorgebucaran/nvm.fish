@@ -10,6 +10,10 @@ function nvm -a cmd -d "Node.js version manager"
         command mkdir -p $nvm_config
     end
 
+    if test ! -d $nvm_bin_path
+        command mkdir -p $nvm_bin_path
+    end
+
     switch "$cmd"
         case ls list
             set -e argv[1]
@@ -49,7 +53,7 @@ function _nvm_help
     echo "usage: nvm --help           Show this help"
     echo "       nvm --version        Show the current version of nvm"
     echo "       nvm ls [<regex>]     List available versions matching <regex>"
-    echo "       nvm use <version>    Download <version> and modify PATH to use it"
+    echo "       nvm use <version>    Download <version> and modify symlink to use it"
     echo "       nvm                  Use version in .nvmrc (or stdin if not a tty)"
     echo "examples:"
     echo "       nvm use 12"
@@ -189,21 +193,20 @@ function _nvm_use
         command mv -f $nvm_config/$ver. $target
     end
 
-    if test -s "$nvm_config/version"
-        read -l last <"$nvm_config/version"
-        if set -l i (contains -i -- "$nvm_config/$last/bin" $fish_user_paths)
-            set -e fish_user_paths[$i]
-        end
-    end
-
     if set -l root (_nvm_find_up (pwd) $nvm_file)
         echo $argv[1] >$root/$nvm_file
     end
 
     echo $ver >$nvm_config/version
 
-    if not contains -- "$nvm_config/$ver/bin" $fish_user_paths
-        set -U fish_user_paths "$nvm_config/$ver/bin" $fish_user_paths
+    if test -s $nvm_config/$ver/bin/node
+        ln -sf $nvm_config/$ver/bin/node $nvm_bin_path/node
+    end
+    if test -s $nvm_config/$ver/bin/npm
+        ln -sf $nvm_config/$ver/bin/npm $nvm_bin_path/npm
+    end
+    if test -s $nvm_config/$ver/bin/npx
+        ln -sf $nvm_config/$ver/bin/npx $nvm_bin_path/npx
     end
 end
 
