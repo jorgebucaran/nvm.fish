@@ -7,7 +7,6 @@ end
 
 function _nvm_uninstall -e nvm_uninstall
     if test -s "$nvm_config/version"
-        read -l ver <$nvm_config/version
         command rm -f $nvm_config/version
     end
 
