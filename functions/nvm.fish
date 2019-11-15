@@ -146,6 +146,7 @@ function _nvm_use
     if test ! -d "$nvm_config/$ver/bin"
         set -l os
         set -l arch
+        set -l ext tar.gz
         set -l name "node-v$ver"
         set -l target "$nvm_config/$ver"
         switch (uname -s)
@@ -167,6 +168,15 @@ function _nvm_use
             case Darwin
                 set os darwin
                 set arch x64
+            case MSYS_NT\*
+                set os win
+                set ext zip
+                switch (uname -m)
+                    case x86_64
+                        set arch x64
+                    case \*
+                        set arch x86
+                end
             case \*
                 echo "nvm: OS not implemented -- request it on https://git.io/fish-nvm" >&2
                 return 1
@@ -178,7 +188,7 @@ function _nvm_use
         echo "fetching $url" >&2
         command mkdir -p $target/$name
 
-        if not command curl --fail --progress-bar $url.tar.gz | command tar -xzf- -C $target/$name
+        if not command curl --fail --progress-bar $url.$ext | command tar -xzf- -C $target/$name
             command rm -rf $target
             echo "nvm: fetch error -- are you offline?" >&2
             return 1
