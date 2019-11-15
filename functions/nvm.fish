@@ -197,6 +197,11 @@ function _nvm_use
         command mv -f $target/$name/$name $nvm_config/$ver.
         command rm -rf $target
         command mv -f $nvm_config/$ver. $target
+
+       if test "$os" = "win"
+           command mkdir $nvm_config/$ver/bin
+           command mv -f $nvm_config/$ver/{node.exe,npm,node_modules} $nvm_config/$ver/bin
+       end
     end
 
     if test -s "$nvm_config/version"
