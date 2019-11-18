@@ -168,7 +168,7 @@ function _nvm_use
             case Darwin
                 set os darwin
                 set arch x64
-            case MSYS_NT\*
+            case MSYS_NT\* MINGW\*_NT\*
                 set os win
                 set ext zip
                 switch (uname -m)
