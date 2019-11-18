@@ -200,7 +200,11 @@ function _nvm_use
 
        if test "$os" = "win"
            command mkdir $nvm_config/$ver/bin
-           command mv -f $nvm_config/$ver/{node.exe,npm,node_modules} $nvm_config/$ver/bin
+           for file in $nvm_config/$ver/*
+               if test -x $file
+                   command mv $file $nvm_config/$ver/bin
+               end
+           end
        end
     end
 
