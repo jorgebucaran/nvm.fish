@@ -196,8 +196,8 @@ function _nvm_use
         end
     end
 
-    if set -l root (_nvm_find_up (pwd) $nvm_file)
-        echo $argv[1] >$root/$nvm_file
+    if set -l root (_nvm_find_up (pwd) $nvm_file); and test $ver != (cat $root/$nvm_file)
+        echo $ver >$root/$nvm_file
     end
 
     echo $ver >$nvm_config/version
