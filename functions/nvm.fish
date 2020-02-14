@@ -121,7 +121,7 @@ function _nvm_ls -a query
     ' <$index 2>/dev/null
 end
 
-function _nvm_use
+function _nvm_resolve_version
     set -l index (_nvm_get_index); or return
     set -l ver (command awk -v ver="$argv[1]" '
         BEGIN {
@@ -137,6 +137,17 @@ function _nvm_use
             exit
         }
     ' <$index 2>/dev/null)
+
+    if not set -q ver[1]
+        return 1
+    end
+
+    echo $ver
+end
+
+function _nvm_use
+    set -l index (_nvm_get_index); or return
+    set -l ver (_nvm_resolve_version $argv[1])
 
     if not set -q ver[1]
         echo "nvm: invalid version number or alias: \"$argv[1]\"" >&2
@@ -197,7 +208,10 @@ function _nvm_use
     end
 
     if set -l root (_nvm_find_up (pwd) $nvm_file)
-        echo $argv[1] >$root/$nvm_file
+        read -l line <$root/$nvm_file
+        if test $ver != (_nvm_resolve_version $line)
+            echo $argv[1] >$root/$nvm_file
+        end
     end
 
     echo $ver >$nvm_config/version
