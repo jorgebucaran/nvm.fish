@@ -189,7 +189,7 @@ function _nvm_use
         echo "fetching $url" >&2
         command mkdir -p $target/$name
 
-        if not command curl --fail --progress-bar $url.tar.gz | command tar -xzf- -C $target/$name
+        if not command curl -L --fail --progress-bar $url.tar.gz | command tar -xzf- -C $target/$name
             command rm -rf $target
             echo "nvm: fetch error -- are you offline?" >&2
             return 1
