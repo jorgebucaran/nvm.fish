@@ -217,7 +217,7 @@ function _nvm_use
     echo $ver >$nvm_config/version
 
     if not contains -- "$nvm_config/$ver/bin" $fish_user_paths
-        set -U fish_user_paths "$nvm_config/$ver/bin" $fish_user_paths
+        set -g fish_user_paths "$nvm_config/$ver/bin" $fish_user_paths
     end
 end
 
