@@ -169,7 +169,7 @@ function _nvm_use
                         set arch armv6l
                     case armv7 armv7l
                         set arch armv7l
-                    case armv8 armv8l
+                    case armv8 armv8l aarch64
                         set arch arm64
                     case \*
                         set arch x86
