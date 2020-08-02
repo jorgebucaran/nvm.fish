@@ -1,27 +1,26 @@
-# fish-nvm (Node Version Manager) [![Releases](https://img.shields.io/github/release/jorgebucaran/fish-nvm.svg?label=&color=0080FF)](https://github.com/jorgebucaran/fish-nvm/releases/latest)
+# nvm.fish
 
-> Pure-[fish](https://fishshell.com), Node.js version manager.
+> 100% pure-[fish-shell](https://fishshell.com) Node.js version manager.
 
 - `.nvmrc` support.
-- Seamless shell integration.
-  - <kbd>Tab</kbd>-completions? You got it.
-- No dependencies, no subshells, and no configuration setup—it just works.
-- Basically pretty easy to use, minimal & awesome ([see this comparison](https://github.com/jorgebucaran/fish-nvm/issues/82)).
+- Seamless shell integration. <kbd>Tab</kbd>-completions? You got it.
+- No dependencies, no subshells, no configuration setup—it's so easy it hurts.
+- Extremely fast, minimal & awesome ([see this discussion](https://github.com/jorgebucaran/fish-nvm/issues/82)).
 
-![](https://gitcdn.link/repo/jorgebucaran/00f6d3f301483a01a00e836eb17a2b3e/raw/0084c9bacd4dcc8ddea0932d413efcab98f3b82f/fish-nvm.svg)
+![](https://gistcdn.githack.com/jorgebucaran/00f6d3f301483a01a00e836eb17a2b3e/raw/26625256b5e5ccb632f990727db70055ae24e584/nvm.fish.svg)
 
 ## Installation
 
 Install with [Fisher](https://github.com/jorgebucaran/fisher) (recommended):
 
-```
-fisher add jorgebucaran/fish-nvm
+```console
+fisher add jorgebucaran/nvm.fish
 ```
 
 <details>
 <summary>Not using a package manager?</summary>
 
----
+###
 
 Copy [`conf.d/nvm.fish`](conf.d/nvm.fish), [`functions/nvm.fish`](functions/nvm.fish), and [`completions/nvm.fish`](completions/nvm.fish) to your fish configuration directory preserving the directory structure.
 
@@ -33,7 +32,7 @@ for i in conf.d functions completions
 end
 ```
 
-To uninstall, run the following code:
+To uninstall nvm, just run:
 
 ```
 rm -f $XDG_CONFIG_HOME/fish/{conf.d,functions,completions}/nvm.fish && emit nvm_uninstall
@@ -50,7 +49,7 @@ rm -f $XDG_CONFIG_HOME/fish/{conf.d,functions,completions}/nvm.fish && emit nvm_
 
 Download and switch to the latest Node.js release.
 
-```fish
+```console
 nvm use latest
 ```
 
@@ -58,20 +57,20 @@ nvm use latest
 
 Download and switch to the latest LTS (long-term support) Node.js release.
 
-```
+```console
 nvm use lts
 ```
 
 You can create a `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version in it. `nvm` will try to find the nearest `.nvmrc` file, traversing the directory tree from the current working directory upwards.
 
-```fish
+```console
 node -v > .nvmrc
 nvm
 ```
 
 Run `nvm` in any subdirectory of a directory with an `.nvmrc` file to switch to the version from that file. Similarly, running `nvm use <version>` updates that `.nvmrc` file with the specified version.
 
-```
+```console
 ├── README.md
 ├── dist
 ├── node_modules
@@ -80,7 +79,7 @@ Run `nvm` in any subdirectory of a directory with an `.nvmrc` file to switch to 
     └── index.js
 ```
 
-```fish
+```console
 echo lts >.nvmrc
 cd src
 nvm
@@ -92,7 +91,7 @@ v10.15.1
 
 List all the supported Node.js versions you can download and switch to.
 
-```
+```console
 nvm ls
 ```
 
@@ -112,7 +111,7 @@ nvm ls
 
 You can use a regular expression to narrow down the output.
 
-```
+```console
 nvm ls '^8.[4-6]'
 ```
 
@@ -124,7 +123,7 @@ nvm ls '^8.[4-6]'
 
 To customize the download mirror, e.g., if you are behind a firewall, you can set `$nvm_mirror`:
 
-```fish
+```console
 set -g nvm_mirror http://npm.taobao.org/mirrors/node
 ```
 
