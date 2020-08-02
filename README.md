@@ -1,11 +1,11 @@
 # nvm.fish
 
-> 100% pure-[fish-shell](https://fishshell.com) Node.js version manager.
+> 100% pure-<a href="https://fishshell.com" title="friendly interactive shell">fish</a> Node.js version manager.
 
 - `.nvmrc` support.
-- Seamless shell integration. <kbd>Tab</kbd>-completions? You got it.
-- No dependencies, no subshells, no configuration setup—it's so easy it hurts.
-- Extremely fast, minimal & awesome ([see this discussion](https://github.com/jorgebucaran/fish-nvm/issues/82)).
+- Seamless shell integration. <kbd>Tab</kbd>-completions? You got them.
+- No dependencies, no subshells, no configuration setup, no fluff—it's so easy it hurts.
+- Because nvm.fish runs natively by fish, it's insanely fast ([see this discussion](https://github.com/jorgebucaran/fish-nvm/issues/82)).
 
 ![](https://gistcdn.githack.com/jorgebucaran/00f6d3f301483a01a00e836eb17a2b3e/raw/26625256b5e5ccb632f990727db70055ae24e584/nvm.fish.svg)
 
@@ -40,12 +40,7 @@ rm -f $XDG_CONFIG_HOME/fish/{conf.d,functions,completions}/nvm.fish && emit nvm_
 
 </details>
 
-### System Requirements
-
-- [fish](https://github.com/fish-shell/fish-shell) 2.2+
-- [curl](https://github.com/curl/curl) [7.10.3](https://curl.haxx.se/changes.html#7_10_3)+
-
-## Usage
+## Getting Started
 
 Download and switch to the latest Node.js release.
 
