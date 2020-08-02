@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        run: |
+          sudo add-apt-repository -y ppa:fish-shell/nightly-master
+          sudo apt-get update
+          sudo apt-get -y install fish
+        run: |
+          curl git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+          fish -c "fisher add . && nvm use lts && node -v"
+          
+
+
