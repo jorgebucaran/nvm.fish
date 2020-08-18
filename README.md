@@ -40,7 +40,7 @@ rm -f $XDG_CONFIG_HOME/fish/{conf.d,functions,completions}/nvm.fish && emit nvm_
 
 </details>
 
-## Getting Started
+## Quickstart
 
 Download and switch to the latest Node.js release.
 
