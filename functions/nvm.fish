@@ -58,7 +58,7 @@ function _nvm_help
     echo "       nvm use dubnium"
     echo "       nvm ls '^1|9\$'"
     echo "       nvm ls 12"
-    echo "       nvm <file"
+    echo "       nvm <file>"
 end
 
 function _nvm_complete -a index
