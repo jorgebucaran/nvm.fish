@@ -14,7 +14,7 @@
 Install with [Fisher](https://github.com/jorgebucaran/fisher) (recommended):
 
 ```console
-fisher add jorgebucaran/nvm.fish
+fisher install jorgebucaran/nvm.fish
 ```
 
 <details>
