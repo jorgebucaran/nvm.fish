@@ -1,125 +1,106 @@
-# nvm.fish
+# NVM.fish
 
-> 100% pure-<a href="https://fishshell.com" title="friendly interactive shell">fish</a> Node.js version manager.
+> 100% pure-[Fish](https://fishshell.com) Node version management.
 
-- `.nvmrc` support.
-- Seamless shell integration. <kbd>Tab</kbd>-completions? You got them.
-- No dependencies, no subshells, no configuration setup, no fluff—it's so easy it hurts.
-- Because nvm.fish runs natively by fish, it's insanely fast ([see this discussion](https://github.com/jorgebucaran/fish-nvm/issues/82)).
+Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](), this tool helps you manage different versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts. Here are some of the highlights:
 
-![](https://gistcdn.githack.com/jorgebucaran/00f6d3f301483a01a00e836eb17a2b3e/raw/26625256b5e5ccb632f990727db70055ae24e584/nvm.fish.svg)
+- [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) friendly.
+- `.node-version` and `.nvmrc` support. ✅
+- <kbd>Tab</kbd>-completable seamless shell integration.
+- No dependencies, no setup, no clutter—it just works.
+  <!-- - Hot symlink switching—absolute speed unlocked. -->
+    <!-- - Automatic version switching on `$PWD` change. -->
 
 ## Installation
 
-Install with [Fisher](https://github.com/jorgebucaran/fisher) (recommended):
+Install with [Fisher](https://github.com/jorgebucaran/fisher):
 
 ```console
 fisher install jorgebucaran/nvm.fish
 ```
 
-<details>
-<summary>Not using a package manager?</summary>
-
-###
-
-Copy [`conf.d/nvm.fish`](conf.d/nvm.fish), [`functions/nvm.fish`](functions/nvm.fish), and [`completions/nvm.fish`](completions/nvm.fish) to your fish configuration directory preserving the directory structure.
-
-```fish
-set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-
-for i in conf.d functions completions
-  curl https://git.io/$i.nvm.fish --create-dirs -sLo $XDG_CONFIG_HOME/fish/$i/nvm.fish
-end
-```
-
-To uninstall nvm, just run:
-
-```
-rm -f $XDG_CONFIG_HOME/fish/{conf.d,functions,completions}/nvm.fish && emit nvm_uninstall
-```
-
-</details>
-
 ## Quickstart
 
-Download and switch to the latest Node.js release.
+Install the latest Node release and start using it.
 
 ```console
-nvm use latest
+nvm install latest
 ```
 
-> **Note:** This downloads the latest Node.js release tarball from the [official mirror](https://nodejs.org/dist), extracts it to <code>[\$XDG_CONFIG_HOME](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html#variables)/nvm</code> and modifies your `$PATH` so it can be used immediately. Learn more about the Node.js release schedule [here](https://github.com/nodejs/Release).
+Install the latest [LTS](https://github.com/nodejs/Release) (long-term support) Node release.
 
-Download and switch to the latest LTS (long-term support) Node.js release.
+```console
+nvm install lts
+```
+
+Install an older LTS release by codename.
+
+```console
+nvm install carbon
+```
+
+> Installs `8.16.2`, the latest release of the Carbon LTS line.
+
+Or install a specific version of Node.
+
+```console
+nvm install v12.9.1
+```
+
+> Supports full or partial version numbers, starting with an optional "v".
+
+The `nvm install` command activates the specified Node version only in the current environment. If you want to set the default version for new shells use:
+
+```fish
+set -U nvm_default_version v12.9.1
+```
+
+Activate a version you've already installed.
 
 ```console
 nvm use lts
 ```
 
-You can create a `.nvmrc` file in the root of your project (or any parent directory) and run `nvm` to use the version in it. `nvm` will try to find the nearest `.nvmrc` file, traversing the directory tree from the current working directory upwards.
+List which versions you have installed (including the system Node if there is one).
 
 ```console
-node -v > .nvmrc
-nvm
-```
+$ nvm list
 
-Run `nvm` in any subdirectory of a directory with an `.nvmrc` file to switch to the version from that file. Similarly, running `nvm use <version>` updates that `.nvmrc` file with the specified version.
 
-```console
-├── README.md
-├── dist
-├── node_modules
-├── package.json
-└── src
-    └── index.js
-```
 
-```console
-echo lts >.nvmrc
-cd src
-nvm
-node -v
-v10.15.1
-```
-
-### Listing versions
-
-List all the supported Node.js versions you can download and switch to.
-
-```console
-nvm ls
-```
-
-```console
 ...
-10.14.2    (lts/dubnium)
-10.15.0    (lts/dubnium)
- 11.0.0
- 11.1.0
- 11.2.0
- 11.3.0
- 11.4.0
- 11.5.0
- 11.6.0
- 11.7.0    (latest/current)
 ```
 
-You can use a regular expression to narrow down the output.
+Or list all the Node versions available to install.
 
 ```console
-nvm ls '^8.[4-6]'
+nvm list-remote
 ```
 
+Want to remove a Node version? You can do that too.
+
 ```console
-8.4.0    (lts/carbon)
-8.5.0    (lts/carbon)
-8.6.0    (lts/carbon)
+nvm remove v12.9.1
 ```
 
-To customize the download mirror, e.g., if you are behind a firewall, you can set `$nvm_mirror`:
+If you would like to use a different mirror of the Node binaries, for example, if you're behind a firewall, use:
+
+```fish
+set -g nvm_mirror https://npm.taobao.org/mirrors/node
+```
+
+## `.nvmrc`
+
+An `.nvmrc` file makes it easy to peg a specific version of Node for different projects. Just create an `.nvmrc` file containing a Node version number or alias, e.g., `node`, `lts`, `carbon`, etc., in the root of your project.
 
 ```console
-set -g nvm_mirror http://npm.taobao.org/mirrors/node
+node -v >.nvmrc
+```
+
+Then run `nvm install` to install and activate that version. This will traverse the directory hierarchy looking for the nearest `.nvmrc` file.
+
+```console
+nvm install
 ```
 
 ## License

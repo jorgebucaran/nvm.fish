@@ -3,18 +3,25 @@ name: CI
 on: push
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          sudo add-apt-repository -y ppa:fish-shell/nightly-master
+      - name: Install Fish
+        run: |
+          sudo apt-add-repository -yn ppa:fish-shell/release-3
           sudo apt-get update
-          sudo apt-get -y install fish
-      - run: |
-          curl git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
-          fish -c "fisher add . && nvm use lts && node -v"
+          sudo apt-get install -y fish
 
-          
+      - name: Install Fisher
+        run: curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
+        shell: fish {0}
 
-
+      - name: Install Nvm
+        run: |
+          fisher install jorgebucaran/nvm.fish
+          set -l v 14.0.0
+          nvm install $v
+          test (node --version) = v$v
+        shell: fish {0}

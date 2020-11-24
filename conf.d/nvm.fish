@@ -1,15 +1,22 @@
+set -g nvm_version 1.1.0
+
+set --query XDG_DATA_HOME \
+    && set --global nvm_data $XDG_DATA_HOME/nvm \
+    || set --global nvm_data ~/.local/share/nvm
+
+if set --query nvm_default_version && not set --query nvm_current_version
+    nvm use $nvm_default_version >/dev/null
+end
+
 function _nvm_uninstall -e nvm_uninstall
-    if test -s "$nvm_config/version"
-        read -l ver <$nvm_config/version
-        if set -l i (contains -i -- "$nvm_config/$ver/bin" $fish_user_paths)
-            set -e fish_user_paths[$i]
-        end
-        command rm -f $nvm_config/version
+    # command rm -rf $nvm_data
+    
+    set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
+
+    for var in nvm_{version,current_version,default_node,data}
+        set --erase $var
     end
 
-    for name in (set -n | command awk '/^nvm_/')
-        set -e "$name"
-    end
-
-    functions -e (functions -a | command awk '/^_nvm_/')
+    complete --erase --command nvm
+    functions --erase (functions --all | string match --entire --regex "^_nvm_")
 end
