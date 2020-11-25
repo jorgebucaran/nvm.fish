@@ -65,16 +65,28 @@ List which versions you have installed (including the system Node if there is on
 
 ```console
 $ nvm list
-
-
-
-...
+     system  
+    v8.17.0 lts/carbon 
+    v12.9.1  
+ ▶ v14.15.1 lts/fermium 
+    v15.3.0 latest
 ```
 
 Or list all the Node versions available to install.
 
 ```console
-nvm list-remote
+$ nvm list-remote
+   ...
+   v14.13.1  
+   v14.14.0  
+   v14.15.0 lts/fermium 
+ ▶ v14.15.1 lts/fermium ✓
+    v15.0.0  
+    v15.0.1  
+    v15.1.0  
+    v15.2.0  
+    v15.2.1  
+    v15.3.0 latest ✓
 ```
 
 Want to remove a Node version? You can do that too.
