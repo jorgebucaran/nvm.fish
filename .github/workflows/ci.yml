@@ -20,7 +20,7 @@ jobs:
 
       - name: Install Nvm
         run: |
-          fisher install jorgebucaran/nvm.fish
+          fisher install jorgebucaran/nvm.fish@2.0
           set -l v 14.0.0
           nvm install $v
           test (node --version) = v$v
