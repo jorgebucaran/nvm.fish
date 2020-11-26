@@ -4,10 +4,10 @@
 
 Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](), this tool helps you manage different versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts. Here are some of the highlights:
 
-- [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) friendly.
-- `.node-version` and `.nvmrc` support. ✅
-- <kbd>Tab</kbd>-completable seamless shell integration.
 - No dependencies, no setup, no clutter—it just works.
+- <kbd>Tab</kbd>-completable seamless shell integration.
+- `.node-version` and `.nvmrc` support. ✅
+- [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) friendly.
   <!-- - Hot symlink switching—absolute speed unlocked. -->
     <!-- - Automatic version switching on `$PWD` change. -->
 
@@ -61,14 +61,14 @@ Activate a version you've already installed.
 nvm use lts
 ```
 
-List which versions you have installed (including the system Node if there is one).
+List which versions you have installed (includes your system Node if there is one).
 
 ```console
 $ nvm list
-     system  
-    v8.17.0 lts/carbon 
-    v12.9.1  
- ▶ v14.15.1 lts/fermium 
+     system
+    v8.17.0 lts/carbon
+    v12.9.1
+ ▶ v14.15.1 lts/fermium
     v15.3.0 latest
 ```
 
@@ -77,15 +77,15 @@ Or list all the Node versions available to install.
 ```console
 $ nvm list-remote
    ...
-   v14.13.1  
-   v14.14.0  
-   v14.15.0 lts/fermium 
+   v14.13.1
+   v14.14.0
+   v14.15.0 lts/fermium
  ▶ v14.15.1 lts/fermium ✓
-    v15.0.0  
-    v15.0.1  
-    v15.1.0  
-    v15.2.0  
-    v15.2.1  
+    v15.0.0
+    v15.0.1
+    v15.1.0
+    v15.2.0
+    v15.2.1
     v15.3.0 latest ✓
 ```
 
@@ -103,13 +103,13 @@ set -g nvm_mirror https://npm.taobao.org/mirrors/node
 
 ## `.nvmrc`
 
-An `.nvmrc` file makes it easy to peg a specific version of Node for different projects. Just create an `.nvmrc` file containing a Node version number or alias, e.g., `node`, `lts`, `carbon`, etc., in the root of your project.
+An `.nvmrc` file makes it easy to peg a specific version of Node for different projects. Just create an `.nvmrc` (or `.node-version`) file containing a version number or alias, e.g., `latest`, `lts`, `carbon`, in the root of your project.
 
 ```console
 node -v >.nvmrc
 ```
 
-Then run `nvm install` to install and activate that version. This will traverse the directory hierarchy looking for the nearest `.nvmrc` file.
+Then run `nvm install` to install and activate that version. Works from anywhere inside your project by traversing the directory hierarchy until a `.nvmrc` is found.
 
 ```console
 nvm install
