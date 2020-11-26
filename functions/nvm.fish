@@ -18,17 +18,20 @@ function nvm -a cmd -d "Node version manager"
         case -v --version
             echo "nvm, version $nvm_version"
         case "" -h --help
-            echo "usage: nvm install <version>  Download and activate a version"
-            echo "       nvm install            Install version from nearest .nvmrc file"
-            echo "       nvm use <version>      Activate a version in the current shell"
-            echo "       nvm use                Activate version from nearest .nvmrc file"
-            echo "       nvm remove <version>   Remove an installed version"
-            echo "       nvm current            Print currently-active version"
-            echo "       nvm list               List installed versions"
-            echo "       nvm list-remote        List versions available to install"
+            echo "usage: nvm install <version>    Download and activate a version"
+            echo "       nvm install              Install version from nearest .nvmrc file"
+            echo "       nvm use <version>        Activate a version in the current shell"
+            echo "       nvm use                  Activate version from nearest .nvmrc file"
+            echo "       nvm uninstall <version>  Remove an installed version"
+            echo "       nvm current              Print currently-active version"
+            echo "       nvm list                 List installed versions"
+            echo "       nvm list-remote          List versions available to install"
             echo "options:"
-            echo "       -v or --version        Print nvm version"
-            echo "       -h or --help           Print this help message"
+            echo "       -v or --version          Print nvm version"
+            echo "       -h or --help             Print this help message"
+            echo "variables:"
+            echo "       nvm_mirror               Set mirror for Node binaries"
+            echo "       nvm_default_version      Set the default version for new shells"
         case install
             _nvm_index_update $nvm_mirror/index.tab $nvm_data/.index || return
 
@@ -107,7 +110,7 @@ function nvm -a cmd -d "Node version manager"
 
             echo -e "Now using Node "(node --version)" "(command --search node)
 
-        case remove uninstall
+        case uninstall
             if test -z "$ver"
                 echo "nvm: Not enough arguments for command: \"$cmd\"" >&2
                 return 1
