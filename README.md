@@ -52,7 +52,7 @@ nvm install v12.9.1
 The `nvm install` command activates the specified Node version only in the current environment. If you want to set the default version for new shells use:
 
 ```fish
-set -U nvm_default_version v12.9.1
+set --universal nvm_default_version v12.9.1
 ```
 
 Activate a version you've already installed.
@@ -98,7 +98,7 @@ nvm remove v12.9.1
 If you would like to use a different mirror of the Node binaries, for example, if you're behind a firewall, use:
 
 ```fish
-set -g nvm_mirror https://npm.taobao.org/mirrors/node
+set --global nvm_mirror https://npm.taobao.org/mirrors/node
 ```
 
 ## `.nvmrc`

@@ -1,4 +1,4 @@
-set -g nvm_version 1.1.0
+set --global nvm_version 1.1.0
 
 set --query XDG_DATA_HOME \
     && set --global nvm_data $XDG_DATA_HOME/nvm \
