@@ -109,7 +109,7 @@ An `.nvmrc` file makes it easy to peg a specific version of Node for different p
 node -v >.nvmrc
 ```
 
-Then run `nvm install` to install and activate that version. Works from anywhere inside your project by traversing the directory hierarchy until a `.nvmrc` is found.
+Then run `nvm install` to install and activate that version. Works from anywhere inside your project by traversing the directory hierarchy until an `.nvmrc` is found.
 
 ```console
 nvm install
