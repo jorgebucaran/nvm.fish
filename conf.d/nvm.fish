@@ -9,7 +9,7 @@ if set --query nvm_default_version && not set --query nvm_current_version
 end
 
 function _nvm_uninstall -e nvm_uninstall
-    # command rm -rf $nvm_data
+    command rm -rf $nvm_data
     
     set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
 
