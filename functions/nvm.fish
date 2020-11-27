@@ -1,5 +1,4 @@
-function nvm -a cmd -d "Node version manager"
-    set --local ver "$argv[2..-1]"
+function nvm -a cmd ver -d "Node version manager"
     set --query nvm_mirror || set --global nvm_mirror https://nodejs.org/dist
 
     if test -z "$ver" && contains -- "$cmd" install use
@@ -18,14 +17,15 @@ function nvm -a cmd -d "Node version manager"
         case -v --version
             echo "nvm, version $nvm_version"
         case "" -h --help
-            echo "usage: nvm install <version>    Download and activate a version"
+            echo "usage: nvm install <version>    Download and activate a given version"
             echo "       nvm install              Install version from nearest .nvmrc file"
-            echo "       nvm use <version>        Activate a version in the current shell"
+            echo "       nvm use <version>        Activate version in the current shell"
             echo "       nvm use                  Activate version from nearest .nvmrc file"
             echo "       nvm uninstall <version>  Remove an installed version"
-            echo "       nvm current              Print currently-active version"
             echo "       nvm list                 List installed versions"
             echo "       nvm list-remote          List versions available to install"
+            echo "       nvm list-remote <regex>  List versions matching a given regular expression"
+            echo "       nvm current              Print currently-active version"
             echo "options:"
             echo "       -v or --version          Print nvm version"
             echo "       -h or --help             Print this help message"
@@ -93,12 +93,12 @@ function nvm -a cmd -d "Node version manager"
 
             echo -e "Now using Node "(node --version)" "(command --search node)
         case use
-            test $ver = default && set ver $nvm_default_version
-
             if test $ver = system && set ver (_nvm_current) && test system != $ver
                 _nvm_version_deactivate $nvm_current_version
             else
-                _nvm_list | string match --entire --regex (_nvm_version_match "$ver") | read ver __
+                test $ver = default && test ! -z "$nvm_default_version" && set ver $nvm_default_version
+
+                _nvm_list | string match --entire --regex (_nvm_version_match $ver) | read ver __
 
                 if not set --query ver[1]
                     echo "nvm: Node version not available or invalid version/alias: \"$argv[2..-1]\"" >&2
@@ -116,9 +116,9 @@ function nvm -a cmd -d "Node version manager"
                 return 1
             end
 
-            test "$ver" = default && set ver $nvm_default_version
+            test $ver = default && test ! -z "$nvm_default_version" && set ver $nvm_default_version
 
-            _nvm_list | string match --entire --regex (_nvm_version_match "$ver") | read ver __
+            _nvm_list | string match --entire --regex (_nvm_version_match $ver) | read ver __
 
             if not set -q ver[1]
                 echo "nvm: Invalid version number or alias: \"$argv[2..-1]\"" >&2
@@ -132,7 +132,7 @@ function nvm -a cmd -d "Node version manager"
         case current
             _nvm_current
         case ls list
-            _nvm_list | _nvm_list_format (_nvm_current)
+            _nvm_list | _nvm_list_format (_nvm_current) $argv[2]
         case lsr {ls,list}-remote
             _nvm_index_update $nvm_mirror/index.tab $nvm_data/.index || return
             _nvm_list | command awk '
@@ -140,7 +140,7 @@ function nvm -a cmd -d "Node version manager"
                     is_local[$1]++
                     next
                 } { print $0 (is_local[$1] ? " ✓" : "") }
-            ' - $nvm_data/.index | _nvm_list_format (_nvm_current)
+            ' - $nvm_data/.index | _nvm_list_format (_nvm_current) $argv[2]
         case \*
             echo "nvm: Unknown flag or command: \"$cmd\" (see `nvm -h`)" >&2
             return 1
@@ -167,19 +167,14 @@ function _nvm_index_update -a mirror index
 end
 
 function _nvm_version_match -a ver
-    # TODO: Make regex more strict.
-    string lower $ver | \
-        string replace --regex "\s*(node|latest)[/\s]*" "" | \
-        string replace --regex "^(\d+)" "v\$1" | \
-        string replace --regex "v(\d+|\d+\.\d+)\$" "v\$1." | \
-        string escape --style=regex | \
-        string replace --regex '^(\w+)$' '/$1' | \
-        string replace --regex '/(lts|system)' '$1'
+    string replace --regex '^v?(\d+|\d+\.\d+)$' 'v$1.' $ver | \
+    string replace --filter --regex '^v?(\d+)' 'v$1' | \
+    string escape --style=regex || string lower '\b'$ver'(?:/\w+)?$'
 end
 
-function _nvm_list_format -a current
-    command awk -v current="$current" '
-        {
+function _nvm_list_format -a current filter
+    command awk -v current="$current" -v filter="$filter" '
+        $0 ~ filter {
             idx = i++
             versions[idx] = $1
             aliases[idx] = $2 " " $3
