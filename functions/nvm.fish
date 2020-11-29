@@ -123,9 +123,9 @@ function nvm -a cmd ver -d "Node version manager"
             end
 
             echo -e "Uninstalling Node $ver "(command --search node | string replace ~ \~)
-            command rm -rf $nvm_data/$ver
-
             _nvm_version_deactivate $ver
+            command rm -rf $nvm_data/$ver
+            
         case current
             _nvm_current
         case ls list
