@@ -1,4 +1,5 @@
 set --global nvm_version 1.1.0
+set --query nvm_mirror || set --global nvm_mirror https://nodejs.org/dist
 
 set --query XDG_DATA_HOME \
     && set --global nvm_data $XDG_DATA_HOME/nvm \
@@ -6,6 +7,11 @@ set --query XDG_DATA_HOME \
 
 if set --query nvm_default_version && not set --query nvm_current_version
     nvm use $nvm_default_version >/dev/null
+end
+
+function _nvm_install -e nvm_install
+    echo "Updating the Node index for the first time..."
+    _nvm_index_update $nvm_mirror/index.tab $nvm_data/.index
 end
 
 function _nvm_uninstall -e nvm_uninstall

@@ -1,6 +1,4 @@
 function nvm -a cmd ver -d "Node version manager"
-    set --query nvm_mirror || set --global nvm_mirror https://nodejs.org/dist
-
     if test -z "$ver" && contains -- "$cmd" install use
         for file in .nvmrc .node-version
             set file (_nvm_find_up $PWD $file) && read ver <$file && break
@@ -151,19 +149,6 @@ function _nvm_find_up -a path file
         test "$path" != / || return
         _nvm_find_up (command dirname $path) $file
     end
-end
-
-function _nvm_index_update -a mirror index
-    command curl --show-error --location --silent $mirror | command awk -v OFS=\t '
-        /v0.9.12/ { exit } # Unsupported
-        NR > 1 {
-            print $1 (NR == 2  ? " latest" : $10 != "-" ? " lts/" tolower($10) : "")
-        }
-    ' > $index.temp && command mv $index.temp $index && return 
-    
-    command rm -f $index.temp
-    echo "nvm: Invalid index or unavailable host: \"$mirror\"" >&2
-    return 1
 end
 
 function _nvm_version_match -a ver
