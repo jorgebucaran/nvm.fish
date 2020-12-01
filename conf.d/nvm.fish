@@ -9,6 +9,7 @@ if set --query nvm_default_version && not set --query nvm_current_version
 end
 
 function _nvm_install -e nvm_install
+    test ! -d $nvm_data && command mkdir -p $nvm_data
     echo "Updating the Node index for the first time..."
     _nvm_index_update $nvm_mirror/index.tab $nvm_data/.index
 end

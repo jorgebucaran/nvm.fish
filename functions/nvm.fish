@@ -9,8 +9,6 @@ function nvm -a cmd ver -d "Node version manager"
         end
     end    
 
-    test ! -d $nvm_data && command mkdir -p $nvm_data
-
     switch "$cmd"
         case -v --version
             echo "nvm, version $nvm_version"
