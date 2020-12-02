@@ -33,7 +33,7 @@ function nvm -a cmd ver -d "Node version manager"
 
             string match --entire --regex (_nvm_version_match $ver) <$nvm_data/.index | read ver alias
 
-            if not set --query ver[1]
+            if ! set --query ver[1]
                 echo "nvm: Invalid version number or alias: \"$argv[2..-1]\"" >&2
                 return 1
             end
@@ -72,7 +72,7 @@ function nvm -a cmd ver -d "Node version manager"
                 echo -e "Installing Node \x1b[1m$ver\x1b[22m $alias"
                 echo -e "Fetching \x1b[4m$url\x1b[24m\x1b[7m"
 
-                if not command curl --progress-bar --location --show-error $url \
+                if ! command curl --progress-bar --location --show-error $url \
                     | command tar --extract --gzip --directory $nvm_data/$ver 2>/dev/null
                     command rm -rf $nvm_data/$ver
                     echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
@@ -96,7 +96,7 @@ function nvm -a cmd ver -d "Node version manager"
 
                 _nvm_list | string match --entire --regex (_nvm_version_match $ver) | read ver __
 
-                if not set --query ver[1]
+                if ! set --query ver[1]
                     echo "nvm: Node version not installed or invalid: \"$argv[2..-1]\"" >&2
                     return 1
                 end
@@ -115,7 +115,7 @@ function nvm -a cmd ver -d "Node version manager"
 
             _nvm_list | string match --entire --regex (_nvm_version_match $ver) | read ver __
 
-            if not set -q ver[1]
+            if ! set -q ver[1]
                 echo "nvm: Node version not installed or invalid: \"$argv[2..-1]\"" >&2
                 return 1
             end
