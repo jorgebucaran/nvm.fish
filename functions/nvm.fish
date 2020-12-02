@@ -72,7 +72,7 @@ function nvm -a cmd ver -d "Node version manager"
                 echo -e "Installing Node \x1b[1m$ver\x1b[22m $alias"
                 echo -e "Fetching \x1b[4m$url\x1b[24m\x1b[7m"
 
-                if ! command curl --progress-bar --location --show-error $url \
+                if ! command curl --progress-bar --location $url \
                     | command tar --extract --gzip --directory $nvm_data/$ver 2>/dev/null
                     command rm -rf $nvm_data/$ver
                     echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
