@@ -15,13 +15,12 @@ jobs:
           sudo apt-get install -y fish
 
       - name: Install Fisher
-        run: curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
+        run: curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
         shell: fish {0}
 
-      - name: Install Nvm
+      - name: Install NVM
         run: |
-          fisher install jorgebucaran/nvm.fish@2.0
-          set -l v 14.0.0
-          nvm install $v
-          test (node --version) = v$v
+          fisher install $GITHUB_WORKSPACE
+          nvm install 6
+          test (nvm current) = v6.17.1
         shell: fish {0}
