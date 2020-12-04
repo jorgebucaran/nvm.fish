@@ -7,7 +7,7 @@ function nvm -a cmd ver -d "Node version manager"
             echo "nvm: Invalid version or missing \".nvmrc\" file" >&2
             return 1
         end
-    end    
+    end
 
     switch "$cmd"
         case -v --version
@@ -84,24 +84,25 @@ function nvm -a cmd ver -d "Node version manager"
                 command mv $nvm_data/$ver/$dir/* $nvm_data/$ver
                 command rm -rf $nvm_data/$ver/$dir
             end
-           
-            test "$nvm_current_version" != $ver && _nvm_version_activate $ver
+
+            if test $ver != "$nvm_current_version"
+                set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
+                _nvm_version_activate $ver
+            end
 
             printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
         case use
-            if test $ver = system && set ver (_nvm_current) && test system != $ver
-                _nvm_version_deactivate $nvm_current_version
-            else
-                test $ver = default && test ! -z "$nvm_default_version" && set ver $nvm_default_version
+            test $ver = default && set ver $nvm_default_version
+            _nvm_list | string match --entire --regex (_nvm_version_match $ver) | read ver __
 
-                _nvm_list | string match --entire --regex (_nvm_version_match $ver) | read ver __
+            if ! set --query ver[1]
+                echo "nvm: Node version not installed or invalid: \"$argv[2..-1]\"" >&2
+                return 1
+            end
 
-                if ! set --query ver[1]
-                    echo "nvm: Node version not installed or invalid: \"$argv[2..-1]\"" >&2
-                    return 1
-                end
-
-                test "$nvm_current_version" != $ver && _nvm_version_activate $ver
+            if test $ver != "$nvm_current_version"
+                set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
+                test $ver != system && _nvm_version_activate $ver
             end
 
             printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
@@ -121,9 +122,9 @@ function nvm -a cmd ver -d "Node version manager"
             end
 
             echo -e "Uninstalling Node $ver "(command --search node | string replace ~ \~)
+
             _nvm_version_deactivate $ver
             command rm -rf $nvm_data/$ver
-            
         case current
             _nvm_current
         case ls list
@@ -151,8 +152,8 @@ end
 
 function _nvm_version_match -a ver
     string replace --regex '^v?(\d+|\d+\.\d+)$' 'v$1.' $ver | \
-    string replace --filter --regex '^v?(\d+)' 'v$1' | \
-    string escape --style=regex || string lower '\b'$ver'(?:/\w+)?$'
+        string replace --filter --regex '^v?(\d+)' 'v$1' | \
+        string escape --style=regex || string lower '\b'$ver'(?:/\w+)?$'
 end
 
 function _nvm_list_format -a current filter
