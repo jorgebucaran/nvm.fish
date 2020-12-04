@@ -5,11 +5,10 @@
 Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](), this tool helps you manage different versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts. Here are some of the highlights:
 
 - No dependencies, no setup, no clutter—it just works.
+- 100% pure Fish—easy to contribute to or modify.
 - <kbd>Tab</kbd>-completable seamless shell integration.
 - `.node-version` and `.nvmrc` support. ✅
 - [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) friendly.
-  <!-- - Hot symlink switching—absolute speed unlocked. -->
-    <!-- - Automatic version switching on `$PWD` change. -->
 
 ## Installation
 
@@ -75,30 +74,13 @@ $ nvm list
 Or list all the Node versions available to install.
 
 ```console
-$ nvm list-remote
-   ...
-   v14.13.1
-   v14.14.0
-   v14.15.0 lts/fermium
- ▶ v14.15.1 lts/fermium ✓
-    v15.0.0
-    v15.0.1
-    v15.1.0
-    v15.2.0
-    v15.2.1
-    v15.3.0 latest ✓
+nvm list-remote
 ```
 
 Want to remove a Node version? You can do that too.
 
 ```console
 nvm remove v12.9.1
-```
-
-If you would like to use a different mirror of the Node binaries, for example, if you're behind a firewall, use:
-
-```fish
-set --global nvm_mirror https://npm.taobao.org/mirrors/node
 ```
 
 ## `.nvmrc`
