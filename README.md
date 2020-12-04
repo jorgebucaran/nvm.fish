@@ -1,14 +1,14 @@
-# NVM.fish
+# nvm.fish
 
-> 100% pure-[Fish](https://fishshell.com) Node version management.
+> Node version management lovingly made for [Fish](https://fishshell.com).
 
-Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](), this tool helps you manage different versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts. Here are some of the highlights:
+Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](https://fishshell.com), this tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts. 
 
 - No dependencies, no setup, no clutter—it just works.
-- 100% pure Fish—easy to contribute to or modify.
+- 100% Fish—quick & easy to contribute to or change.
 - <kbd>Tab</kbd>-completable seamless shell integration.
 - `.node-version` and `.nvmrc` support. ✅
-- [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) friendly.
+- [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) compliant.
 
 ## Installation
 
@@ -60,7 +60,7 @@ Activate a version you've already installed.
 nvm use lts
 ```
 
-List which versions you have installed (includes your system Node if there is one).
+List which versions you have installed (includes any previously installed system Node if there is one).
 
 ```console
 $ nvm list
@@ -91,7 +91,7 @@ An `.nvmrc` file makes it easy to peg a specific version of Node for different p
 node -v >.nvmrc
 ```
 
-Then run `nvm install` to install and activate that version. Works from anywhere inside your project by traversing the directory hierarchy until an `.nvmrc` is found.
+Then run `nvm install` to install or `nvm use` to activate that version. Works from anywhere inside your project by traversing the directory hierarchy until an `.nvmrc` is found!
 
 ```console
 nvm install
