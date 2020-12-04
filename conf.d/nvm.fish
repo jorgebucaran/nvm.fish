@@ -5,7 +5,7 @@ set --query XDG_DATA_HOME \
     || set --global nvm_data ~/.local/share/nvm
 set --query nvm_mirror || set --global nvm_mirror https://nodejs.org/dist
 
-if set --query nvm_default_version && not set --query nvm_current_version
+if set --query nvm_default_version && ! set --query nvm_current_version
     nvm use $nvm_default_version >/dev/null
 end
 
