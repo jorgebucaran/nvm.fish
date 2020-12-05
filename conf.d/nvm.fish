@@ -1,5 +1,3 @@
-set --global nvm_version 2.0.0
-
 set --query XDG_DATA_HOME \
     && set --global nvm_data $XDG_DATA_HOME/nvm \
     || set --global nvm_data ~/.local/share/nvm

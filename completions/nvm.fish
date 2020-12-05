@@ -1,4 +1,4 @@
-complete -c nvm --exclusive --long version -d "Print nvm version"
+complete -c nvm --exclusive --long version -d "Print version"
 complete -c nvm --exclusive --long help -d "Print this help message"
 
 complete -c nvm --exclusive --condition "__fish_use_subcommand" -a install -d "Download and activate a given version (use nearest .nvmrc file if none is given)"
