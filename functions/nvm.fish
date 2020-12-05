@@ -11,7 +11,7 @@ function nvm -a cmd v -d "Node version manager"
 
     switch "$cmd"
         case -v --version
-            echo "nvm, version $nvm_version"
+            echo "nvm, version 2.0.0"
         case "" -h --help
             echo "usage: nvm install <version>    Download and activate a given version"
             echo "       nvm install              Install version from nearest .nvmrc file"
@@ -23,7 +23,7 @@ function nvm -a cmd v -d "Node version manager"
             echo "       nvm current              Print currently-active version"
             echo "       nvm uninstall <version>  Uninstall a version"
             echo "options:"
-            echo "       -v or --version          Print nvm version"
+            echo "       -v or --version          Print version"
             echo "       -h or --help             Print this help message"
             echo "variables:"
             echo "       nvm_mirror               Set mirror for Node binaries"
@@ -73,7 +73,7 @@ function nvm -a cmd v -d "Node version manager"
                 echo -e "Fetching \x1b[4m$url\x1b[24m\x1b[7m"
 
                 if ! command curl --progress-bar --location $url \
-                        | command tar --extract --gzip --directory $nvm_data/$v 2>/dev/null
+                    | command tar --extract --gzip --directory $nvm_data/$v 2>/dev/null
                     command rm -rf $nvm_data/$v
                     echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
                     return 1
@@ -124,6 +124,7 @@ function nvm -a cmd v -d "Node version manager"
             echo -e "Uninstalling Node $v "(command --search node | string replace ~ \~)
 
             _nvm_version_deactivate $v
+
             command rm -rf $nvm_data/$v
         case current
             _nvm_current
