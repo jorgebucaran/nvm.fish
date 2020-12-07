@@ -13,14 +13,11 @@ jobs:
           sudo apt-add-repository -yn ppa:fish-shell/release-3
           sudo apt-get update
           sudo apt-get install -y fish
-
-      - name: Install Fisher
-        run: curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-        shell: fish {0}
-
-      - name: Install NVM
+          
+      - name: Install Tools
         run: |
-          fisher install $GITHUB_WORKSPACE
+          curl -sL https://git.io/fisher | source
+          fisher install jorgebucaran/fisher $GITHUB_WORKSPACE
           nvm install 6
           test (nvm current) = v6.17.1
         shell: fish {0}
