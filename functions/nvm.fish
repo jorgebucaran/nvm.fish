@@ -39,33 +39,36 @@ function nvm -a cmd v -d "Node version manager"
             end
 
             if test ! -e $nvm_data/$v
+                set --local os (uname -s | string lower)
+                set --local ext tar.gz
                 set --local arch (uname -m)
-                set --local os (string lower (uname -s))
 
                 switch $os
                     case linux
-                        switch $arch
-                            case x86_64
-                                set arch x64
-                            case armv6 armv6l
-                                set arch armv6l
-                            case armv7 armv7l
-                                set arch armv7l
-                            case armv8 armv8l aarch64
-                                set arch arm64
-                            case \*
-                                echo "nvm: Unsupported hardware architecture: \"$arch\"" >&2
-                                return 1
-                        end
                     case darwin
-                        set arch x64
+                    case {MSYS_NT,MINGW\*_NT}\*
+                        set os win
+                        set ext zip
                     case \*
                         echo "nvm: Unsupported operating system: \"$os\"" >&2
                         return 1
                 end
 
+                switch $arch
+                    case i\*86
+                        set arch x86
+                    case x86_64
+                        set arch x64
+                    case armv6 armv6l
+                        set arch armv6l
+                    case armv7 armv7l
+                        set arch armv7l
+                    case armv8 armv8l aarch64
+                        set arch arm64
+                end
+
                 set --local dir "node-$v-$os-$arch"
-                set --local url $nvm_mirror/$v/$dir.tar.gz
+                set --local url $nvm_mirror/$v/$dir.$ext
 
                 command mkdir -p $nvm_data/$v
 
@@ -81,8 +84,12 @@ function nvm -a cmd v -d "Node version manager"
 
                 echo -en "\033[F\33[2K\x1b[0m"
 
-                command mv $nvm_data/$v/$dir/* $nvm_data/$v
-                command rm -rf $nvm_data/$v/$dir
+                if test "$os" = "win"
+                    command mv $nvm_data/$v/$dir $nvm_data/$v/bin
+                else
+                    command mv $nvm_data/$v/$dir/* $nvm_data/$v
+                    command rm -rf $nvm_data/$v/$dir
+                end
             end
 
             if test $v != "$nvm_current_version"
