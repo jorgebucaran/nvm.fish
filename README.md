@@ -1,6 +1,6 @@
 # nvm.fish
 
-> Node version management lovingly made for [Fish](https://fishshell.com).
+> Node version manager lovingly made for [Fish](https://fishshell.com).
 
 Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](https://fishshell.com), this tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts. 
 
