@@ -80,7 +80,7 @@ nvm list-remote
 Want to remove a Node version? You can do that too.
 
 ```console
-nvm remove v12.9.1
+nvm uninstall v12.9.1
 ```
 
 ## `.nvmrc`
