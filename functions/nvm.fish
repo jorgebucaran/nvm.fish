@@ -44,6 +44,9 @@ function nvm -a cmd v -d "Node version manager"
                 set --local arch (uname -m)
 
                 switch $os
+                    case aix
+                        set arch ppc64
+                    case sunos
                     case linux
                     case darwin
                     case {MSYS_NT,MINGW\*_NT}\*
