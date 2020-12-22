@@ -1,7 +1,7 @@
 complete -c nvm --exclusive --long version -d "Print version"
 complete -c nvm --exclusive --long help -d "Print this help message"
 
-complete -c nvm --exclusive --condition "__fish_use_subcommand" -a install -d "Download and activate the specified Node version using nearest .nvmrc file if none is given"
+complete -c nvm --exclusive --condition "__fish_use_subcommand" -a install -d "Download and activate the specified Node version"
 complete -c nvm --exclusive --condition "__fish_use_subcommand" -a use -d "Activate a version in the current shell"
 complete -c nvm --exclusive --condition "__fish_use_subcommand" -a list -d "List installed versions"
 complete -c nvm --exclusive --condition "__fish_use_subcommand" -a list-remote -d "List versions available to install matching optional regex"
