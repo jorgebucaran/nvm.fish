@@ -1,8 +1,8 @@
-# NVM.fish
+# nvm.fish
 
 > Node.js version manager lovingly made for [Fish](https://fishshell.com).
 
-Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](https://fishshell.com), this tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts. 
+Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](https://fishshell.com), this tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts.
 
 - No dependencies, no setup, no clutter—it just works.
 - 100% Fish—quick & easy to contribute to or change.
@@ -86,10 +86,6 @@ nvm uninstall v12.9.1
 ## `.nvmrc`
 
 An `.nvmrc` file makes it easy to lock a specific version of Node for different projects. Just create an `.nvmrc` (or `.node-version`) file containing a version number or alias, e.g., `latest`, `lts`, `carbon`, in the root of your project.
-
-## `.nvmrc`
-
-An `.nvmrc` file makes it easy to peg a specific version of Node for different projects. Just create an `.nvmrc` file containing a Node version number or alias, e.g., `node`, `lts`, `carbon`, etc., in the root of your project.
 
 ```console
 node --version >.nvmrc
