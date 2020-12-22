@@ -1,13 +1,13 @@
-# nvm.fish
+# NVM.fish
 
-> Node version manager lovingly made for [Fish](https://fishshell.com).
+> Node.js version manager lovingly made for [Fish](https://fishshell.com).
 
 Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](https://fishshell.com), this tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts. 
 
 - No dependencies, no setup, no clutter—it just works.
 - 100% Fish—quick & easy to contribute to or change.
 - <kbd>Tab</kbd>-completable seamless shell integration.
-- `.node-version` and `.nvmrc` support. ✅
+- `.node-version` and `.nvmrc` support.
 - [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) compliant.
 
 ## Installation
@@ -57,10 +57,10 @@ set --universal nvm_default_version v12.9.1
 Activate a version you've already installed.
 
 ```console
-nvm use lts
+nvm use v14
 ```
 
-List which versions you have installed (includes any previously installed system Node if there is one).
+List which versions you have installed (includes your system-installed Node if there is one).
 
 ```console
 $ nvm list
@@ -77,7 +77,7 @@ Or list all the Node versions available to install.
 nvm list-remote
 ```
 
-Want to remove a Node version? You can do that too.
+Want to uninstall a Node version? You can do that too.
 
 ```console
 nvm uninstall v12.9.1
@@ -85,13 +85,17 @@ nvm uninstall v12.9.1
 
 ## `.nvmrc`
 
-An `.nvmrc` file makes it easy to peg a specific version of Node for different projects. Just create an `.nvmrc` (or `.node-version`) file containing a version number or alias, e.g., `latest`, `lts`, `carbon`, in the root of your project.
+An `.nvmrc` file makes it easy to lock a specific version of Node for different projects. Just create an `.nvmrc` (or `.node-version`) file containing a version number or alias, e.g., `latest`, `lts`, `carbon`, in the root of your project.
+
+## `.nvmrc`
+
+An `.nvmrc` file makes it easy to peg a specific version of Node for different projects. Just create an `.nvmrc` file containing a Node version number or alias, e.g., `node`, `lts`, `carbon`, etc., in the root of your project.
 
 ```console
-node -v >.nvmrc
+node --version >.nvmrc
 ```
 
-Then run `nvm install` to install or `nvm use` to activate that version. Works from anywhere inside your project by traversing the directory hierarchy until an `.nvmrc` is found!
+Then run `nvm install` to install or `nvm use` to activate that version. Works from anywhere inside your project by traversing the directory hierarchy until an `.nvmrc` is found.
 
 ```console
 nvm install
