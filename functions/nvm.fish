@@ -110,7 +110,8 @@ function nvm -a cmd v -d "Node version manager"
                 return 1
             end
 
-            if test $v != "$nvm_current_version"
+            _nvm_node_info | read -t node_v
+            if test $v != "$node_v"
                 set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
                 test $v != system && _nvm_version_activate $v
             end
