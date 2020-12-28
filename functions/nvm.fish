@@ -79,7 +79,7 @@ function nvm -a cmd v -d "Node version manager"
                 echo -e "Fetching \x1b[4m$url\x1b[24m\x1b[7m"
 
                 if ! command curl --progress-bar --location $url \
-                    | command tar --extract --gzip --directory $nvm_data/$v 2>/dev/null
+                        | command tar --extract --gzip --directory $nvm_data/$v 2>/dev/null
                     command rm -rf $nvm_data/$v
                     echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
                     return 1
@@ -87,7 +87,7 @@ function nvm -a cmd v -d "Node version manager"
 
                 echo -en "\033[F\33[2K\x1b[0m"
 
-                if test "$os" = "win"
+                if test "$os" = win
                     command mv $nvm_data/$v/$dir $nvm_data/$v/bin
                 else
                     command mv $nvm_data/$v/$dir/* $nvm_data/$v
