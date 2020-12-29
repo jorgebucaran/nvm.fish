@@ -190,9 +190,10 @@ function _nvm_current
 end
 
 function _nvm_node_info
-    set --local npm_pkg_json (realpath (command --search npm))
+    set --local npm_path (string replace bin/npm-cli.js "" (realpath (command --search npm)))
     command node --eval "
         console.log(process.version)
-        console.log(require('"(string replace bin/npm-cli.js package.json $npm_pkg_json)"').version)"
-    command --search node | string replace ~ \~
+        console.log(require('"$npm_path"/package.json').version)
+        console.log(process.execPath.replace(os.homedir(), '~'))
+    "
 end
