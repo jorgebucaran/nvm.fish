@@ -143,10 +143,9 @@ function nvm --argument-names cmd v --description "Node version manager"
         case lsr {ls,list}-remote
             _nvm_index_update $nvm_mirror/index.tab $nvm_data/.index || return
             _nvm_list | command awk '
-                FNR == NR && FILENAME == "-" {
-                    is_local[$1]++
-                    next
-                } { print $0 (is_local[$1] ? " ✓" : "") }
+                FILENAME == "-" && (is_local[$1] = FNR == NR) { next } {
+                    print $0 (is_local[$1] ? " ✓" : "")
+                }
             ' - $nvm_data/.index | _nvm_list_format (_nvm_current) $argv[2]
         case \*
             echo "nvm: Unknown command or option: \"$cmd\" (see nvm -h)" >&2
