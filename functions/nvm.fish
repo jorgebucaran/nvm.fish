@@ -39,9 +39,9 @@ function nvm --argument-names cmd v --description "Node version manager"
             end
 
             if test ! -e $nvm_data/$v
-                set --local os (uname -s | string lower)
+                set --local os (command uname -s | string lower)
                 set --local ext tar.gz
-                set --local arch (uname -m)
+                set --local arch (command uname -m)
 
                 switch $os
                     case aix
