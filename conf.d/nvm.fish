@@ -1,7 +1,7 @@
 set --query XDG_DATA_HOME \
     && set --global nvm_data $XDG_DATA_HOME/nvm \
     || set --global nvm_data ~/.local/share/nvm
-set --query nvm_mirror || set --global nvm_mirror https://nodejs.org/dist
+set --query nvm_mirror[1] || set --global nvm_mirror https://nodejs.org/dist
 
 function _nvm_install -e nvm_install
     test ! -d $nvm_data && command mkdir -p $nvm_data
