@@ -4,7 +4,7 @@ function _nvm_index_update -a mirror index
         NR > 1 {
             print $1 (NR == 2  ? " latest" : $10 != "-" ? " lts/" tolower($10) : "")
         }
-    ' >$index.temp && command mv $index.temp $index && return
+    ' >$index.temp 2>/dev/null && command mv $index.temp $index && return
 
     command rm -f $index.temp
     echo "nvm: Invalid index or unavailable host: \"$mirror\"" >&2
