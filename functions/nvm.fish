@@ -1,4 +1,4 @@
-function nvm -a cmd v -d "Node version manager"
+function nvm --argument-names cmd v --description "Node version manager"
     if test -z "$v" && contains -- "$cmd" install use
         for file in .nvmrc .node-version
             set file (_nvm_find_up $PWD $file) && read v <$file && break
@@ -154,20 +154,20 @@ function nvm -a cmd v -d "Node version manager"
     end
 end
 
-function _nvm_find_up -a path file
+function _nvm_find_up --argument-names path file
     test -e "$path/$file" && echo $path/$file || begin
         test "$path" != / || return
         _nvm_find_up (command dirname $path) $file
     end
 end
 
-function _nvm_version_match -a v
+function _nvm_version_match --argument-names v
     string replace --regex '^v?(\d+|\d+\.\d+)$' 'v$1.' $v \
         | string replace --filter --regex '^v?(\d+)' 'v$1' \
         | string escape --style=regex || string lower '\b'$v'(?:/\w+)?$'
 end
 
-function _nvm_list_format -a current filter
+function _nvm_list_format --argument-names current filter
     command awk -v current="$current" -v filter="$filter" '
         $0 ~ filter {
             len = ++i

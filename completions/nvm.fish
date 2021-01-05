@@ -1,19 +1,19 @@
-complete -c nvm --exclusive --long version -d "Print version"
-complete -c nvm --exclusive --long help -d "Print this help message"
+complete --command nvm --exclusive --long version --description "Print version"
+complete --command nvm --exclusive --long help --description "Print help"
 
-complete -c nvm --exclusive --condition __fish_use_subcommand -a install -d "Download and activate the specified Node version"
-complete -c nvm --exclusive --condition __fish_use_subcommand -a use -d "Activate a version in the current shell"
-complete -c nvm --exclusive --condition __fish_use_subcommand -a list -d "List installed versions"
-complete -c nvm --exclusive --condition __fish_use_subcommand -a list-remote -d "List versions available to install matching optional regex"
-complete -c nvm --exclusive --condition __fish_use_subcommand -a current -d "Print the currently-active version"
-complete -c nvm --exclusive --condition "__fish_seen_subcommand_from install" -a "(
+complete --command nvm --exclusive --condition __fish_use_subcommand --arguments install --description "Download and activate the specified Node version"
+complete --command nvm --exclusive --condition __fish_use_subcommand --arguments use --description "Activate a version in the current shell"
+complete --command nvm --exclusive --condition __fish_use_subcommand --arguments list --description "List installed versions"
+complete --command nvm --exclusive --condition __fish_use_subcommand --arguments list-remote --description "List versions available to install matching optional regex"
+complete --command nvm --exclusive --condition __fish_use_subcommand --arguments current --description "Print the currently-active version"
+complete --command nvm --exclusive --condition "__fish_seen_subcommand_from install" --arguments "(
     test -e $nvm_data && string split ' ' <$nvm_data/.index
 )"
-complete -c nvm --exclusive --condition "__fish_seen_subcommand_from use" -a "(_nvm_list | string split ' ')"
-complete -c nvm --exclusive --condition __fish_use_subcommand -a uninstall -d "Uninstall a version"
-complete -c nvm --exclusive --condition "__fish_seen_subcommand_from uninstall" -a "(
+complete --command nvm --exclusive --condition "__fish_seen_subcommand_from use" --arguments "(_nvm_list | string split ' ')"
+complete --command nvm --exclusive --condition __fish_use_subcommand --arguments uninstall --description "Uninstall a version"
+complete --command nvm --exclusive --condition "__fish_seen_subcommand_from uninstall" --arguments "(
     _nvm_list | string split ' ' | string replace system ''
 )"
-complete -c nvm --exclusive --condition "__fish_seen_subcommand_from use uninstall" -a "(
+complete --command nvm --exclusive --condition "__fish_seen_subcommand_from use uninstall" --arguments "(
     set --query nvm_default_version && echo default
 )"
