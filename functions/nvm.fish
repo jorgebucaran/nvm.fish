@@ -31,7 +31,7 @@ function nvm --argument-names cmd v --description "Node version manager"
         case install
             _nvm_index_update $nvm_mirror/index.tab $nvm_data/.index || return
 
-            string match --entire --regex (_nvm_version_match $v) <$nvm_data/.index | read v alias
+            string match --entire --regex -- (_nvm_version_match $v) <$nvm_data/.index | read v alias
 
             if ! set --query v[1]
                 echo "nvm: Invalid version number or alias: \"$argv[2..-1]\"" >&2
@@ -103,7 +103,7 @@ function nvm --argument-names cmd v --description "Node version manager"
             printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
         case use
             test $v = default && set v $nvm_default_version
-            _nvm_list | string match --entire --regex (_nvm_version_match $v) | read v __
+            _nvm_list | string match --entire --regex -- (_nvm_version_match $v) | read v __
 
             if ! set --query v[1]
                 echo "nvm: Node version not installed or invalid: \"$argv[2..-1]\"" >&2
@@ -124,7 +124,7 @@ function nvm --argument-names cmd v --description "Node version manager"
 
             test $v = default && test ! -z "$nvm_default_version" && set v $nvm_default_version
 
-            _nvm_list | string match --entire --regex (_nvm_version_match $v) | read v __
+            _nvm_list | string match --entire --regex -- (_nvm_version_match $v) | read v __
 
             if ! set -q v[1]
                 echo "nvm: Node version not installed or invalid: \"$argv[2..-1]\"" >&2
@@ -162,9 +162,10 @@ function _nvm_find_up --argument-names path file
 end
 
 function _nvm_version_match --argument-names v
-    string replace --regex '^v?(\d+|\d+\.\d+)$' 'v$1.' $v \
-        | string replace --filter --regex '^v?(\d+)' 'v$1' \
-        | string escape --style=regex || string lower '\b'$v'(?:/\w+)?$'
+    string replace --regex -- '^v?(\d+|\d+\.\d+)$' 'v$1.' $v |
+        string replace --filter --regex -- '^v?(\d+)' 'v$1' |
+        string escape --style=regex ||
+        string lower '\b'$v'(?:/\w+)?$'
 end
 
 function _nvm_list_format --argument-names current filter
