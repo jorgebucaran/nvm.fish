@@ -149,7 +149,7 @@ function nvm --argument-names cmd v --description "Node version manager"
                 } { print $0 (is_local[$1] ? " ✓" : "") }
             ' - $nvm_data/.index | _nvm_list_format (_nvm_current) $argv[2]
         case \*
-            echo "nvm: Unknown flag or command: \"$cmd\" (see `nvm -h`)" >&2
+            echo "nvm: Unknown command or option: \"$cmd\" (see nvm -h)" >&2
             return 1
     end
 end
