@@ -171,15 +171,14 @@ end
 function _nvm_list_format --argument-names current filter
     command awk -v current="$current" -v filter="$filter" '
         $0 ~ filter {
-            len = ++i
-            indent = (n = length($1)) > indent ? n : indent
+            len = i++
+            pad = (n = length($1)) > pad ? n : pad
             versions[len] = $1
             aliases[len] = $2 " " $3
         }
         END {
-            for (i = len; i > 0; i--) {
-                printf((current == versions[i] ? " ▶ " : "   ") "%"indent"s %s\n", versions[i], aliases[i])
-            }
+            while (i--)
+                printf((current == versions[i] ? " ▶ " : "   ") "%"pad"s %s\n", versions[i], aliases[i])
             exit (len == 0)
         }
     '
