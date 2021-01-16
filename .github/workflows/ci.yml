@@ -17,6 +17,6 @@ jobs:
       - name: Install Tools
         run: |
           curl -sL https://git.io/fisher | source
-          fisher install jorgebucaran/fisher $GITHUB_WORKSPACE
+          fisher install $GITHUB_WORKSPACE jorgebucaran/fishtape
           fishtape tests/*
         shell: fish {0}
