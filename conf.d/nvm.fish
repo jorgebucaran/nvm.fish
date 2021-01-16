@@ -16,7 +16,6 @@ function _nvm_uninstall --on-event nvm_uninstall
 
     set --names | string replace --filter --regex -- "^nvm" "set --erase nvm" | source
     functions --erase (functions --all | string match --entire --regex -- "^_nvm_")
-    complete --erase --command nvm
 end
 
 status is-interactive &&
