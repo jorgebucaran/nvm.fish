@@ -18,6 +18,5 @@ jobs:
         run: |
           curl -sL https://git.io/fisher | source
           fisher install jorgebucaran/fisher $GITHUB_WORKSPACE
-          nvm install 6
-          test (nvm current) = v6.17.1
+          fishtape tests/*
         shell: fish {0}
