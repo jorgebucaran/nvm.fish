@@ -1,10 +1,11 @@
 function _nvm_install --on-event nvm_install
+    set --query nvm_mirror || set --universal nvm_mirror https://nodejs.org/dist
     set --query XDG_DATA_HOME || set --local XDG_DATA_HOME ~/.local/share
     set --universal nvm_data $XDG_DATA_HOME/nvm
 
     test ! -d $nvm_data && command mkdir -p $nvm_data
     echo "Downloading the Node distribution index for the first time..." 2>/dev/null
-    _nvm_index_update $nvm_data/.index
+    _nvm_index_update $nvm_mirror $nvm_data/.index
 end
 
 function _nvm_uninstall --on-event nvm_uninstall
