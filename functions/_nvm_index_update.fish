@@ -1,4 +1,7 @@
-function _nvm_index_update --argument-names mirror index
+function _nvm_index_update --argument-names index
+    set --query nvm_mirror || set --local nvm_mirror https://nodejs.org/dist
+    set --local mirror $nvm_mirror/index.tab
+
     command curl --location --silent $mirror | command awk -v OFS=\t '
         /v0.9.12/ { exit } # Unsupported
         NR > 1 {
