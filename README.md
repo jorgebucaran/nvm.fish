@@ -4,7 +4,6 @@
 
 Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](https://fishshell.com), this tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts.
 
-- No dependencies, no setup, no clutter—it just works.
 - 100% Fish—quick & easy to contribute to or change.
 - <kbd>Tab</kbd>-completable seamless shell integration.
 - `.node-version` and `.nvmrc` support.
@@ -20,7 +19,7 @@ fisher install jorgebucaran/nvm.fish
 
 ## Quickstart
 
-Install the latest Node release and start using it.
+Install the latest Node release and activate it.
 
 ```console
 nvm install latest
@@ -77,7 +76,7 @@ Or list all the Node versions available to install.
 nvm list-remote
 ```
 
-Want to uninstall a Node version? You can do that too.
+Want to uninstall a Node version?
 
 ```console
 nvm uninstall v12.9.1
