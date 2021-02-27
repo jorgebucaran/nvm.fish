@@ -79,28 +79,61 @@ function nvm --argument-names cmd v --description "Node version manager"
                 echo -e "Fetching \x1b[4m$url\x1b[24m\x1b[7m"
 
                 if ! command curl --progress-bar --location $url \
-                        | command tar --extract --gzip --strip-components=1 --directory $nvm_data/$v 2>/dev/null
+                        | command tar --extract --gzip --directory $nvm_data/$v 2>/dev/null
+                    command rm -rf $nvm_data/$v
                     echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
-                    
-                    echo -e "Trying to install from source..."
-
-                    set --local dir "node-$v"
-                    set --local url $nvm_mirror/$v/$dir.$ext
-                    command mkdir -p $nvm_data/src/$v
-                    if ! command curl --progress-bar --location $url \
-                        | command tar --extract --gzip --strip-components=1 --directory $nvm_data/src/$v 2>/dev/null
-                        echo -e "Couldn't download source tarball."
-                        return 1
-                    end
-                    pushd $nvm_data/src/$v
-                    command /bin/sh $nvm_data/src/$v/configure --prefix="$nvm_data/$v"
-                    command make -j9
-                    command make install
-                    popd
-                    command rm -rf $nvm_data/src/$v
+                    echo -e "Try nvm install-source $v to attemp installing from source"
+                    return 1
                 end
 
                 echo -en "\033[F\33[2K\x1b[0m"
+
+                if test "$os" = win
+                    command mv $nvm_data/$v/$dir $nvm_data/$v/bin
+                else
+                    command mv $nvm_data/$v/$dir/* $nvm_data/$v
+                    command rm -rf $nvm_data/$v/$dir
+                end
+            end
+
+            if test $v != "$nvm_current_version"
+                set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
+                _nvm_version_activate $v
+            end
+
+            printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
+
+        case install-source
+            _nvm_index_update $nvm_mirror $nvm_data/.index || return
+
+            string match --entire --regex -- (_nvm_version_match $v) <$nvm_data/.index | read v alias
+
+            if ! set --query v[1]
+                echo "nvm: Invalid version number or alias: \"$argv[2..-1]\"" >&2
+                return 1
+            end
+
+            if test ! -e $nvm_data/$v
+                set --local tmpdir (command mktemp -d -t nvm.XXXXXX)
+                trap 'rm -rf -- "$tmpdir"' EXIT
+
+                echo "tmpdir: $tmpdir"
+
+                set --local ext tar.gz
+                set --local url "$nvm_mirror/$v/node-$v.$ext"
+                echo "url: $url"
+                if ! command curl --progress-bar --location $url \
+                    | command tar --extract --gzip --strip-components=1 --directory $tmpdir 2>/dev/null
+                    echo -e "Couldn't download source tarball."
+                    return 1
+                end
+                pushd $tmpdir
+                trap popd EXIT
+                command $tmpdir/configure --prefix="$nvm_data/$v"
+                command make -j9
+                command make install
+                popd
+                command rm -rf -- $tmpdir
             end
 
             if test $v != "$nvm_current_version"
