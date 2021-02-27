@@ -117,11 +117,8 @@ function nvm --argument-names cmd v --description "Node version manager"
                 set --local tmpdir (command mktemp -d -t nvm.XXXXXX)
                 trap 'rm -rf -- "$tmpdir"' EXIT
 
-                echo "tmpdir: $tmpdir"
-
                 set --local ext tar.gz
                 set --local url "$nvm_mirror/$v/node-$v.$ext"
-                echo "url: $url"
                 if ! command curl --progress-bar --location $url \
                     | command tar --extract --gzip --strip-components=1 --directory $tmpdir 2>/dev/null
                     echo -e "Couldn't download source tarball."
