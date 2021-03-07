@@ -176,9 +176,9 @@ function _nvm_list_format --argument-names current filter
             aliases[len] = $2 " " $3
         }
         END {
+            if (!i) exit 1
             while (i--)
                 printf((current == versions[i] ? " ▶ " : "   ") "%"pad"s %s\n", versions[i], aliases[i])
-            exit (len == 0)
         }
     '
 end
