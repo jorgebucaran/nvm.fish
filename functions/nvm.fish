@@ -167,18 +167,17 @@ function _nvm_version_match --argument-names v
         string lower '\b'$v'(?:/\w+)?$'
 end
 
-function _nvm_list_format --argument-names current filter
-    command awk -v current="$current" -v filter="$filter" '
-        $0 ~ filter {
-            len = i++
+function _nvm_list_format --argument-names current regex
+    command awk -v current="$current" -v regex="$regex" '
+        $0 ~ regex {
+            aliases[versions[i++] = $1] = $2 " " $3
             pad = (n = length($1)) > pad ? n : pad
-            versions[len] = $1
-            aliases[len] = $2 " " $3
         }
         END {
             if (!i) exit 1
             while (i--)
-                printf((current == versions[i] ? " ▶ " : "   ") "%"pad"s %s\n", versions[i], aliases[i])
+                printf((current == versions[i] ? " ▶ " : "   ") "%"pad"s %s\n",
+                    versions[i], aliases[versions[i]])
         }
     '
 end
