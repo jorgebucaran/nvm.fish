@@ -62,6 +62,10 @@ function nvm --argument-names cmd v --description "Node version manager"
                         set arch x86
                     case x86_64
                         set arch x64
+                    case arm64
+                        if test "$os" = darwin
+                            set arch x64
+                        end
                     case armv6 armv6l
                         set arch armv6l
                     case armv7 armv7l
