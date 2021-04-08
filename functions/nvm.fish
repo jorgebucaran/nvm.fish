@@ -193,9 +193,10 @@ end
 
 function _nvm_node_info
     set --local npm_path (string replace bin/npm-cli.js "" (realpath (command --search npm)))
+    test -f $npm_path/package.json || set --local npm_version_default (command npm --version)
     command node --eval "
         console.log(process.version)
-        console.log(require('"$npm_path"/package.json').version)
+        console.log('$npm_version_default' ? '$npm_version_default': require('$npm_path/package.json').version)
         console.log(process.execPath.replace(os.homedir(), '~'))
     "
 end
