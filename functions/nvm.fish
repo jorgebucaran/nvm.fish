@@ -73,6 +73,13 @@ function nvm --argument-names cmd v --description "Node version manager"
                     case armv8 armv8l aarch64
                         set arch arm64
                 end
+                
+                # Set musl libc (https://github.com/nvm-sh/nvm/issues/1102#issuecomment-550572252)
+                # Requires setting unofficial mirror 
+                # set -U nvm_mirror https://unofficial-builds.nodejs.org/download/release/
+                if ldd (which echo) | grep -q musl
+                  set arch "$arch-musl"
+                end
 
                 set --local dir "node-$v-$os-$arch"
                 set --local url $nvm_mirror/$v/$dir.$ext
