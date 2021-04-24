@@ -59,7 +59,7 @@ Activate a version you've already installed.
 nvm use v14
 ```
 
-List which versions you have installed (includes your system-installed Node if there is one).
+List which versions you have installed (includes your system-installed Node if there is one), which are stored under `$nvm_data`.
 
 ```console
 $ nvm list
@@ -94,6 +94,14 @@ Then run `nvm install` to install or `nvm use` to activate that version. Works f
 
 ```console
 nvm install
+```
+## Custom Source
+
+If you would like to use a different Node.js mirror which has the same layout as the default https://nodejs.org/dist/, you can define `$nvm_mirror`.
+The most common example is users in China can define:
+
+```console
+set -U nvm_mirror https://npm.taobao.org/mirrors/node
 ```
 
 ## License
