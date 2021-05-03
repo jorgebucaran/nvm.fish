@@ -26,7 +26,8 @@ function nvm --argument-names cmd v --description "Node version manager"
             echo "       -v or --version          Print version"
             echo "       -h or --help             Print this help message"
             echo "Variables:"
-            echo "       nvm_mirror               Set mirror for Node binaries"
+            echo "       nvm_arch                 Override architecture, e.g. x64-musl"
+            echo "       nvm_mirror               Set the Node download mirror"
             echo "       nvm_default_version      Set the default version for new shells"
         case install
             _nvm_index_update $nvm_mirror $nvm_data/.index || return
@@ -74,6 +75,8 @@ function nvm --argument-names cmd v --description "Node version manager"
                     case armv8 armv8l aarch64
                         set arch arm64
                 end
+
+                set --query nvm_arch && set arch $nvm_arch
 
                 set --local dir "node-$v-$os-$arch"
                 set --local url $nvm_mirror/$v/$dir.$ext
