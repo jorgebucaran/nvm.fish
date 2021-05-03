@@ -59,7 +59,7 @@ Activate a version you've already installed.
 nvm use v14
 ```
 
-List which versions you have installed (includes your system-installed Node if there is one), which are stored under `$nvm_data`.
+List which versions you have installed (includes your system-installed Node if there is one).
 
 ```console
 $ nvm list
