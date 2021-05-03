@@ -95,15 +95,17 @@ Then run `nvm install` to install or `nvm use` to activate that version. Works f
 ```console
 nvm install
 ```
+
 ## Custom Source
 
-If you would like to use a different Node.js mirror which has the same layout as the default https://nodejs.org/dist/, you can define `$nvm_mirror`.
+If you would like to use a different Node.js mirror that has the same layout as the default at https://nodejs.org/dist, you can set `$nvm_mirror`.
 The most common example is users in China can define:
 
 ```console
-set -U nvm_mirror https://npm.taobao.org/mirrors/node
+set --universal nvm_mirror https://npm.taobao.org/mirrors/node
 ```
 
 ## License
 
 [MIT](LICENSE.md)
+g
