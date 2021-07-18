@@ -108,4 +108,3 @@ set --universal nvm_mirror https://npm.taobao.org/mirrors/node
 ## License
 
 [MIT](LICENSE.md)
-g
