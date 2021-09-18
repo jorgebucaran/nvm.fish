@@ -114,7 +114,7 @@ function nvm --argument-names cmd v --description "Node version manager"
             _nvm_list | string match --entire --regex -- (_nvm_version_match $v) | read v __
 
             if ! set --query v[1]
-                echo "nvm: Node version not installed or invalid: \"$argv[2..-1]\"" >&2
+                echo "nvm: Can't use Node \"$argv[2..-1]\", version must be installed first" >&2
                 return 1
             end
 

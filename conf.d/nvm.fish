@@ -4,7 +4,7 @@ function _nvm_install --on-event nvm_install
     set --query nvm_mirror || set --universal nvm_mirror https://nodejs.org/dist
 
     test ! -d $nvm_data && command mkdir -p $nvm_data
-    echo "Downloading the Node distribution index for the first time..." 2>/dev/null
+    echo "Downloading the Node distribution index..." 2>/dev/null
     _nvm_index_update $nvm_mirror $nvm_data/.index
 end
 
@@ -23,6 +23,6 @@ function _nvm_uninstall --on-event nvm_uninstall
     functions --erase (functions --all | string match --entire --regex -- "^_nvm_")
 end
 
-status is-interactive &&
-    set --query nvm_default_version && ! set --query nvm_current_version &&
+if status is-interactive && set --query nvm_default_version && ! set --query nvm_current_version
     nvm use $nvm_default_version >/dev/null
+end
