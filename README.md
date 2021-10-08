@@ -97,7 +97,7 @@ Then run `nvm install` to install or `nvm use` to activate that version. Works f
 nvm install
 ```
 
-## Custom Source
+## `$nvm_mirror`
 
 If you would like to use a different Node.js mirror that has the same layout as the default at https://nodejs.org/dist, you can set `$nvm_mirror`. A typical example is users from China using:
 
