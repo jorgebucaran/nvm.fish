@@ -2,12 +2,13 @@
 
 > Node.js version manager lovingly made for [Fish](https://fishshell.com).
 
-Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed for [Fish](https://fishshell.com), this tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts.
+Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed from the ground up for [Fish](https://fishshell.com), this tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts.
 
-- 100% Fish—quick & easy to contribute to or change.
-- <kbd>Tab</kbd>-completable seamless shell integration.
-- `.node-version` and `.nvmrc` support.
-- [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) compliant.
+- 100% pure Fish—quick & easy to contribute to or change
+- <kbd>Tab</kbd>-completable seamless shell integration
+- `.node-version` and `.nvmrc` support
+- [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) compliant
+- No dependencies
 
 ## Installation
 
@@ -98,8 +99,7 @@ nvm install
 
 ## Custom Source
 
-If you would like to use a different Node.js mirror that has the same layout as the default at https://nodejs.org/dist, you can set `$nvm_mirror`.
-The most common example is users in China can define:
+If you would like to use a different Node.js mirror that has the same layout as the default at https://nodejs.org/dist, you can set `$nvm_mirror`. A typical example is users from China using:
 
 ```console
 set --universal nvm_mirror https://npm.taobao.org/mirrors/node
