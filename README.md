@@ -8,7 +8,7 @@ Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed fr
 - <kbd>Tab</kbd>-completable seamless shell integration
 - `.node-version` and `.nvmrc` support
 - [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) compliant
-- No dependencies
+- No setup—it just works!
 
 ## Installation
 
@@ -107,7 +107,7 @@ set --universal nvm_mirror https://npm.taobao.org/mirrors/node
 
 ## Acknowledgements
 
-nvm.fish started out in 2016 by [@jorgebucaran](https://github.com/jorgebucaran) as Fish's premier choice to Node.js version management, and was introduced originally as [fin](https://github.com/jorgebucaran/nvm.fish/tree/9dfd453a81088c3e2b0c50c22ee6eb64a91cb92b). A heartfelt thank you to [@creationx](https://github.com/creationix) and [@ljharb](https://github.com/ljharb) for creating the one true [nvm.sh](https://github.com/nvm-sh/nvm) that served as the inspiration for this project. If you are looking for a way to use the original nvm in Fish, check out [@FabioAntunes/fish-nvm](https://github.com/FabioAntunes/fish-nvm) or [@derekstavis/plugin-nvm](https://github.com/derekstavis/plugin-nvm). Thank you to all our contributors! <3
+nvm.fish started out in 2016 by [@jorgebucaran](https://github.com/jorgebucaran) as Fish's premier choice to Node.js version management. A heartfelt thank you to [@creationx](https://github.com/creationix) and [@ljharb](https://github.com/ljharb) for creating the one true [nvm.sh](https://github.com/nvm-sh/nvm) that served as the inspiration for this project. If you are looking for a way to use the original nvm right from Fish, check out [@FabioAntunes/fish-nvm](https://github.com/FabioAntunes/fish-nvm) or [@derekstavis/plugin-nvm](https://github.com/derekstavis/plugin-nvm). Thank you to all our contributors! <3
 
 ## License
 
