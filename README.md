@@ -105,7 +105,7 @@ If you would like to use a different Node.js mirror that has the same layout as 
 set --universal nvm_mirror https://npm.taobao.org/mirrors/node
 ```
 
-## Acknowledgements
+## Acknowledgments
 
 nvm.fish started out in 2016 by [@jorgebucaran](https://github.com/jorgebucaran) as Fish's premier choice to Node.js version management. A heartfelt thank you to [@creationx](https://github.com/creationix) and [@ljharb](https://github.com/ljharb) for creating the one true [nvm.sh](https://github.com/nvm-sh/nvm) that served as the inspiration for this project. If you are looking for a way to use the original nvm right from Fish, check out [@FabioAntunes/fish-nvm](https://github.com/FabioAntunes/fish-nvm) or [@derekstavis/plugin-nvm](https://github.com/derekstavis/plugin-nvm). Thank you to all our contributors! <3
 
