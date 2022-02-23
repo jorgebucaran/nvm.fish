@@ -1,7 +1,7 @@
 function _nvm_index_update --argument-names mirror index
     if not command curl --location --silent $mirror/index.tab >$index.temp
         command rm -f $index.temp
-        echo "nvm: Can't update index, host unvailable: \"$mirror\"" >&2
+        echo "nvm: Can't update index, host unavailable: \"$mirror\"" >&2
         return 1
     end
 
