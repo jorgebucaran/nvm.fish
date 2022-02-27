@@ -200,12 +200,12 @@ function _nvm_node_info
     set --local npm_version "- not installed"
 
     if test $npm_path
-        set --local npm_path (string replace bin/npm-cli.js "" (realpath $npm_path))
+        set npm_path (string replace bin/npm-cli.js "" (realpath $npm_path))
 
         if test -f $npm_path/package.json
-            set --local npm_version_default (command npm --version)
+            set npm_version (command npm --version)
         else
-            set --local npm_version_default command node --eval "require('$npm_path/package.json').version"
+            set npm_version command node --eval "require('$npm_path/package.json').version"
         end
     end
 
