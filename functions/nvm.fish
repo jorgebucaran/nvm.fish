@@ -9,6 +9,8 @@ function nvm --argument-names cmd v --description "Node version manager"
         end
     end
 
+    set --local their_version $v
+
     switch "$cmd"
         case -v --version
             echo "nvm, version 2.2.6"
@@ -35,7 +37,7 @@ function nvm --argument-names cmd v --description "Node version manager"
             string match --entire --regex -- (_nvm_version_match $v) <$nvm_data/.index | read v alias
 
             if ! set --query v[1]
-                echo "nvm: Invalid version number or alias: \"$argv[2..-1]\"" >&2
+                echo "nvm: Invalid version number or alias: \"$their_version\"" >&2
                 return 1
             end
 
@@ -114,7 +116,7 @@ function nvm --argument-names cmd v --description "Node version manager"
             _nvm_list | string match --entire --regex -- (_nvm_version_match $v) | read v __
 
             if ! set --query v[1]
-                echo "nvm: Can't use Node \"$argv[2..-1]\", version must be installed first" >&2
+                echo "nvm: Can't use Node \"$their_version\", version must be installed first" >&2
                 return 1
             end
 
@@ -135,7 +137,7 @@ function nvm --argument-names cmd v --description "Node version manager"
             _nvm_list | string match --entire --regex -- (_nvm_version_match $v) | read v __
 
             if ! set -q v[1]
-                echo "nvm: Node version not installed or invalid: \"$argv[2..-1]\"" >&2
+                echo "nvm: Node version not installed or invalid: \"$their_version\"" >&2
                 return 1
             end
 
