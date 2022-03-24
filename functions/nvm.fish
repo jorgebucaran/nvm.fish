@@ -97,6 +97,10 @@ function nvm --argument-names cmd v --description "Node version manager"
 
                 echo -en "\033[F\33[2K\x1b[0m"
 
+                if not set -q $nvm_default_packages[1]
+                    set install_default_packages true
+                end
+
                 if test "$os" = win
                     command mv $nvm_data/$v/$dir $nvm_data/$v/bin
                 else
@@ -108,6 +112,11 @@ function nvm --argument-names cmd v --description "Node version manager"
             if test $v != "$nvm_current_version"
                 set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
                 _nvm_version_activate $v
+
+                if test $install_default_packages
+                    echo "Installing default npm packages: $nvm_default_packages"
+                    npm install -g $nvm_default_packages
+                end
             end
 
             printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
