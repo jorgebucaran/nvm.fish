@@ -97,9 +97,11 @@ Then run `nvm install` to install or `nvm use` to activate that version. Works f
 nvm install
 ```
 
+Automatic activation can be enable with `set --universal auto_invoke_nvm true`
+
 ## `$nvm_mirror`
 
-If you would like to use a different Node.js mirror that has the same layout as the default at https://nodejs.org/dist, you can set `$nvm_mirror`. A typical example is users from China using:
+If you would like to use a different Node.js mirror that has the same layout as the default at <https://nodejs.org/dist>, you can set `$nvm_mirror`. A typical example is users from China using:
 
 ```console
 set --universal nvm_mirror https://npm.taobao.org/mirrors/node
