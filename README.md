@@ -97,7 +97,9 @@ Then run `nvm install` to install or `nvm use` to activate that version. Works f
 nvm install
 ```
 
-Automatic activation can be enable with `set --universal auto_invoke_nvm true`
+### Automatic activation
+
+can be enable with `set --universal nvm_use_on_pwd_change true`
 
 ## `$nvm_mirror`
 
