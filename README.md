@@ -99,11 +99,15 @@ nvm install
 
 ### Automatic activation
 
-can be enable with `set --universal nvm_use_on_pwd_change true`
+Switching to the version specified by the current working project can be enable with:
+
+```console
+set --universal nvm_use_on_pwd_change true`
+```
 
 ## `$nvm_mirror`
 
-If you would like to use a different Node.js mirror that has the same layout as the default at <https://nodejs.org/dist>, you can set `$nvm_mirror`. A typical example is users from China using:
+If you would like to use a different Node.js mirror that has the same layout as the default at https://nodejs.org/dist, you can set `$nvm_mirror`. A typical example is users from China using:
 
 ```console
 set --universal nvm_mirror https://npm.taobao.org/mirrors/node
