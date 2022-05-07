@@ -15,7 +15,7 @@
 
 @test ".nvmrc" (
   echo 8.17.0 >.nvmrc
-  command mkdir -p foo/bar/baz && command cd foo/bar/baz
-  nvm install
+  mkdir -p foo/bar/baz && cd foo/bar/baz
+  nvm install >/dev/null 2>&1
   nvm current
 ) = v8.17.0
