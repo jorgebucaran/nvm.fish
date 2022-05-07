@@ -14,9 +14,8 @@
 ) = v5.11.1
 
 @test ".nvmrc" (
-  command mkdir -p foo/bar/baz
-  foo/ && echo 8.17.0 >.nvmrc
-  foo/bar/baz/
+  echo 8.17.0 >.nvmrc
+  command mkdir -p foo/bar/baz && command cd foo/bar/baz
   nvm install
   nvm current
 ) = v8.17.0
