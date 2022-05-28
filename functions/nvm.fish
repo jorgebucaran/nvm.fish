@@ -1,11 +1,17 @@
 function nvm --argument-names cmd v --description "Node version manager"
+    set auto false
     if test -z "$v" && contains -- "$cmd" install use
+        set auto true
         for file in .nvmrc .node-version
             set file (_nvm_find_up $PWD $file) && read v <$file && break
         end
         if test -z "$v"
-            echo "nvm: Invalid version or missing \".nvmrc\" file" >&2
-            return 1
+            if test "$cmd" = use
+                set v system
+            else
+                echo "nvm: Invalid version or missing \".nvmrc\" file" >&2
+                return 1
+            end
         end
     end
 
@@ -120,12 +126,18 @@ function nvm --argument-names cmd v --description "Node version manager"
                 return 1
             end
 
-            if test $v != "$nvm_current_version"
+            set current $nvm_current_version
+            if ! set --query current[0]
+                set current system
+            end
+            if test $v != $current
                 set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
                 test $v != system && _nvm_version_activate $v
             end
 
-            printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
+            if test $auto = false
+                printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
+            end
         case uninstall
             if test -z "$v"
                 echo "nvm: Not enough arguments for command: \"$cmd\"" >&2
