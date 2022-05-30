@@ -102,7 +102,7 @@ nvm install
 Switching to the version specified by the current working project can be enable with:
 
 ```console
-set --universal nvm_use_on_pwd_change true`
+set --universal nvm_use_on_pwd_change true
 ```
 
 ## `$nvm_mirror`
