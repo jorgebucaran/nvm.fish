@@ -49,7 +49,7 @@ function nvm --description "Node version manager"
             echo "       nvm_mirror               Set the Node download mirror"
             echo "       nvm_default_version      Set the default version for new shells"
         case install
-            _nvm_index_update $nvm_mirror $nvm_data/.index || return
+            _nvm_index_update
 
             string match --entire --regex -- (_nvm_version_match $ver) <$nvm_data/.index | read ver alias
 
@@ -170,7 +170,7 @@ function nvm --description "Node version manager"
         case ls list
             _nvm_list | _nvm_list_format (_nvm_current) $argv[2]
         case lsr {ls,list}-remote
-            _nvm_index_update $nvm_mirror $nvm_data/.index || return
+            _nvm_index_update || return
             _nvm_list | command awk '
                 FILENAME == "-" && (is_local[$1] = FNR == NR) { next } {
                     print $0 (is_local[$1] ? " ✓" : "")

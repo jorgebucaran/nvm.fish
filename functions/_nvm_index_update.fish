@@ -1,7 +1,11 @@
-function _nvm_index_update --argument-names mirror index
-    if not command curl --location --silent $mirror/index.tab >$index.temp
+function _nvm_index_update
+    test ! -d $nvm_data && command mkdir -p $nvm_data
+
+    set --local index $nvm_data/.index
+
+    if not command curl --location --silent $nvm_mirror/index.tab >$index.temp
         command rm -f $index.temp
-        echo "nvm: Can't update index, host unavailable: \"$mirror\"" >&2
+        echo "nvm: Can't update index, host unavailable: \"$nvm_mirror\"" >&2
         return 1
     end
 
