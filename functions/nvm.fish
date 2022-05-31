@@ -1,15 +1,26 @@
-function nvm --argument-names cmd v --description "Node version manager"
-    if test -z "$v" && contains -- "$cmd" install use
-        for file in .nvmrc .node-version
-            set file (_nvm_find_up $PWD $file) && read v <$file && break
+function nvm --description "Node version manager"
+    for silent in -s --silent
+        if set --local index (contains --index -- $silent $argv)
+            set --erase argv[$index] && break
         end
-        if test -z "$v"
+        set --erase silent
+    end
+
+    set --local cmd $argv[1]
+    set --local ver $argv[2]
+
+    if test -z "$ver" && contains -- "$cmd" install use
+        for file in .nvmrc .node-version
+            set file (_nvm_find_up $PWD $file) && read ver <$file && break
+        end
+
+        if ! set --query ver[1]
             echo "nvm: Invalid version or missing \".nvmrc\" file" >&2
             return 1
         end
     end
 
-    set --local their_version $v
+    set --local their_version $ver
 
     switch "$cmd"
         case -v --version
@@ -25,6 +36,7 @@ function nvm --argument-names cmd v --description "Node version manager"
             echo "       nvm current              Print the currently-active version"
             echo "       nvm uninstall <version>  Uninstall a version"
             echo "Options:"
+            echo "       -s or --silent           Suppress standard output"
             echo "       -v or --version          Print version"
             echo "       -h or --help             Print this help message"
             echo "Variables:"
@@ -34,14 +46,14 @@ function nvm --argument-names cmd v --description "Node version manager"
         case install
             _nvm_index_update $nvm_mirror $nvm_data/.index || return
 
-            string match --entire --regex -- (_nvm_version_match $v) <$nvm_data/.index | read v alias
+            string match --entire --regex -- (_nvm_version_match $ver) <$nvm_data/.index | read ver alias
 
-            if ! set --query v[1]
+            if ! set --query ver[1]
                 echo "nvm: Invalid version number or alias: \"$their_version\"" >&2
                 return 1
             end
 
-            if test ! -e $nvm_data/$v
+            if test ! -e $nvm_data/$ver
                 set --local os (command uname -s | string lower)
                 set --local ext tar.gz
                 set --local arch (command uname -m)
@@ -66,7 +78,7 @@ function nvm --argument-names cmd v --description "Node version manager"
                     case x86_64
                         set arch x64
                     case arm64
-                        string match --regex --quiet "v(?<major>\d+)" $v
+                        string match --regex --quiet "v(?<major>\d+)" $ver
                         if test "$os" = darwin -a $major -lt 16
                             set arch x64
                         end
@@ -80,72 +92,74 @@ function nvm --argument-names cmd v --description "Node version manager"
 
                 set --query nvm_arch && set arch $nvm_arch
 
-                set --local dir "node-$v-$os-$arch"
-                set --local url $nvm_mirror/$v/$dir.$ext
+                set --local dir "node-$ver-$os-$arch"
+                set --local url $nvm_mirror/$ver/$dir.$ext
 
-                command mkdir -p $nvm_data/$v
+                command mkdir -p $nvm_data/$ver
 
-                echo -e "Installing Node \x1b[1m$v\x1b[22m $alias"
-                echo -e "Fetching \x1b[4m$url\x1b[24m\x1b[7m"
+                if ! set --query silent
+                    echo -e "Installing Node \x1b[1m$ver\x1b[22m $alias"
+                    echo -e "Fetching \x1b[4m$url\x1b[24m\x1b[7m"
+                end
 
-                if ! command curl --progress-bar --location $url \
-                        | command tar --extract --gzip --directory $nvm_data/$v 2>/dev/null
-                    command rm -rf $nvm_data/$v
+                if ! command curl $silent --progress-bar --location $url |
+                        command tar --extract --gzip --directory $nvm_data/$ver 2>/dev/null
+                    command rm -rf $nvm_data/$ver
                     echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
                     return 1
                 end
 
-                echo -en "\033[F\33[2K\x1b[0m"
+                set --query silent || echo -en "\033[F\33[2K\x1b[0m"
 
                 if test "$os" = win
-                    command mv $nvm_data/$v/$dir $nvm_data/$v/bin
+                    command mv $nvm_data/$ver/$dir $nvm_data/$ver/bin
                 else
-                    command mv $nvm_data/$v/$dir/* $nvm_data/$v
-                    command rm -rf $nvm_data/$v/$dir
+                    command mv $nvm_data/$ver/$dir/* $nvm_data/$ver
+                    command rm -rf $nvm_data/$ver/$dir
                 end
             end
 
-            if test $v != "$nvm_current_version"
+            if test $ver != "$nvm_current_version"
                 set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
-                _nvm_version_activate $v
+                _nvm_version_activate $ver
             end
 
-            printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
+            set --query silent || printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
         case use
-            test $v = default && set v $nvm_default_version
-            _nvm_list | string match --entire --regex -- (_nvm_version_match $v) | read v __
+            test $ver = default && set ver $nvm_default_version
+            _nvm_list | string match --entire --regex -- (_nvm_version_match $ver) | read ver __
 
-            if ! set --query v[1]
+            if ! set --query ver[1]
                 echo "nvm: Can't use Node \"$their_version\", version must be installed first" >&2
                 return 1
             end
 
-            if test $v != "$nvm_current_version"
+            if test $ver != "$nvm_current_version"
                 set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
-                test $v != system && _nvm_version_activate $v
+                test $ver != system && _nvm_version_activate $ver
             end
 
-            printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
+            set --query silent || printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
         case uninstall
-            if test -z "$v"
+            if test -z "$ver"
                 echo "nvm: Not enough arguments for command: \"$cmd\"" >&2
                 return 1
             end
 
-            test $v = default && test ! -z "$nvm_default_version" && set v $nvm_default_version
+            test $ver = default && test ! -z "$nvm_default_version" && set ver $nvm_default_version
 
-            _nvm_list | string match --entire --regex -- (_nvm_version_match $v) | read v __
+            _nvm_list | string match --entire --regex -- (_nvm_version_match $ver) | read ver __
 
-            if ! set -q v[1]
+            if ! set -q ver[1]
                 echo "nvm: Node version not installed or invalid: \"$their_version\"" >&2
                 return 1
             end
 
-            printf "Uninstalling Node %s %s\n" $v (string replace ~ \~ "$nvm_data/$v/bin/node")
+            set --query silent || printf "Uninstalling Node %s %s\n" $ver (string replace ~ \~ "$nvm_data/$ver/bin/node")
 
-            _nvm_version_deactivate $v
+            _nvm_version_deactivate $ver
 
-            command rm -rf $nvm_data/$v
+            command rm -rf $nvm_data/$ver
         case current
             _nvm_current
         case ls list
@@ -170,11 +184,11 @@ function _nvm_find_up --argument-names path file
     end
 end
 
-function _nvm_version_match --argument-names v
-    string replace --regex -- '^v?(\d+|\d+\.\d+)$' 'v$1.' $v |
+function _nvm_version_match --argument-names ver
+    string replace --regex -- '^v?(\d+|\d+\.\d+)$' 'v$1.' $ver |
         string replace --filter --regex -- '^v?(\d+)' 'v$1' |
         string escape --style=regex ||
-        string lower '\b'$v'(?:/\w+)?$'
+        string lower '\b'$ver'(?:/\w+)?$'
 end
 
 function _nvm_list_format --argument-names current regex
