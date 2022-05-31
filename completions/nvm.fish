@@ -1,3 +1,4 @@
+complete --command nvm --exclusive
 complete --command nvm --exclusive --long version --description "Print version"
 complete --command nvm --exclusive --long help --description "Print help"
 complete --command nvm --long silent --description "Suppress standard output"
