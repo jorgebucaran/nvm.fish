@@ -9,7 +9,12 @@ function nvm --description "Node version manager"
     set --local cmd $argv[1]
     set --local ver $argv[2]
 
-    if test -z "$ver" && contains -- "$cmd" install use
+    if set --query silent && ! set --query cmd[1]
+        echo "nvm: Version number not specified (see nvm -h for usage)" >&2
+        return 1
+    end
+
+    if ! set --query ver[1] && contains -- "$cmd" install use
         for file in .nvmrc .node-version
             set file (_nvm_find_up $PWD $file) && read ver <$file && break
         end
@@ -172,7 +177,7 @@ function nvm --description "Node version manager"
                 }
             ' - $nvm_data/.index | _nvm_list_format (_nvm_current) $argv[2]
         case \*
-            echo "nvm: Unknown command or option: \"$cmd\" (see nvm -h)" >&2
+            echo "nvm: Unknown command or option: \"$cmd\" (see nvm -h for usage)" >&2
             return 1
     end
 end
