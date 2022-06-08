@@ -1,5 +1,5 @@
 function nvm --description "Node version manager"
-    for silent in -s --silent
+    for silent in --silent -s
         if set --local index (contains --index -- $silent $argv)
             set --erase argv[$index] && break
         end
