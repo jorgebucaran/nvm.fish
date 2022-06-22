@@ -1,4 +1,4 @@
-function _nvm_version_activate --argument-names v
-    set --global --export nvm_current_version $v
-    set --prepend PATH $nvm_data/$v/bin
+function _nvm_version_activate --argument-names ver
+    set --global --export nvm_current_version $ver
+    set --prepend PATH $nvm_data/$ver/bin
 end
