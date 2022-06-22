@@ -46,8 +46,9 @@ function nvm --description "Node version manager"
             echo "       -h or --help             Print this help message"
             echo "Variables:"
             echo "       nvm_arch                 Override architecture, e.g. x64-musl"
-            echo "       nvm_mirror               Set the Node download mirror"
+            echo "       nvm_mirror               Use a mirror of the Node binaries"
             echo "       nvm_default_version      Set the default version for new shells"
+            echo "       nvm_default_packages     Install a list of packages every time you install a Node version"
         case install
             _nvm_index_update
 
@@ -127,7 +128,7 @@ function nvm --description "Node version manager"
             if test $ver != "$nvm_current_version"
                 set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
                 _nvm_version_activate $ver
-                
+
                 set --query nvm_default_packages[1] && npm install --global $silent $nvm_default_packages
             end
 
