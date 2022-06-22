@@ -127,6 +127,8 @@ function nvm --description "Node version manager"
             if test $ver != "$nvm_current_version"
                 set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
                 _nvm_version_activate $ver
+                
+                set --query nvm_default_packages[1] && npm install --global $silent $nvm_default_packages
             end
 
             set --query silent || printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
