@@ -70,7 +70,7 @@ function nvm --description "Node version manager"
                     case sunos
                     case linux
                     case darwin
-                    case {MSYS_NT,MINGW\*_NT}\*
+                    case {msys_nt,mingw\*_nt}\*
                         set os win
                         set ext zip
                     case \*
@@ -108,14 +108,30 @@ function nvm --description "Node version manager"
                     echo -e "Fetching \x1b[4m$url\x1b[24m\x1b[7m"
                 end
 
-                if ! command curl $silent --progress-bar --location $url |
-                        command tar --extract --gzip --directory $nvm_data/$ver 2>/dev/null
+                if ! command curl $silent --progress-bar --location $url --output $nvm_data/$ver/$dir.$ext
                     command rm -rf $nvm_data/$ver
                     echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
                     return 1
                 end
 
-                set --query silent || echo -en "\033[F\33[2K\x1b[0m"
+                set --query silent || echo -e "\033[F\33[2K\x1b[0mExtracting \x1b[4m$nvm_data/$ver/$dir.$ext\x1b[24m\x1b[7m"
+
+                switch $ext
+                    case tar.gz
+                        command tar --extract --gzip --directory $nvm_data/$ver $nvm_data/$ver/$dir.$ext 2>/dev/null
+                    case zip
+                        # find a command to extract zip files
+                        if type -q unzip
+                            command unzip $nvm_data/$ver/$dir.$ext -d $nvm_data/$ver
+                        else if type -q bsdtar
+                            command bsdtar -x -f $nvm_data/$ver/$dir.$ext -C $nvm_data/$ver
+                        else
+                            # no command available to extract zip files
+                            echo -e "\033[F\33[2K\x1b[0mnvm: Please install unzip or bsdtar to extract zip files" >&2
+                            command rm -rf $nvm_data/$ver
+                            return 1
+                        end
+                end
 
                 if test "$os" = win
                     command mv $nvm_data/$ver/$dir $nvm_data/$ver/bin
@@ -123,6 +139,8 @@ function nvm --description "Node version manager"
                     command mv $nvm_data/$ver/$dir/* $nvm_data/$ver
                     command rm -rf $nvm_data/$ver/$dir
                 end
+
+                command rm $nvm_data/$ver/$dir.$ext
             end
 
             if test $ver != "$nvm_current_version"
