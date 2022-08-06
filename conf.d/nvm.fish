@@ -6,6 +6,7 @@ function _nvm_install --on-event nvm_install
     test ! -d $nvm_data && command mkdir -p $nvm_data
     echo "Downloading the Node distribution index..." 2>/dev/null
     _nvm_index_update
+    _nvm_symlink_local
 end
 
 function _nvm_update --on-event nvm_update
