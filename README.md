@@ -15,7 +15,7 @@ Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed fr
 Install with [Fisher](https://github.com/jorgebucaran/fisher):
 
 ```console
-fisher install jorgebucaran/nvm.fish
+fisher add jorgebucaran/nvm.fish
 ```
 
 ## Quickstart
