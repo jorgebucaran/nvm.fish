@@ -1,6 +1,6 @@
 # nvm.fish
 
-> The Node.js version manager you'll adore, crafted specifically for [Fish](https://fishshell.com).
+> The Node.js version manager you'll adore, crafted just for [Fish](https://fishshell.com).
 
 Nope, not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Built from scratch for [Fish](https://fishshell.com), this handy tool lets you juggle multiple active Node versions in a single local environment. Install and switch between runtimes like a boss, without messing up your home directory or breaking system-wide scripts.
 
