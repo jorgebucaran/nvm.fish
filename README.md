@@ -1,14 +1,14 @@
 # nvm.fish
 
-> Node.js version manager lovingly made for [Fish](https://fishshell.com).
+> The Node.js version manager you'll adore, crafted specifically for [Fish](https://fishshell.com).
 
-Not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Designed from the ground up for [Fish](https://fishshell.com), this tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts.
+Nope, not [_that_](https://github.com/nvm-sh/nvm) POSIX-compatible script. Built from scratch for [Fish](https://fishshell.com), this handy tool lets you juggle multiple active Node versions in a single local environment. Install and switch between runtimes like a boss, without messing up your home directory or breaking system-wide scripts.
 
-- 100% pure Fish—quick & easy to contribute to or change
-- <kbd>Tab</kbd>-completable seamless shell integration
+- 100% pure Fish—so simple to contribute to or tweak
+- <kbd>Tab</kbd>-completable for seamless shell integration
 - `.node-version` and `.nvmrc` support
 - [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) compliant
-- No setup—it just works!
+- No setup needed—it just works!
 
 ## Installation
 
@@ -54,24 +54,24 @@ Activate a version you've already installed.
 nvm use v14
 ```
 
-List which versions you have installed (includes your system-installed Node if there is one).
+Check out which versions you have installed (includes your system-installed Node if there is one).
 
 ```console
 $ nvm list
      system
     v8.17.0 lts/carbon
-    v15.3.0 
+    v15.3.0
  ▶ v14.15.1 lts/fermium
     v18.4.0 latest
 ```
 
-Or list all the Node versions that can be installed.
+Or list all the Node versions up for grabs.
 
 ```console
 nvm list-remote
 ```
 
-Want to uninstall a version?
+Need to uninstall a version?
 
 ```console
 nvm uninstall v15.3.0
@@ -79,13 +79,13 @@ nvm uninstall v15.3.0
 
 ## `.nvmrc`
 
-An `.nvmrc` file makes it easy to lock a specific version of Node for different projects. Just create an `.nvmrc` (or `.node-version`) file containing a version number or alias, e.g., `latest`, `lts`, `carbon`, in the root of your project.
+An `.nvmrc` file is perfect for locking a specific version of Node for different projects. Just create an `.nvmrc` (or `.node-version`) file with a version number or alias, e.g., `latest`, `lts`, `carbon`, in your project's root.
 
 ```console
 node --version >.nvmrc
 ```
 
-Then run `nvm install` to install or `nvm use` to activate that version. Works from anywhere inside your project by traversing the directory hierarchy until an `.nvmrc` is found.
+Then run `nvm install` to install or `nvm use` to activate that version. Works like a charm from anywhere in your project by traversing the directory hierarchy until an `.nvmrc` is found.
 
 ```console
 nvm install
@@ -93,11 +93,11 @@ nvm install
 
 ## `$nvm_mirror`
 
-Use a mirror of the Node binaries. Default: https://nodejs.org/dist.
+Choose a mirror of the Node binaries. Default: https://nodejs.org/dist.
 
 ## `$nvm_default_version`
 
-The `nvm install` command activates the specified Node version only in the current environment. If you want to set the default version for new shells use:
+The `nvm install` command activates the specified Node version only in the current environment. If you want to set the default version for new shells:
 
 ```fish
 set --universal nvm_default_version v18.4.0
@@ -105,7 +105,7 @@ set --universal nvm_default_version v18.4.0
 
 ## `$nvm_default_packages`
 
-If you have a list of default packages you want installed every time you install a new Node version use:
+Got a list of default packages you want installed every time you install a new Node version?
 
 ```fish
 set --universal nvm_default_packages yarn np
@@ -113,7 +113,7 @@ set --universal nvm_default_packages yarn np
 
 ## Acknowledgments
 
-nvm.fish started out in 2016 by [@jorgebucaran](https://github.com/jorgebucaran) as Fish's premier choice to Node.js version management. All credit to [@creationx](https://github.com/creationix) and [@ljharb](https://github.com/ljharb) for creating the one true [nvm.sh](https://github.com/nvm-sh/nvm) that served as the inspiration for this project. If you are looking for a way to use the original nvm right from Fish, check out [@FabioAntunes/fish-nvm](https://github.com/FabioAntunes/fish-nvm) or [@derekstavis/plugin-nvm](https://github.com/derekstavis/plugin-nvm). Thank you to all our contributors! <3
+`nvm.fish` was established in 2016 by [**@jorgebucaran**](https://github.com/jorgebucaran) as the go-to Node.js version manager for Fish. It was inspired by the original [**nvm.sh**](https://github.com/nvm-sh/nvm) created by [**@creationix**](https://github.com/creationix) and [**@ljharb**](https://github.com/ljharb). To use the original nvm in Fish, consider [**@FabioAntunes/fish-nvm**](https://github.com/FabioAntunes/fish-nvm) or [**@derekstavis/plugin-nvm**](https://github.com/derekstavis/plugin-nvm). We appreciate all of our contributors! ❤️
 
 ## License
 
