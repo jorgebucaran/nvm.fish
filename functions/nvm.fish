@@ -225,6 +225,6 @@ function _nvm_node_info
     command node --eval "
         console.log(process.version)
         console.log('$npm_version_default' ? '$npm_version_default': require('$npm_path/package.json').version)
-        console.log(process.execPath.replace(require('os').homedir(), '~'))
-    "
+        console.log(process.execPath)
+    " | string replace -- ~ \~
 end
