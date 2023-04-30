@@ -195,8 +195,7 @@ end
 function _nvm_version_match --argument-names ver
     string replace --regex -- '^v?(\d+|\d+\.\d+)$' 'v$1.' $ver |
         string replace --filter --regex -- '^v?(\d+)' 'v$1' |
-        string escape --style=regex ||
-        string lower '\b'$ver'(?:/\w+)?$'
+        string escape --style=regex || string lower '\b'$ver'(?:/\w+)?$'
 end
 
 function _nvm_list_format --argument-names current regex
