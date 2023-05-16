@@ -19,7 +19,7 @@ function nvm --description "Node version manager"
             set file (_nvm_find_up $PWD $file) && read ver <$file && break
         end
 
-        if ! set --query ver[1]
+        if ! set --query ver[1] && ! test -e .nvmrc
             echo "nvm: Invalid version or missing \".nvmrc\" file" >&2
             return 1
         end
@@ -29,11 +29,11 @@ function nvm --description "Node version manager"
 
     switch "$cmd"
         case -v --version
-            echo "nvm, version 2.2.13"
+            echo "nvm, version 2.2.14"
         case "" -h --help
             echo "Usage: nvm install <version>    Download and activate the specified Node version"
             echo "       nvm install              Install the version specified in the nearest .nvmrc file"
-            echo "       nvm use <version>        Activate the specified Node version in the current shell"
+            echo "       nvm use <version> [-L]   Activate the specified Node version in the current shell"
             echo "       nvm use                  Activate the version specified in the nearest .nvmrc file"
             echo "       nvm list                 List installed Node versions"
             echo "       nvm list-remote          List available Node versions to install"
@@ -139,7 +139,29 @@ function nvm --description "Node version manager"
 
             set --query silent || printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
         case use
+            set --local flag false
+            set --local n_argv (count $argv)
+            if test $n_argv -eq 2
+                and contains -- "$ver" -L --local
+                    set flag local
+                    set ver default
+            else if test $n_argv -eq 3
+                set --local a2 $argv[2]
+                set --local a3 $argv[3]
+                if contains -- "$a2" -L --local
+                    set flag local
+                    set ver $a3
+                else if contains -- "$a3" -L --local
+                    set flag local
+                end
+            else if test $n_argv -gt 3
+                echo "Too many args, except < 4, got $n_argv" 
+                return 1
+            end
+
+            set their_version $ver
             test $ver = default && set ver $nvm_default_version
+
             _nvm_list | string match --entire --regex -- (_nvm_version_match $ver) | read ver __
 
             if ! set --query ver[1]
@@ -153,6 +175,10 @@ function nvm --description "Node version manager"
             end
 
             set --query silent || printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)
+
+            if test $flag = local
+                node --version > .nvmrc
+            end
         case uninstall
             if test -z "$ver"
                 echo "nvm: Not enough arguments for command: \"$cmd\"" >&2

@@ -85,6 +85,12 @@ An `.nvmrc` file is perfect for locking a specific version of Node for different
 node --version >.nvmrc
 ```
 
+or create `.nvmrc` while useing:
+
+```console
+nvm use latest --local
+```
+
 Then run `nvm install` to install or `nvm use` to activate that version. Works like a charm from anywhere in your project by traversing the directory hierarchy until an `.nvmrc` is found.
 
 ```console
