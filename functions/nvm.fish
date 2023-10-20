@@ -119,7 +119,7 @@ function nvm --description "Node version manager"
                     end
 
                     if command axel $axel_silent -an4 $url -o $nvm_data/$ver.tmp && 
-                            command tar --extract --gzip --directory $nvm_data/$ver $nvm_data/$ver.tmp 2>/dev/null
+                            command tar --extract --gzip --directory $nvm_data/$ver -f $nvm_data/$ver.tmp 2>/dev/null
                         command rm $nvm_data/$ver.tmp
                     else
                         echo -e "\033[F\33[2K\x1b[0mnvm: Failed to download and extract: \"$url\"" >&2
