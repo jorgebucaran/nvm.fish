@@ -113,11 +113,25 @@ function nvm --description "Node version manager"
                     echo -e "Fetching \x1b[4m$url\x1b[24m\x1b[7m"
                 end
 
-                if ! command curl $silent --progress-bar --location $url |
-                        command tar --extract --gzip --directory $nvm_data/$ver 2>/dev/null
-                    command rm -rf $nvm_data/$ver
-                    echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
-                    return 1
+                if command --query axel
+                    if set --query silent
+                        set axel_silent "--quiet"
+                    end
+
+                    if command axel $axel_silent -an4 $url -o $nvm_data/$ver.tmp && 
+                            command tar --extract --gzip --directory $nvm_data/$ver $nvm_data/$ver.tmp 2>/dev/null
+                        command rm $nvm_data/$ver.tmp
+                    else
+                        echo -e "\033[F\33[2K\x1b[0mnvm: Failed to download and extract: \"$url\"" >&2
+                        return 1
+                    end
+                else
+                    if ! command curl $silent --progress-bar --location $url |
+                            command tar --extract --gzip --directory $nvm_data/$ver 2>/dev/null
+                        command rm -rf $nvm_data/$ver
+                        echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
+                        return 1
+                    end
                 end
 
                 set --query silent || echo -en "\033[F\33[2K\x1b[0m"
