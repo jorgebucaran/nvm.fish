@@ -1,5 +1,6 @@
 function _nvm_list
-    set --local versions $nvm_data/*
+    set --local versions (string replace --all -- $nvm_data/ "" $nvm_data/*)
+
     set --query versions[1] &&
         string match --entire --regex -- (string match --regex -- "v\d.+" $versions |
             string escape --style=regex |
