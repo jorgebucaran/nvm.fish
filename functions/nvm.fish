@@ -29,7 +29,7 @@ function nvm --description "Node version manager"
 
     switch "$cmd"
         case -v --version
-            echo "nvm, version 2.2.14"
+            echo "nvm, version 2.2.15"
         case "" -h --help
             echo "Usage: nvm install <version>    Download and activate the specified Node version"
             echo "       nvm install              Install the version specified in the nearest .nvmrc file"
