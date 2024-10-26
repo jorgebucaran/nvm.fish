@@ -111,6 +111,15 @@ Got a list of default packages you want installed every time you install a new N
 set --universal nvm_default_packages yarn np
 ```
 
+## Custom Install Directory
+
+To set a custom install directory for storing Node versions, set the `$NVM_DIR` environment variable.
+Add the following to your fish config:
+
+```fish
+set -gx NVM_DIR $HOME/.nvm
+```
+
 ## Acknowledgments
 
 `nvm.fish` was established in 2016 by [**@jorgebucaran**](https://github.com/jorgebucaran) as the go-to Node.js version manager for Fish. It was inspired by the original [**nvm.sh**](https://github.com/nvm-sh/nvm) created by [**@creationix**](https://github.com/creationix) and [**@ljharb**](https://github.com/ljharb). To use the original nvm in Fish, consider [**@FabioAntunes/fish-nvm**](https://github.com/FabioAntunes/fish-nvm) or [**@derekstavis/plugin-nvm**](https://github.com/derekstavis/plugin-nvm). We appreciate all of our contributors! ❤️
