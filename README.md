@@ -111,10 +111,10 @@ Got a list of default packages you want installed every time you install a new N
 set --universal nvm_default_packages yarn np
 ```
 
-## Custom Install Directory
+## Custom nvm's installation directory
 
-To set a custom install directory for storing Node versions, set the `$NVM_DIR` environment variable.
-Add the following to your fish config:
+To set a custom nvm's installation directory for storing Node versions, set the `$NVM_DIR` environment variable.
+Set `$HOME/.nvm` as the install directory? Add this to your `config.fish`:
 
 ```fish
 set -gx NVM_DIR $HOME/.nvm
