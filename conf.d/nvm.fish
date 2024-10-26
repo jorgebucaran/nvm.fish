@@ -1,5 +1,5 @@
 set --query nvm_mirror || set --global nvm_mirror https://nodejs.org/dist
-set --query NVM_DIR && set --global nvm_data $NVM_DIR
+set --query nvm_dir && set --global nvm_data $nvm_dir
 set --query nvm_data || begin
     set --query XDG_DATA_HOME || set --local XDG_DATA_HOME ~/.local/share
     set --global nvm_data $XDG_DATA_HOME/nvm

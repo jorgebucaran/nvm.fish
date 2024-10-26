@@ -113,11 +113,10 @@ set --universal nvm_default_packages yarn np
 
 ## Custom nvm's installation directory
 
-To set a custom nvm's installation directory for storing Node versions, set the `$NVM_DIR` environment variable.
-Set `$HOME/.nvm` as the install directory? Add this to your `config.fish`:
+If you want to set nvm's installation directory for storing Node versions:
 
 ```fish
-set -gx NVM_DIR $HOME/.nvm
+set --universal nvm_dir $HOME/.nvm
 ```
 
 ## Acknowledgments
