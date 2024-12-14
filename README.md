@@ -111,12 +111,12 @@ Got a list of default packages you want installed every time you install a new N
 set --universal nvm_default_packages yarn np
 ```
 
-## `$nvm_dir`
+## `$nvm_data`
 
-If you want to set nvm's installation directory for storing Node versions:
+If you want to set a custom directory for storing nvm data:
 
 ```fish
-set --universal nvm_dir $HOME/.nvm
+set --universal nvm_data $HOME/.nvm
 ```
 
 ## Acknowledgments
