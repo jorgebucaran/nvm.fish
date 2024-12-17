@@ -113,10 +113,10 @@ set --universal nvm_default_packages yarn np
 
 ## `$nvm_data`
 
-If you want to set a custom directory for storing nvm data:
+Set where nvm stores Node binaries and related data. Defaults to `$XDG_DATA_HOME/nvm` (~/.local/share/nvm) if unset.
 
 ```fish
-set --universal nvm_data $HOME/.nvm
+set --global nvm_data ~/.nvm
 ```
 
 ## Acknowledgments
