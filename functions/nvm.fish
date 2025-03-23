@@ -69,6 +69,7 @@ function nvm --description "Node version manager"
                 set --local os (command uname -s | string lower)
                 set --local ext tar.gz
                 set --local arch (command uname -m)
+                set --local tarcmd tar
 
                 switch $os
                     case aix
@@ -76,9 +77,10 @@ function nvm --description "Node version manager"
                     case sunos
                     case linux
                     case darwin
-                    case {MSYS_NT,MINGW\*_NT}\*
+                    case {msys_nt,mingw\*_nt}\*
                         set os win
                         set ext zip
+                        set tarcmd bsdtar
                     case \*
                         echo "nvm: Unsupported operating system: \"$os\"" >&2
                         return 1
@@ -115,7 +117,7 @@ function nvm --description "Node version manager"
                 end
 
                 if ! command curl -q $silent --progress-bar --location $url |
-                        command tar --extract --gzip --directory $nvm_data/$ver 2>/dev/null
+                        command $tarcmd --extract --gzip --directory $nvm_data/$ver 2>/dev/null
                     command rm -rf $nvm_data/$ver
                     echo -e "\033[F\33[2K\x1b[0mnvm: Invalid mirror or host unavailable: \"$url\"" >&2
                     return 1
