@@ -171,7 +171,7 @@ function nvm --description "Node version manager"
                 return 1
             end
 
-            set --query silent || printf "Uninstalling Node %s %s\n" $ver (string replace ~ \~ "$nvm_data/$ver/bin/node")
+            set --query silent || printf "Uninstalling Node %s %s\n" $ver (string replace -r "^$HOME" '~' "$nvm_data/$ver/bin/node")
 
             _nvm_version_deactivate $ver
 
@@ -233,5 +233,5 @@ function _nvm_node_info
         console.log(process.version)
         console.log('$npm_version_default' ? '$npm_version_default': require('$npm_path/package.json').version)
         console.log(process.execPath)
-    " | string replace -- ~ \~
+    " | string replace -r -a -- "(^|\s)$HOME" '\1~'
 end
