@@ -111,6 +111,14 @@ Got a list of default packages you want installed every time you install a new N
 set --universal nvm_default_packages yarn np
 ```
 
+## `$nvm_enable_corepack`
+
+Want to enable [Corepack](https://nodejs.org/api/corepack.html) automatically every time you install a new Node version?
+
+```fish
+set --universal nvm_enable_corepack 1
+```
+
 ## `$nvm_data`
 
 Set where nvm stores Node binaries and related data. Defaults to `$XDG_DATA_HOME/nvm` (~/.local/share/nvm) if unset.

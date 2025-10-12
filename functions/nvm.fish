@@ -49,6 +49,7 @@ function nvm --description "Node version manager"
             echo "       nvm_mirror               Use a mirror for downloading Node binaries"
             echo "       nvm_default_version      Set the default version for new shells"
             echo "       nvm_default_packages     Install a list of packages every time a Node version is installed"
+            echo "       nvm_enable_corepack      Enable Corepack every time a Node version is installed"
             echo "       nvm_data                 Set a custom directory for storing nvm data"
             echo "Examples:"
             echo "       nvm install latest       Install the latest version of Node"
@@ -138,6 +139,12 @@ function nvm --description "Node version manager"
                 _nvm_version_activate $ver
 
                 set --query nvm_default_packages[1] && npm install --global $silent $nvm_default_packages
+
+                if set --query nvm_enable_corepack
+                    if command --search --quiet corepack
+                        corepack enable
+                    end
+                end
             end
 
             set --query silent || printf "Now using Node %s (npm %s) %s\n" (_nvm_node_info)

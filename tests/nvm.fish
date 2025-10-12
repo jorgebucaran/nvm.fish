@@ -19,3 +19,11 @@
   nvm install >/dev/null 2>&1
   nvm current
 ) = v8.17.0
+
+@test "nvm install with nvm_enable_corepack" (
+  set --global nvm_enable_corepack 1
+  nvm install latest >/dev/null 2>&1
+  command --search --quiet corepack
+  set --erase nvm_enable_corepack
+  echo $status
+) = 0
