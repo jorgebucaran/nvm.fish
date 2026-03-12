@@ -111,6 +111,14 @@ Got a list of default packages you want installed every time you install a new N
 set --universal nvm_default_packages yarn np
 ```
 
+## `$nvm_auto_use`
+
+Automatically switch Node version when navigating to a directory with an `.nvmrc` or `.node-version` file.
+
+```fish
+set --universal nvm_auto_use true
+```
+
 ## `$nvm_data`
 
 Set where nvm stores Node binaries and related data. Defaults to `$XDG_DATA_HOME/nvm` (~/.local/share/nvm) if unset.
