@@ -91,6 +91,39 @@ Then run `nvm install` to install or `nvm use` to activate that version. Works l
 nvm install
 ```
 
+## Calling `nvm use` automatically in a directory with an `.nvmrc` file
+
+To automatically switch Node versions whenever you `cd` into a directory containing an `.nvmrc` (or `.node-version`) file, add the following to your `~/.config/fish/config.fish`:
+
+```fish
+function __nvm_auto_use --on-variable PWD
+    status is-interactive || return
+
+    set --local dir $PWD
+    set --local file
+    while test -n "$dir"
+        for name in .nvmrc .node-version
+            if test -f "$dir/$name"
+                set file "$dir/$name"
+                break
+            end
+        end
+        set --query file[1] && break
+        test "$dir" = / && break
+        set dir (path dirname "$dir")
+    end
+
+    set --query file[1] || return
+    test "$file" = "$__nvm_auto_use_file" && return
+
+    nvm use --silent && set --global __nvm_auto_use_file $file
+end
+
+__nvm_auto_use
+```
+
+The function walks up from the current directory to find the nearest `.nvmrc` or `.node-version` and activates it via `nvm use`. It remembers the last file used so it won't reactivate the same version when you move around inside the same project.
+
 ## `$nvm_mirror`
 
 Choose a mirror of the Node binaries. Default: https://nodejs.org/dist.
