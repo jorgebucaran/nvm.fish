@@ -18,6 +18,13 @@ Install with [Fisher](https://github.com/jorgebucaran/fisher):
 fisher install jorgebucaran/nvm.fish
 ```
 
+Or install manually
+
+```fish
+git clone https://github.com/jorgebucaran/nvm.fish.git
+cp --interactive nvm.fish/{completions,conf.d,functions} "$__fish_config_dir"
+```
+
 ## Quickstart
 
 Install the latest Node release and activate it.
