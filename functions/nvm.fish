@@ -50,6 +50,7 @@ function nvm --description "Node version manager"
             echo "       nvm_default_version      Set the default version for new shells"
             echo "       nvm_default_packages     Install a list of packages every time a Node version is installed"
             echo "       nvm_data                 Set a custom directory for storing nvm data"
+            echo "       nvm_alpha                Include Node alpha versions"
             echo "Examples:"
             echo "       nvm install latest       Install the latest version of Node"
             echo "       nvm use 14.15.1          Use Node version 14.15.1"
@@ -58,7 +59,7 @@ function nvm --description "Node version manager"
         case install
             _nvm_index_update
 
-            string match --entire --regex -- (_nvm_version_match $ver) <$nvm_data/.index | read ver alias
+            _nvm_index | string match --entire --regex -- (_nvm_version_match $ver) | read ver alias
 
             if ! set --query ver[1]
                 echo "nvm: Invalid version number or alias: \"$their_version\"" >&2
@@ -182,11 +183,9 @@ function nvm --description "Node version manager"
             _nvm_list | _nvm_list_format (_nvm_current) $argv[2]
         case lsr {ls,list}-remote
             _nvm_index_update || return
-            _nvm_list | command awk '
-                FILENAME == "-" && (is_local[$1] = FNR == NR) { next } {
-                    print $0 (is_local[$1] ? " ✓" : "")
-                }
-            ' - $nvm_data/.index | _nvm_list_format (_nvm_current) $argv[2]
+            for line in (_nvm_index)
+                test -d $nvm_data/(string split " " -- $line)[1] && echo "$line ✓" || echo $line
+            end | _nvm_list_format (_nvm_current) $argv[2]
         case \*
             echo "nvm: Unknown command or option: \"$cmd\" (see nvm -h for usage)" >&2
             return 1
