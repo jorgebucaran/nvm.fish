@@ -201,9 +201,9 @@ function _nvm_find_up --argument-names path file
 end
 
 function _nvm_version_match --argument-names ver
-    string replace --regex -- '^v?(\d+|\d+\.\d+)$' 'v$1.' $ver |
-        string replace --filter --regex -- '^v?(\d+)' 'v$1' |
-        string escape --style=regex || string lower '\b'$ver'(?:/\w+)?$'
+    set --local number (string replace --all --regex -- '^v|\.$' '' $ver | string escape --style=regex)
+    string match --quiet --regex -- '^\d' $number &&
+        echo '^v'$number'([. ]|$)' || string lower '\b'$ver'(?:/\w+)?$'
 end
 
 function _nvm_list_format --argument-names current regex
