@@ -119,6 +119,18 @@ Set where nvm stores Node binaries and related data. Defaults to `$XDG_DATA_HOME
 set --global nvm_data ~/.nvm
 ```
 
+## `$nvm_alpha`
+
+Node publishes alpha versions, like `v27.0.0-alpha.0.1.0`, before each new major version. nvm hides alpha versions unless `nvm_alpha` is set.
+
+```fish
+set --universal nvm_alpha
+```
+
+Use `--global` instead to include alpha versions in the current shell only.
+
+When `nvm_alpha` is set, nvm treats alpha versions like any other version, so `nvm install latest` and `nvm install 27` can install an alpha version. `nvm install 27.0.0` always installs the real 27.0.0, never an alpha version.
+
 ## Acknowledgments
 
 `nvm.fish` was established in 2016 by [**@jorgebucaran**](https://github.com/jorgebucaran) as the go-to Node.js version manager for Fish. It was inspired by the original [**nvm.sh**](https://github.com/nvm-sh/nvm) created by [**@creationix**](https://github.com/creationix) and [**@ljharb**](https://github.com/ljharb). To use the original nvm in Fish, consider [**@FabioAntunes/fish-nvm**](https://github.com/FabioAntunes/fish-nvm) or [**@derekstavis/plugin-nvm**](https://github.com/derekstavis/plugin-nvm). We appreciate all of our contributors! ❤️
